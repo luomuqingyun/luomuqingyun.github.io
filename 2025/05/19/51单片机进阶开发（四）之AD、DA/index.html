@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="单片机怎么与模拟信号“交流”我们都知道单片机只能识别0或1两种数字信号，但是现实世界所有的存在都已具体的模拟量为主，比如电压，电流，气压，质量等等，那单片机要怎么才能和这些信号打交道呢？要是没有“交流”那电子世界不就会乱套了，那可能比哥伦布刚发现印第安人那刻还乱吧。是不是就必须得有工具来“翻译”这些信息了，这里就不得不利用数模转换功能了，学了电子技术基础的朋友应该都有印象吧。它们就像单片机与外界信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机进阶开发（四）之AD、DA">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="单片机怎么与模拟信号“交流”我们都知道单片机只能识别0或1两种数字信号，但是现实世界所有的存在都已具体的模拟量为主，比如电压，电流，气压，质量等等，那单片机要怎么才能和这些信号打交道呢？要是没有“交流”那电子世界不就会乱套了，那可能比哥伦布刚发现印第安人那刻还乱吧。是不是就必须得有工具来“翻译”这些信息了，这里就不得不利用数模转换功能了，学了电子技术基础的朋友应该都有印象吧。它们就像单片机与外界信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/05ccb752-811f-4ead-a84e-ea94f3c43a1b.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/00b0d6f1-ce45-47b3-9e81-00809d3b9842.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/e1e95de8-9d3a-4c7f-b0a9-c34a6b1c4b8a.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/1bd2bd7e-7119-488a-96b5-86081258ac33.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.595Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/05ccb752-811f-4ead-a84e-ea94f3c43a1b.png">
+  
+  
+  
+  <title>51单片机进阶开发（四）之AD、DA - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="51单片机进阶开发（四）之AD、DA"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">51单片机进阶开发（四）之AD、DA</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="单片机怎么与模拟信号“交流”"><a href="#单片机怎么与模拟信号“交流”" class="headerlink" title="单片机怎么与模拟信号“交流”"></a>单片机怎么与模拟信号“交流”</h2><p>我们都知道单片机只能识别0或1两种数字信号，但是现实世界所有的存在都已具体的模拟量为主，比如电压，电流，气压，质量等等，那单片机要怎么才能和这些信号打交道呢？要是没有“交流”那电子世界不就会乱套了，那可能比哥伦布刚发现印第安人那刻还乱吧。是不是就必须得有工具来“翻译”这些信息了，这里就不得不利用数模转换功能了，学了电子技术基础的朋友应该都有印象吧。它们就像单片机与外界信息交流的翻译官。</p>
+<p>我们做项目开发时基本都会用到数模转换（A&#x2F;D、D&#x2F;A），尤其是A&#x2F;D单元，几乎是项目必用的。所以它们的地位还是很重要的，基础版的51单片机内部是没有集成这些单元的，所以课本上介绍这些知识时都会使用外接芯片来讲解，但是现在新出的芯片几乎都是内部集成数模转换功能，只要对着手册在程序中设置一下引脚功能就可以进行操作了。所以之前的内容中我一直没介绍外接数模转换芯片这一块的知识，现在来介绍这一部分内容也是比较尴尬的事，毕竟介绍再多工作中用到的概率不大。所以今天就写些相对更为实用一点的内容，书本上有的电路，程序就不举例说明了。</p>
+<p>A&#x2F;D和D&#x2F;A转换模型分类都比较多，这些细节可以参考相关书籍做了解。反正说白了，数模转换原理是简单的，普通的模块也是廉价的，不然现在的MCU也不会集成它。但是高性能的数模转换芯片国内现在是欠缺的，这就影响了国内工业在很多高精行业芯片不得不依靠进口。长江后浪推前浪，但愿这些可以早日突破吧。</p>
+<h2 id="A-D转换基础"><a href="#A-D转换基础" class="headerlink" title="A&#x2F;D转换基础"></a>A&#x2F;D转换基础</h2><p>A&#x2F;D变换就是将模拟信号转换为数字信号传入给单片机，通常用于单片机采集各类信号，最终都会以检测电压的形式体现出来，转换过程通常包含采样、量化和编码3个步骤。</p>
+<p><img src="https://files.mdnice.com/user/38598/05ccb752-811f-4ead-a84e-ea94f3c43a1b.png" srcset="/img/loading.gif" lazyload alt="A&#x2F;D转换步骤"></p>
+<p>采样是将连续的模拟信号变成不连续的模拟信号，就像控制一个快速开关，开关定时开启闭合过程，一个连续的模拟信号就形成一系列的脉冲信号，称为采样信号。</p>
+<p>在理想数据采集系统中，只要满足采样定理——采样频率不小于被采集信号最高频率的2倍（即fs ≥2fmax ），则采样输出信号就可以无失真的重现原输入信号，而在实际应用中通常取会设置更高的采样频率，当然采样平率越高，计算量就越大，对芯片的处理能力要求就越高。比如我们测试心率，胎儿到大人每分钟心率从四五十到两百多都有可能。即每秒最多4次，那我们的采样频率是不是设置8Hz就能测出心率了呢？当然不是这样的，即使是80hz也不一定能测出准确的数据，实际开发中我们得设置几百Hz甚至上千Hz的采样频率。</p>
+<p>量化过程是将模拟信号变成数字信号的过程，输入信号的幅值变化就与实际的数值对应起来，完成了从模拟到数字的变换；量化过程也会引入误差，增加采样频率和幅值的表示位数可以减少误差。将量化过程得到的量化值进行二进制编码，对相同范围的模拟量，编码位数越多，量化误差越小。</p>
+<p><img src="https://files.mdnice.com/user/38598/00b0d6f1-ce45-47b3-9e81-00809d3b9842.png" srcset="/img/loading.gif" lazyload alt="转换过程"></p>
+<h2 id="D-A转换基础"><a href="#D-A转换基础" class="headerlink" title="D&#x2F;A转换基础"></a>D&#x2F;A转换基础</h2><p>与A&#x2F;D转换相反，D&#x2F;A转换就是使用单片机输出模拟信号，和A&#x2F;D一样也是有转换精度的，最常见的应用就是波形发生器，汽车，仪表类行业对这个要求会比较高。</p>
+<p><img src="https://files.mdnice.com/user/38598/e1e95de8-9d3a-4c7f-b0a9-c34a6b1c4b8a.png" srcset="/img/loading.gif" lazyload alt="并行D&#x2F;A转换原理"></p>
+<p>正如图中所画，D&#x2F;A转换时恰好和A&#x2F;D转换相反，内部由多个按一定规律设计的阻电阻网络的控制开关，通过比较器逐级比较从而输出与设计值最接近的模拟量。</p>
+<p>有兴趣练习这部分内容的朋友不妨用你手头的单片机做一个信号发生器或示波器，我这边的文章后期才会选择一些典型案例做一个例程专栏出来。</p>
+<p>就写到这里，相关基础的文章太多，深入的写嘛，因为我不是相关行业内的应用也只是普通，简单的。以我的能力也不好做过多评论，反正我至今都想不通也不想去多想老美逆全球化来搞我们这种损人不利己的衰招的意义，完全反人类，耗费地球资源。难过的还是世界人民，不扯了，加油，明天还是美好的周末。</p>
+<p><img src="https://files.mdnice.com/user/38598/1bd2bd7e-7119-488a-96b5-86081258ac33.png" srcset="/img/loading.gif" lazyload alt="欢迎扫码关注公众号"></p>
+<p><img src="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg" srcset="/img/loading.gif" lazyload alt="有需要可以添加微信"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>51单片机进阶开发（四）之AD、DA</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/51单片机进阶开发（四）之AD、DA/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8BIIC%E9%80%9A%E4%BF%A1/" title="51单片机进阶开发（五）之IIC通信">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">51单片机进阶开发（五）之IIC通信</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI">
+                        <span class="hidden-mobile">51单片机进阶开发（六）之浅谈SPI</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

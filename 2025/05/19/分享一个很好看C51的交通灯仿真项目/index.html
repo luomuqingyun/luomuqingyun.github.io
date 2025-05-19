@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这是一个很好看的交通灯仿真电路图第一次为一个漂亮的仿真电路图感到惊讶，大家欣赏：  由于工作原因我自己很多年都没用51单片机做项目开发了，但因为写文章的缘故前面有初学者问能否分享一下例程做参考，所以就在网上找了一些仿真例程来，偶尔看到合适的工程功能确认没问题就拿出来分享给初学者做参考。这个仿真电路图整体来说作者是非常用心了，把一个简单的仿真电路打扮得这么漂亮，也确实让人耳目一新，实属不易，不管怎样">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分享一个很好看C51的交通灯仿真项目">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这是一个很好看的交通灯仿真电路图第一次为一个漂亮的仿真电路图感到惊讶，大家欣赏：  由于工作原因我自己很多年都没用51单片机做项目开发了，但因为写文章的缘故前面有初学者问能否分享一下例程做参考，所以就在网上找了一些仿真例程来，偶尔看到合适的工程功能确认没问题就拿出来分享给初学者做参考。这个仿真电路图整体来说作者是非常用心了，把一个简单的仿真电路打扮得这么漂亮，也确实让人耳目一新，实属不易，不管怎样">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/9a6f56ea-d957-4d08-aaff-934adfdddd4d.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/9a6f56ea-d957-4d08-aaff-934adfdddd4d.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.630Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/9a6f56ea-d957-4d08-aaff-934adfdddd4d.png">
+  
+  
+  
+  <title>分享一个很好看C51的交通灯仿真项目 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="分享一个很好看C51的交通灯仿真项目"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">分享一个很好看C51的交通灯仿真项目</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="这是一个很好看的交通灯仿真电路图"><a href="#这是一个很好看的交通灯仿真电路图" class="headerlink" title="这是一个很好看的交通灯仿真电路图"></a>这是一个很好看的交通灯仿真电路图</h2><p>第一次为一个漂亮的仿真电路图感到惊讶，大家欣赏：</p>
+<p><img src="https://files.mdnice.com/user/38598/9a6f56ea-d957-4d08-aaff-934adfdddd4d.png" srcset="/img/loading.gif" lazyload alt="一个很用心的仿真电路"></p>
+<p>由于工作原因我自己很多年都没用51单片机做项目开发了，但因为写文章的缘故前面有初学者问能否分享一下例程做参考，所以就在网上找了一些仿真例程来，偶尔看到合适的工程功能确认没问题就拿出来分享给初学者做参考。这个仿真电路图整体来说作者是非常用心了，把一个简单的仿真电路打扮得这么漂亮，也确实让人耳目一新，实属不易，不管怎样还是非常感谢原作者分享如此漂亮的电路图，看了作者的程序也确实写得很规范，肯定不是出自初学者之手，程序值得新手参考借鉴，代码贴后面了，各位自行复制。交通灯是一般课程训练中比较常见的工程，希望初学者可以合理利用，当然是先看到别人的代码再进行copy哈，所以不建议伸手就用，有些可以完善的功能各位可以尝试进行修改。</p>
+<p><img src="https://files.mdnice.com/user/38598/9a6f56ea-d957-4d08-aaff-934adfdddd4d.png" srcset="/img/loading.gif" lazyload alt="程序功能仿真"></p>
+<p>示例代码：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">/*****************************************************</span><br><span class="hljs-comment">       十字路口交通灯控制 C 程序</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">******************************************************/</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span>	uchar	unsigned char</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span>	uint	unsigned int</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span>	<span class="hljs-string">&lt;reg52.h&gt;</span></span><br><span class="hljs-comment">/*****定义控制位**********************/</span><br>sbit    Time_Show_LED2=P2^<span class="hljs-number">5</span>;<span class="hljs-comment">//Time_Show_LED2控制位</span><br>sbit    Time_Show_LED1=P2^<span class="hljs-number">4</span>;<span class="hljs-comment">//Time_Show_LED1控制位</span><br>sbit	  EW_LED2=P2^<span class="hljs-number">3</span>;	<span class="hljs-comment">//EW_LED2控制位</span><br>sbit	  EW_LED1=P2^<span class="hljs-number">2</span>;	<span class="hljs-comment">//EW_LED1控制位</span><br>sbit	  SN_LED2=P2^<span class="hljs-number">1</span>;	<span class="hljs-comment">//SN_LED2控制位</span><br>sbit	  SN_LED1=P2^<span class="hljs-number">0</span>;	<span class="hljs-comment">//SN_LED1控制位</span><br>sbit    SN_Yellow=P1^<span class="hljs-number">6</span>;<span class="hljs-comment">//SN黄灯</span><br>sbit    EW_Yellow=P1^<span class="hljs-number">2</span>;<span class="hljs-comment">//EW黄灯</span><br>sbit    EW_Red=P1^<span class="hljs-number">3</span>;<span class="hljs-comment">//EW红灯</span><br>sbit    SN_Red=P1^<span class="hljs-number">7</span>;<span class="hljs-comment">//SN红灯</span><br>sbit    EW_ManGreen=P3^<span class="hljs-number">0</span>;<span class="hljs-comment">//EW人行道绿灯</span><br>sbit    SN_ManGreen=P3^<span class="hljs-number">1</span>;<span class="hljs-comment">//SN人行道绿灯</span><br>sbit    Special_LED=P2^<span class="hljs-number">6</span>;<span class="hljs-comment">//交通正常指示灯</span><br>sbit    Busy_LED=P2^<span class="hljs-number">7</span>;<span class="hljs-comment">//交通繁忙指示灯</span><br>sbit    Nomor_Button=P3^<span class="hljs-number">5</span>;<span class="hljs-comment">//交通正常按键</span><br>sbit    Busy_Btton=P3^<span class="hljs-number">6</span>;<span class="hljs-comment">//交通繁忙按键</span><br>sbit    Special_Btton=P3^<span class="hljs-number">7</span>;<span class="hljs-comment">//交通特殊按键</span><br>sbit    Add_Button=P3^<span class="hljs-number">3</span>;<span class="hljs-comment">//时间加</span><br>sbit    Reduces_Button=P3^<span class="hljs-number">4</span>;<span class="hljs-comment">//时间减</span><br>bit     Flag_SN_Yellow; <span class="hljs-comment">//SN黄灯标志位</span><br>bit     Flag_EW_Yellow;<span class="hljs-comment">//EW黄灯标志位</span><br><span class="hljs-type">char</span>	  Time_EW;<span class="hljs-comment">//东西方向倒计时单元</span><br><span class="hljs-type">char</span>	  Time_SN;<span class="hljs-comment">//南北方向倒计时单元</span><br>uchar   EW=<span class="hljs-number">60</span>,SN=<span class="hljs-number">40</span>,EWL=<span class="hljs-number">19</span>,SNL=<span class="hljs-number">19</span>; <span class="hljs-comment">//程序初始化赋值，正常模式</span><br>uchar   EW1=<span class="hljs-number">60</span>,SN1=<span class="hljs-number">40</span>,EWL1=<span class="hljs-number">19</span>,SNL1=<span class="hljs-number">19</span>;<span class="hljs-comment">//用于存放修改值的变量</span><br>uchar   code table[<span class="hljs-number">10</span>]= &#123;<span class="hljs-number">0x3F</span>,<span class="hljs-number">0x06</span>,<span class="hljs-number">0x5B</span>,<span class="hljs-number">0x4F</span>,<span class="hljs-number">0x66</span>,<span class="hljs-number">0x6D</span>,<span class="hljs-number">0x7D</span>,<span class="hljs-number">0x07</span>,<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x6F</span>&#125;; <span class="hljs-comment">//1~~~~9段选码</span><br>uchar   code S[<span class="hljs-number">8</span>]= &#123;<span class="hljs-number">0X28</span>,<span class="hljs-number">0X48</span>,<span class="hljs-number">0X18</span>,<span class="hljs-number">0X48</span>,<span class="hljs-number">0X82</span>,<span class="hljs-number">0X84</span>,<span class="hljs-number">0X81</span>,<span class="hljs-number">0X84</span>&#125;; <span class="hljs-comment">//交通信号灯控制代码</span><br><span class="hljs-comment">/**********************延时子程序************************/</span><br><span class="hljs-function"><span class="hljs-type">void</span>	<span class="hljs-title">Delay</span><span class="hljs-params">(uchar	 a)</span></span><br><span class="hljs-function"></span>&#123;<br>    uchar	i;<br>    i=a;<br>    <span class="hljs-keyword">while</span>(i--) &#123;;&#125;<br>&#125;<br><span class="hljs-comment">/*****************显示子函数**************************/</span><br><span class="hljs-function"><span class="hljs-type">void</span>	<span class="hljs-title">Display</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">char</span> h,l;<br>    h=Time_EW/<span class="hljs-number">10</span>;<br>    l=Time_EW%<span class="hljs-number">10</span>;<br>    P0=table[l];<br>    EW_LED2=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Delay</span>(<span class="hljs-number">2</span>);<br>    EW_LED2=<span class="hljs-number">0</span>;<br>    P0=table[h];<br>    EW_LED1=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Delay</span>(<span class="hljs-number">2</span>);<br>    EW_LED1=<span class="hljs-number">0</span>;<br><br>    h=Time_SN/<span class="hljs-number">10</span>;<br>    l=Time_SN%<span class="hljs-number">10</span>;<br>    P0=table[l];<br>    SN_LED2=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Delay</span>(<span class="hljs-number">2</span>);<br>    SN_LED2=<span class="hljs-number">0</span>;<br>    P0=table[h];<br>    SN_LED1=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Delay</span>(<span class="hljs-number">2</span>);<br>    SN_LED1=<span class="hljs-number">0</span>;<br><br><br>    h= EW1/<span class="hljs-number">10</span>;<br>    l= EW1%<span class="hljs-number">10</span>;<br>    P0=table[l];<br>    Time_Show_LED1=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Delay</span>(<span class="hljs-number">2</span>);<br>    Time_Show_LED1=<span class="hljs-number">0</span>;<br>    P0=table[h];<br>    Time_Show_LED2=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Delay</span>(<span class="hljs-number">2</span>);<br>    Time_Show_LED2=<span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">/**********************外部0中断服务程序************************/</span><br><br><span class="hljs-function"><span class="hljs-type">void</span>	<span class="hljs-title">EXINT0</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>interrupt 0 <span class="hljs-keyword">using</span> 1</span><br><span class="hljs-function"></span>&#123;<br>    EX0=<span class="hljs-number">0</span>; <span class="hljs-comment">//关中断</span><br><br>    <span class="hljs-keyword">if</span>(Add_Button==<span class="hljs-number">0</span>) <span class="hljs-comment">//时间加</span><br>    &#123;<br>        EW1+=<span class="hljs-number">5</span>;<br>        SN1+=<span class="hljs-number">5</span>;<br>        <span class="hljs-keyword">if</span>(EW1&gt;=<span class="hljs-number">100</span>)<br>        &#123;<br>            EW1=<span class="hljs-number">99</span>;<br>            SN1=<span class="hljs-number">79</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(Reduces_Button==<span class="hljs-number">0</span>) <span class="hljs-comment">//时间减</span><br>    &#123;<br>        EW1-=<span class="hljs-number">5</span>;<br>        SN1-=<span class="hljs-number">5</span>;<br>        <span class="hljs-keyword">if</span>(EW1&lt;=<span class="hljs-number">40</span>)<br>        &#123;<br>            EW1=<span class="hljs-number">40</span>;<br>            SN1=<span class="hljs-number">20</span>;<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(Nomor_Button==<span class="hljs-number">0</span>)<span class="hljs-comment">//测试按键是否按下，按下为正常状态</span><br>    &#123;<br>        EW1=<span class="hljs-number">60</span>;<br>        SN1=<span class="hljs-number">40</span>;<br>        EWL1=<span class="hljs-number">19</span>;<br>        SNL1=<span class="hljs-number">19</span>;<br>        Busy_LED=<span class="hljs-number">0</span>;<span class="hljs-comment">//关繁忙信号灯</span><br>        Special_LED =<span class="hljs-number">0</span>;<span class="hljs-comment">//关特殊信号灯</span><br>    &#125;<br>    <span class="hljs-keyword">if</span>(Busy_Btton==<span class="hljs-number">0</span>) <span class="hljs-comment">//测试按键是否按下，按下为繁忙状态</span><br>    &#123;<br>        EW1=<span class="hljs-number">45</span>;<br>        SN1=<span class="hljs-number">30</span>;<br>        EWL1=<span class="hljs-number">14</span>;<br>        SNL1=<span class="hljs-number">14</span>;<br>        Special_LED=<span class="hljs-number">0</span>;<span class="hljs-comment">//关特殊信号灯</span><br>        Busy_LED=<span class="hljs-number">1</span>;<span class="hljs-comment">//开繁忙信号灯</span><br><br>    &#125;<br>    <span class="hljs-keyword">if</span>(Special_Btton==<span class="hljs-number">0</span>)<span class="hljs-comment">//测试按键是否按下，按下为特殊状态</span><br>    &#123;<br>        EW1=<span class="hljs-number">75</span>;<br>        SN1=<span class="hljs-number">55</span>;<br>        EWL1=<span class="hljs-number">19</span>;<br>        SNL1=<span class="hljs-number">19</span>;<br>        Busy_LED=<span class="hljs-number">0</span>;<span class="hljs-comment">//关繁忙信号灯</span><br>        Special_LED =<span class="hljs-number">1</span>;<span class="hljs-comment">//开特殊信号灯</span><br><br>    &#125;<br>    EX0=<span class="hljs-number">1</span>;<span class="hljs-comment">//开中断</span><br>&#125;<br><span class="hljs-comment">/**********************T0中断服务程序*******************/</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">timer0</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>interrupt 1 <span class="hljs-keyword">using</span> 1</span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">static</span> uchar count;<br>    TH0=(<span class="hljs-number">65536</span><span class="hljs-number">-50000</span>)/<span class="hljs-number">256</span>;<br>    TL0=(<span class="hljs-number">65536</span><span class="hljs-number">-50000</span>)%<span class="hljs-number">256</span>;<br>    count++;<br><br>    <span class="hljs-keyword">if</span>(count==<span class="hljs-number">10</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(Flag_SN_Yellow==<span class="hljs-number">1</span>) <span class="hljs-comment">//测试南北黄灯标志位</span><br>        &#123;<br>            SN_Yellow=~SN_Yellow;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(Flag_EW_Yellow==<span class="hljs-number">1</span>)  <span class="hljs-comment">//测试东西黄灯标志位</span><br>        &#123;<br>            EW_Yellow=~EW_Yellow;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(count==<span class="hljs-number">20</span>)<br>    &#123;<br>        Time_EW--;<br>        Time_SN--;<br>        <span class="hljs-keyword">if</span>(Flag_SN_Yellow==<span class="hljs-number">1</span>)<span class="hljs-comment">//测试南北黄灯标志位</span><br>        &#123;<br>            SN_Yellow=~SN_Yellow;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(Flag_EW_Yellow==<span class="hljs-number">1</span>)<span class="hljs-comment">//测试东西黄灯标志位</span><br>        &#123;<br>            EW_Yellow=~EW_Yellow;<br>        &#125;<br>        count=<span class="hljs-number">0</span>;<br>    &#125;<br><br>&#125;<br><span class="hljs-comment">/*********************主程序开始**********************/</span><br><span class="hljs-function"><span class="hljs-type">void</span>	<span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function"></span>&#123;<br>    Busy_LED=<span class="hljs-number">0</span>;<br>    Special_LED=<span class="hljs-number">0</span>;<br>    IT0=<span class="hljs-number">1</span>;	<span class="hljs-comment">//INT0负跳变触发</span><br>    TMOD=<span class="hljs-number">0x01</span>;<span class="hljs-comment">//定时器工作于方式1</span><br>    TH0=(<span class="hljs-number">65536</span><span class="hljs-number">-50000</span>)/<span class="hljs-number">256</span>;<span class="hljs-comment">//定时器赋初值</span><br>    TL0=(<span class="hljs-number">65536</span><span class="hljs-number">-50000</span>)%<span class="hljs-number">256</span>;<br>    EA=<span class="hljs-number">1</span>; <span class="hljs-comment">//CPU开中断总允许</span><br>    ET0=<span class="hljs-number">1</span>;<span class="hljs-comment">//开定时中断</span><br>    EX0=<span class="hljs-number">1</span>;<span class="hljs-comment">//开外部INTO中断</span><br>    TR0=<span class="hljs-number">1</span>;<span class="hljs-comment">//启动定时</span><br><br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br><br>    &#123;<br>        <span class="hljs-comment">/*******S0状态**********/</span><br>        EW_ManGreen=<span class="hljs-number">0</span>;	<span class="hljs-comment">//EW人行道禁止</span><br>        SN_ManGreen=<span class="hljs-number">1</span>;<span class="hljs-comment">//SN人行道通行</span><br>        Flag_EW_Yellow=<span class="hljs-number">0</span>;	   <span class="hljs-comment">//EW关黄灯显示信号</span><br>        Time_EW=EW;<br>        Time_SN=SN;<br>        <span class="hljs-keyword">while</span>(Time_SN&gt;=<span class="hljs-number">5</span>)<br>        &#123;<br>            P1=S[<span class="hljs-number">0</span>];	 <span class="hljs-comment">//SN通行，EW红灯</span><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br>        <span class="hljs-comment">/*******S1状态**********/</span><br>        P1=<span class="hljs-number">0x00</span>;<br>        <span class="hljs-keyword">while</span>(Time_SN&gt;=<span class="hljs-number">0</span>)<br>        &#123;<br>            Flag_SN_Yellow=<span class="hljs-number">1</span>;	 <span class="hljs-comment">//SN开黄灯信号位</span><br>            EW_Red=<span class="hljs-number">1</span>;      <span class="hljs-comment">//SN黄灯亮，等待左拐信号，EW红灯</span><br><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br>        <span class="hljs-comment">/*******S2状态**********/</span><br>        Flag_SN_Yellow=<span class="hljs-number">0</span>; <span class="hljs-comment">//SN关黄灯显示信号</span><br>        Time_SN=SNL;<br>        <span class="hljs-keyword">while</span>(Time_SN&gt;=<span class="hljs-number">5</span>)<br>        &#123;<br>            P1=S[<span class="hljs-number">2</span>];<span class="hljs-comment">//SN左拐绿灯亮，EW红灯</span><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br><br>        <span class="hljs-comment">/*******S3状态**********/</span><br>        P1=<span class="hljs-number">0x00</span>;<br>        <span class="hljs-keyword">while</span>(Time_SN&gt;=<span class="hljs-number">0</span>)<br>        &#123;<br>            Flag_SN_Yellow=<span class="hljs-number">1</span>;	<span class="hljs-comment">//SN开黄灯信号位</span><br>            EW_Red=<span class="hljs-number">1</span>;      <span class="hljs-comment">//SN黄灯亮,等待停止信号，EW红灯</span><br><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br><br><br>        <span class="hljs-comment">/***********赋值**********/</span><br>        EW=EW1;<br>        SN=SN1;<br>        EWL=EWL1;<br>        SNL=SNL1;<br><br><br>        <span class="hljs-comment">/*******S4状态**********/</span><br>        EW_ManGreen=~EW_ManGreen;<span class="hljs-comment">//EW人行道通行</span><br>        SN_ManGreen=~SN_ManGreen;<span class="hljs-comment">//SN人行道禁止</span><br>        Flag_SN_Yellow=<span class="hljs-number">0</span>;  <span class="hljs-comment">//SN关黄灯显示信号</span><br>        Time_EW=SN;<br>        Time_SN=EW;<br>        <span class="hljs-keyword">while</span>(Time_EW&gt;=<span class="hljs-number">5</span>)<br>        &#123;<br>            P1=S[<span class="hljs-number">4</span>];	 <span class="hljs-comment">//EW通行，SN红灯</span><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br>        <span class="hljs-comment">/*******S5状态**********/</span><br>        P1=<span class="hljs-number">0X00</span>;<br>        <span class="hljs-keyword">while</span>(Time_EW&gt;=<span class="hljs-number">0</span>)<br>        &#123;<br>            Flag_EW_Yellow=<span class="hljs-number">1</span>;<span class="hljs-comment">//EW开黄灯信号位</span><br>            SN_Red=<span class="hljs-number">1</span>;<span class="hljs-comment">//EW黄灯亮，等待左拐信号，SN红灯</span><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br>        <span class="hljs-comment">/*******S6状态**********/</span><br>        Flag_EW_Yellow=<span class="hljs-number">0</span>;	    <span class="hljs-comment">//EW关黄灯显示信号</span><br>        Time_EW=EWL;<br>        <span class="hljs-keyword">while</span>(Time_EW&gt;=<span class="hljs-number">5</span>)<br>        &#123;<br>            P1=S[<span class="hljs-number">6</span>];<span class="hljs-comment">//EW左拐绿灯亮，SN红灯</span><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br><br>        <span class="hljs-comment">/*******S7状态**********/</span><br>        P1=<span class="hljs-number">0X00</span>;<br>        <span class="hljs-keyword">while</span>(Time_EW&gt;=<span class="hljs-number">0</span>)<br>        &#123;<br>            Flag_EW_Yellow=<span class="hljs-number">1</span>; <span class="hljs-comment">//EN开黄灯信号位</span><br>            SN_Red=<span class="hljs-number">1</span>;<span class="hljs-comment">//EW黄灯亮，等待停止信号，SN红灯</span><br>            <span class="hljs-built_in">Display</span>();<br>        &#125;<br><br>        <span class="hljs-comment">/***********赋值**********/</span><br>        EW=EW1;<br>        SN=SN1;<br>        EWL=EWL1;<br>        SNL=SNL1;<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>如果需要整个参考工程，可后台留言回复关键字：<code>23042522A</code><br>建议初学者对自己的能力训练负责，在自己尝试出错未找到解决方法时再获取，如有需要可加学习交流群提问！<br>尊重原作者，请勿商用，如是网上售卖代码的贩子请勿获取资料！</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+<p><img src="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg" srcset="/img/loading.gif" lazyload alt="欢迎添加作者微信，加入交流群"></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>分享一个很好看C51的交通灯仿真项目</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/分享一个很好看C51的交通灯仿真项目/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%BB%B6%E8%AE%A9%E4%BA%BA%E4%BC%A4%E6%84%9F%E7%9A%84%E4%BA%8B%EF%BC%9A%E5%BC%80%E6%BA%90%E5%A4%A7%E7%89%9B%E8%BD%AC%E5%81%9A%E5%87%BA%E7%BA%B3/" title="分享一件让人伤感的事：开源大牛转做出纳">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">分享一件让人伤感的事：开源大牛转做出纳</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%A4%E4%B8%AA%E7%94%B5%E5%AD%90%E5%BC%80%E5%8F%91%E8%80%85%E7%94%A8%E5%BE%97%E4%B8%8A%E7%9A%84%E5%A5%BD%E5%B7%A5%E5%85%B7/" title="分享两个电子开发者用得上的好工具">
+                        <span class="hidden-mobile">分享两个电子开发者用得上的好工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

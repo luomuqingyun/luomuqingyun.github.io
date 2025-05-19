@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="占位 电子技术基础文章集合为了方便零基础的电子爱好者学习，在这里把前期的写的关于电子技术基础知识的文章做个汇总。 01. 基本元器件之电阻 02. 基本元器件之电容 03. 基本元器件之电感和磁珠 04. 基础元器件之二极管 05. 元器件基础之三极管 06. 基础元器件之场效应管 07. 集成电子元器件之运算放大器 08. 基础运算放大电路 09. 有源滤波电路基础 10. 数字电路基础 相关视">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电子技术基础知识">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="占位 电子技术基础文章集合为了方便零基础的电子爱好者学习，在这里把前期的写的关于电子技术基础知识的文章做个汇总。 01. 基本元器件之电阻 02. 基本元器件之电容 03. 基本元器件之电感和磁珠 04. 基础元器件之二极管 05. 元器件基础之三极管 06. 基础元器件之场效应管 07. 集成电子元器件之运算放大器 08. 基础运算放大电路 09. 有源滤波电路基础 10. 数字电路基础 相关视">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.623Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
+  
+  
+  
+  <title>电子技术基础知识 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="电子技术基础知识"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          406 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          4 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">电子技术基础知识</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>占位</p>
+<h2 id="电子技术基础文章集合"><a href="#电子技术基础文章集合" class="headerlink" title="电子技术基础文章集合"></a>电子技术基础文章集合</h2><p>为了方便零基础的电子爱好者学习，在这里把前期的写的关于电子技术基础知识的文章做个汇总。</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483821&idx=1&sn=e7f5871b8e1568e77f93a68c3fe2094a&chksm=ea7909dcdd0e80ca0e7e1b96d8b37b10a87dcd80e9f6cf3720e6c22f63c301c6c720384a2ee7&token=765272341&lang=zh_CN#rd">01. 基本元器件之电阻</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483831&idx=1&sn=780c5c4cb6624a073b25d5aac1caf1ba&chksm=ea7909c6dd0e80d07e9ac9cc2318b7e1d0d7b5305d5cf7c827795ff1cf2fb6c5989742bdc47c&token=765272341&lang=zh_CN#rd">02. 基本元器件之电容</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483839&idx=1&sn=17124609e9f34b0c88995d7e0ce6c7fa&chksm=ea7909cedd0e80d8582987bc47d4094215c5d2d4c3f3e83a23de8284576cc90d4028d59caeea&token=765272341&lang=zh_CN#rd">03. 基本元器件之电感和磁珠</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483849&idx=1&sn=c0486e21015f84957028b97fb3a66ed2&chksm=ea7909b8dd0e80aeca36cd47d2b6a822e2d7e6e59d838f15f6031187d925addcf38610b2d101&token=765272341&lang=zh_CN#rd">04. 基础元器件之二极管</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483861&idx=1&sn=3f6edea08e8761b7aa9aa82f50768d49&chksm=ea7909a4dd0e80b23895838f8c4cb754f3fa163d7e75232751409eaca1da749c3277b1fc387e&token=765272341&lang=zh_CN#rd">05. 元器件基础之三极管</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483888&idx=1&sn=594dcd18603734ecb19a5a8985bec4d5&chksm=ea790981dd0e8097d20d6104bb4538b68939fe544151ee00991c9ff7c3c6f21e1d87ba97a850&token=765272341&lang=zh_CN#rd">06. 基础元器件之场效应管</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483976&idx=1&sn=8979ee5bec9839c31e7696a0eb17f72c&chksm=ea790a39dd0e832f920ba737ffe58f69e4b09f2726c476bfd3e7a7255e8db33b125f61d04f9f&token=765272341&lang=zh_CN#rd">07. 集成电子元器件之运算放大器</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483997&idx=1&sn=d0a02f1d64cd38555a530ed8f454d523&chksm=ea790a2cdd0e833a3c677588cd45646615bc655ab68a54cc68c22925f41693e062a4dfcf03ef&token=765272341&lang=zh_CN#rd">08. 基础运算放大电路</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484027&idx=1&sn=f19f1b436961461b06d7b3e48a3e1d68&chksm=ea790a0add0e831c77a541355107cdbabfa13ab0dea613bd9cd26f8a859f69f0eabe845bc934&token=765272341&lang=zh_CN#rd">09. 有源滤波电路基础</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484158&idx=1&sn=72e1f0903675b50b04b6ec3b05806ecf&chksm=ea790a8fdd0e8399c29b5ca09a56c376de1a7882c124ac9da3a872810760e2169f5ed9fd5148&token=765272341&lang=zh_CN#rd">10. 数字电路基础</a></p>
+<h2 id="相关视频演示"><a href="#相关视频演示" class="headerlink" title="相关视频演示"></a>相关视频演示</h2><p>这些视频比较，推荐零基础的朋友查看，有一定基础的朋友可以跳过了。</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483888&idx=2&sn=6d21af79e01b43f60aca151afe520d7c&chksm=ea790981dd0e80979e3276588ad91e3aab790f585ff8558c316c84ed03501b57f428b46be8d4&token=765272341&lang=zh_CN#rd">01. 电阻的作用</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483895&idx=1&sn=5a1b18d3cfcce09215032ce104ff1fd0&chksm=ea790986dd0e80900b304069eaff4cdf774caa22eb5848d5ff64bc6197b736cdcfc48ad395c6&token=765272341&lang=zh_CN#rd">02. 电路基础之欧姆定律演示</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483919&idx=3&sn=ee9771b291696afef87390747fc4500e&chksm=ea790a7edd0e836879ce6bb5a0518afd9c8542ee98adc66d10ba5dbf02ed900b577baed63e70&token=765272341&lang=zh_CN#rd">03. 电阻应用之简易分压器</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483888&idx=3&sn=95006d64e9fd351fd809ca107fbfd7c2&chksm=ea790981dd0e80975468781d128454365409b9db2a50c5ee660d62344d30c664b30db398fcb8&token=765272341&lang=zh_CN#rd">04. 三种基本元器件在电路中的功能仿真</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483926&idx=1&sn=681c3f8f21cdded5d72a601c8b5f5dc5&chksm=ea790a67dd0e8371b8ca2d3e46091af7255f017b263d637e83f954bd04cdec95a3d8b13647a4&token=765272341&lang=zh_CN#rd">05. 电容，电感的储能特性</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483934&idx=1&sn=f32010c91444e669be9c2c7689306be1&chksm=ea790a6fdd0e8379ce086c0db4a9bdd4e5b5c46566b4c7a1654bcbcc7fea33df7439960e01c9&token=765272341&lang=zh_CN#rd">06. 怎么看懂高通，低通滤波电路</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483942&idx=1&sn=b64c4ca6fc009daeab45c2ba22c78688&chksm=ea790a57dd0e83417372598e7fa175da618a05c5552e3c0364dc1f2c5fcce7448c87fc1e25cd&token=765272341&lang=zh_CN#rd">07. 带通，带阻滤波器那点事儿</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483949&idx=1&sn=fd6317a60be929f46e2e1740d8baa8c0&chksm=ea790a5cdd0e834a2ebcdc47b41d35a03c7bbf3c2ce1c67d69fd8c49ec60dd7d26a454e373f5&token=765272341&lang=zh_CN#rd">08. 几组有趣的电路图</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483956&idx=1&sn=8d077e68d01eed741d94cfc48ea476a1&chksm=ea790a45dd0e8353d9e7bfa7f3cf54d04a2c38c8cd51e208cd68e4e549b11c482a1118eee1a7&token=765272341&lang=zh_CN#rd">09. 三极管与MOS管基础电路分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247483997&idx=2&sn=d87533fb0433f4c2f656c3adc4f5dbf4&chksm=ea790a2cdd0e833ab31dd0902ed94bdda284d583d56174ef4a48323d014182b2cd62543672d1&token=765272341&lang=zh_CN#rd">10. 运算放大器基础应用电路分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484027&idx=2&sn=42930b4c3ef0bace0eb8be7d0a169e64&chksm=ea790a0add0e831cc238b6b195607fb9a36bc2adf3ad30eaf463321d0c045eed7b7df6f6a23a&token=765272341&lang=zh_CN#rd">11. 有源滤波电路基础</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484166&idx=1&sn=fe452421b40a5297553c21515c19b3c6&chksm=ea790b77dd0e8261ad3b900ce8613e724a05d2d925fdda65b9760624d5bba56ae2df166c64cb&token=765272341&lang=zh_CN#rd">11. 数字电路基础之逻辑门</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484027&idx=2&sn=42930b4c3ef0bace0eb8be7d0a169e64&chksm=ea790a0add0e831cc238b6b195607fb9a36bc2adf3ad30eaf463321d0c045eed7b7df6f6a23a&token=765272341&lang=zh_CN#rd">12. 有源滤波电路基础</a></p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484080&idx=1&sn=72ceac0e9c7a2601201431ca847c82f9&chksm=ea790ac1dd0e83d7630ec80d2e28acc9b99d88812d9bff7aa6b957a2352b2231d2bbf27e6d65&token=1854026269&lang=zh_CN#rd">滤波器设计软件FilterPro</a></li>
+</ul>
+<hr>
+<p><img src="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg" srcset="/img/loading.gif" lazyload alt="欢迎添加作者微信"></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>电子技术基础知识</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/电子技术基础知识/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E7%94%B5%E5%AD%90%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/" title="电子开发小工具分享">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">电子开发小工具分享</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E7%9B%B4%E6%8E%A5%E5%AD%A6STM32%E8%BF%98%E6%98%AF%E5%85%88%E5%AD%A651%EF%BC%9F/" title="直接学STM32还是先学51？">
+                        <span class="hidden-mobile">直接学STM32还是先学51？</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

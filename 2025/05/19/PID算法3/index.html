@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="串级PID控制器串级PID控制是指将二个或多个PID控制器串级连接，以实现更复杂的控制效果，类似平时设计的串级滤波器电路，它通常应用于需要高精度控制的场合，比如机器人、无人机的控制中的马达转速与位置调节，高精度加热设备中的加热器工作功率与被加热物体温度控制等等。  串级PID的优点是可以提高系统的控制精度,以应对复杂的控制系统。但串级结构也会增加控制系统的复杂度。因此,设计时需要仔细考虑每个控制回">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID算法3">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/PID%E7%AE%97%E6%B3%953/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="串级PID控制器串级PID控制是指将二个或多个PID控制器串级连接，以实现更复杂的控制效果，类似平时设计的串级滤波器电路，它通常应用于需要高精度控制的场合，比如机器人、无人机的控制中的马达转速与位置调节，高精度加热设备中的加热器工作功率与被加热物体温度控制等等。  串级PID的优点是可以提高系统的控制精度,以应对复杂的控制系统。但串级结构也会增加控制系统的复杂度。因此,设计时需要仔细考虑每个控制回">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/4ce87ad4-8012-4290-b588-b58d2436afb6.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/2d75019c-f174-443f-bdb1-03ec2f5955c8.jpg">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/c3e8da28-8af9-4db2-91d3-a02381732c28.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.730Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/4ce87ad4-8012-4290-b588-b58d2436afb6.png">
+  
+  
+  
+  <title>PID算法3 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PID算法3"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PID算法3</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="串级PID控制器"><a href="#串级PID控制器" class="headerlink" title="串级PID控制器"></a>串级PID控制器</h2><p>串级PID控制是指将二个或多个PID控制器串级连接，以实现更复杂的控制效果，类似平时设计的串级滤波器电路，它通常应用于需要高精度控制的场合，比如机器人、无人机的控制中的马达转速与位置调节，高精度加热设备中的加热器工作功率与被加热物体温度控制等等。</p>
+<p><img src="https://files.mdnice.com/user/38598/4ce87ad4-8012-4290-b588-b58d2436afb6.png" srcset="/img/loading.gif" lazyload alt="串级PID模型"></p>
+<p>串级PID的优点是可以提高系统的控制精度,以应对复杂的控制系统。但串级结构也会增加控制系统的复杂度。因此,设计时需要仔细考虑每个控制回路的作用,合理配置控制参数,同时也要考虑系统复杂度与性能两者的折中处理方法。</p>
+<h2 id="串级PID控制器实现过程"><a href="#串级PID控制器实现过程" class="headerlink" title="串级PID控制器实现过程"></a>串级PID控制器实现过程</h2><ol>
+<li><p>将控制系统分解为多个控制回路,每个控制回路由一个PID控制器实现基本的反馈控制（不一定每个回路都要采用完整的三参数进行控制）。</p>
+</li>
+<li><p>将多个PID控制器的输出串级连接,前一级PID的输出作为后一级PID的输入。通过这种方式,后一级PID可以对前一级PID的控制行为进行修正,进而实现更精确的控制。</p>
+</li>
+<li><p>通常情况下会将串级连接的PID控制器分为主PID和从PID。主PID完成对系统的基本控制,从PID对主PID的控制行为进行补偿和修正。 </p>
+</li>
+<li><p>通过正确设计每个PID控制器的参数,协调各控制回路之间的关系,从而获得整个串级控制系统的良好控制效果。</p>
+</li>
+</ol>
+<h2 id="串级PID控制器应用举例"><a href="#串级PID控制器应用举例" class="headerlink" title="串级PID控制器应用举例"></a>串级PID控制器应用举例</h2><p>以两个PID控制器组成的串级PID控制为例，其中一个PID控制器在外回路，控制像液面高度或是速度等主要的物理量，另一个PID控制器是内回路，以外回路PID控制器的输出做为其目标值，一般是控制较快速变化的参数，例如流量或加速度等。若利用串级PID控制，可以适当增加控制器的工作频率，降低其时间常数。</p>
+<p>例如一个温控的设备有二个串级的PID控制器，分别有各自的热电偶温度感测器。外回路的控制器控制水温，其感测器距加热器很远，直接量测整体水温，其误差量是理想水温及整体水温的差值。外回路PID控制器的输出即为内回路控制器的目标值，内回路控制器控制加热器，其感测器是在加热器上，其误差量是加热器的理想温度及量测到温度的差值，其输出会使加热器温度维持在设定值附近。</p>
+<p><img src="https://files.mdnice.com/user/38598/2d75019c-f174-443f-bdb1-03ec2f5955c8.jpg" srcset="/img/loading.gif" lazyload alt="二级串级温度控制器"></p>
+<p>内外回路控制器的参数可能会相差很多，外回路的PID控制器有较长的时间常数，对应所有的水加热或是冷却需要的时间。内回路的PID控制器反应会比较快。每个控制器可以调整到符合其真正控制的系统，本例中水槽中的水温，和加热器本身温度。</p>
+<p>当然如果是系统对温度控制的精度非常高，那还有可能将系统设置为三级串级控制器，比如要设计一个高精度的恒温水浴加热系统，需要对被加热物体温度进行精确控制，此时需要同时监测水浴温度，器皿温度，以及被加热物体温度，这种情况下就可以设计一个三级串级温度控制器了。</p>
+<p><img src="https://files.mdnice.com/user/38598/c3e8da28-8af9-4db2-91d3-a02381732c28.png" srcset="/img/loading.gif" lazyload alt="三级串级温度控制器举例"></p>
+<h2 id="串级PID控制器示例程序"><a href="#串级PID控制器示例程序" class="headerlink" title="串级PID控制器示例程序"></a>串级PID控制器示例程序</h2><p>二级串级温度控制PID示例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*Constructor (...)*********************************************************</span><br><span class="hljs-comment"> *    The parameters specified here are those for for which we can&#x27;t set up </span><br><span class="hljs-comment"> *    reliable defaults, so we need to have the user set them.</span><br><span class="hljs-comment"> ***************************************************************************/</span><br>PID::<span class="hljs-built_in">PID</span>(<span class="hljs-type">double</span>* Input, <span class="hljs-type">double</span>* Output, <span class="hljs-type">double</span>* Setpoint,<br>        <span class="hljs-type">double</span> Kp, <span class="hljs-type">double</span> Ki, <span class="hljs-type">double</span> Kd, <span class="hljs-type">int</span> ControllerDirection)<br>&#123;<br>	<br>    myOutput = Output;<br>    myInput = Input;<br>    mySetpoint = Setpoint;<br>	inAuto = <span class="hljs-literal">false</span>;<br>	<br>	PID::<span class="hljs-built_in">SetOutputLimits</span>(<span class="hljs-number">0</span>, <span class="hljs-number">255</span>);				<span class="hljs-comment">//default output limit corresponds to </span><br>												<span class="hljs-comment">//the arduino pwm limits</span><br><br>    SampleTime = <span class="hljs-number">100</span>;							<span class="hljs-comment">//default Controller Sample Time is 0.1 seconds</span><br><br>    PID::<span class="hljs-built_in">SetControllerDirection</span>(ControllerDirection);<br>    PID::<span class="hljs-built_in">SetTunings</span>(Kp, Ki, Kd);<br><br>    lastTime = <span class="hljs-built_in">millis</span>()-SampleTime;				<br>&#125;<br> <br> <br><span class="hljs-comment">/* Compute() **********************************************************************</span><br><span class="hljs-comment"> *     This, as they say, is where the magic happens.  this function should be called</span><br><span class="hljs-comment"> *   every time &quot;void loop()&quot; executes.  the function will decide for itself whether a new</span><br><span class="hljs-comment"> *   pid Output needs to be computed.  returns true when the output is computed,</span><br><span class="hljs-comment"> *   false when nothing has been done.</span><br><span class="hljs-comment"> **********************************************************************************/</span> <br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">PID::Compute</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>   <span class="hljs-keyword">if</span>(!inAuto) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>   <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> now = <span class="hljs-built_in">millis</span>();<br>   <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> timeChange = (now - lastTime);<br>   <span class="hljs-keyword">if</span>(timeChange&gt;=SampleTime)<br>   &#123;<br>      <span class="hljs-comment">/*Compute all the working error variables*/</span><br>	  <span class="hljs-type">double</span> input = *myInput;<br>      <span class="hljs-type">double</span> error = *mySetpoint - input;<br>      ITerm+= (ki * error);<br>      <span class="hljs-keyword">if</span>(ITerm &gt; outMax) ITerm= outMax;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ITerm &lt; outMin) ITerm= outMin;<br>      <span class="hljs-type">double</span> dInput = (input - lastInput);<br> <br>      <span class="hljs-comment">/*Compute PID Output*/</span><br>      <span class="hljs-type">double</span> output = kp * error + ITerm- kd * dInput;<br>      <br>	  <span class="hljs-keyword">if</span>(output &gt; outMax) output = outMax;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(output &lt; outMin) output = outMin;<br>	  *myOutput = output;<br>	  <br>      <span class="hljs-comment">/*Remember some variables for next time*/</span><br>      lastInput = input;<br>      lastTime = now;<br>	  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>   &#125;<br>   <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><br><span class="hljs-comment">/* SetTunings(...)*************************************************************</span><br><span class="hljs-comment"> * This function allows the controller&#x27;s dynamic performance to be adjusted. </span><br><span class="hljs-comment"> * it&#x27;s called automatically from the constructor, but tunings can also</span><br><span class="hljs-comment"> * be adjusted on the fly during normal operation</span><br><span class="hljs-comment"> ******************************************************************************/</span> <br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PID::SetTunings</span><span class="hljs-params">(<span class="hljs-type">double</span> Kp, <span class="hljs-type">double</span> Ki, <span class="hljs-type">double</span> Kd)</span></span><br><span class="hljs-function"></span>&#123;<br>   <span class="hljs-keyword">if</span> (Kp&lt;<span class="hljs-number">0</span> || Ki&lt;<span class="hljs-number">0</span> || Kd&lt;<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br> <br>   dispKp = Kp; dispKi = Ki; dispKd = Kd;<br>   <br>   <span class="hljs-type">double</span> SampleTimeInSec = ((<span class="hljs-type">double</span>)SampleTime)/<span class="hljs-number">1000</span>;  <br>   kp = Kp;<br>   ki = Ki * SampleTimeInSec;<br>   kd = Kd / SampleTimeInSec;<br> <br>  <span class="hljs-keyword">if</span>(controllerDirection ==REVERSE)<br>   &#123;<br>      kp = (<span class="hljs-number">0</span> - kp);<br>      ki = (<span class="hljs-number">0</span> - ki);<br>      kd = (<span class="hljs-number">0</span> - kd);<br>   &#125;<br>&#125;<br>  <br><span class="hljs-comment">/* SetSampleTime(...) *********************************************************</span><br><span class="hljs-comment"> * sets the period, in Milliseconds, at which the calculation is performed	</span><br><span class="hljs-comment"> ******************************************************************************/</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PID::SetSampleTime</span><span class="hljs-params">(<span class="hljs-type">int</span> NewSampleTime)</span></span><br><span class="hljs-function"></span>&#123;<br>   <span class="hljs-keyword">if</span> (NewSampleTime &gt; <span class="hljs-number">0</span>)<br>   &#123;<br>      <span class="hljs-type">double</span> ratio  = (<span class="hljs-type">double</span>)NewSampleTime<br>                      / (<span class="hljs-type">double</span>)SampleTime;<br>      ki *= ratio;<br>      kd /= ratio;<br>      SampleTime = (<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>)NewSampleTime;<br>   &#125;<br>&#125;<br> <br><span class="hljs-comment">/* SetOutputLimits(...)****************************************************</span><br><span class="hljs-comment"> *     This function will be used far more often than SetInputLimits.  while</span><br><span class="hljs-comment"> *  the input to the controller will generally be in the 0-1023 range (which is</span><br><span class="hljs-comment"> *  the default already,)  the output will be a little different.  maybe they&#x27;ll</span><br><span class="hljs-comment"> *  be doing a time window and will need 0-8000 or something.  or maybe they&#x27;ll</span><br><span class="hljs-comment"> *  want to clamp it from 0-125.  who knows.  at any rate, that can all be done</span><br><span class="hljs-comment"> *  here.</span><br><span class="hljs-comment"> **************************************************************************/</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PID::SetOutputLimits</span><span class="hljs-params">(<span class="hljs-type">double</span> Min, <span class="hljs-type">double</span> Max)</span></span><br><span class="hljs-function"></span>&#123;<br>   <span class="hljs-keyword">if</span>(Min &gt;= Max) <span class="hljs-keyword">return</span>;<br>   outMin = Min;<br>   outMax = Max;<br> <br>   <span class="hljs-keyword">if</span>(inAuto)<br>   &#123;<br>	   <span class="hljs-keyword">if</span>(*myOutput &gt; outMax) *myOutput = outMax;<br>	   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(*myOutput &lt; outMin) *myOutput = outMin;<br>	 <br>	   <span class="hljs-keyword">if</span>(ITerm &gt; outMax) ITerm= outMax;<br>	   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ITerm &lt; outMin) ITerm= outMin;<br>   &#125;<br>&#125;<br><br><span class="hljs-comment">/* SetMode(...)****************************************************************</span><br><span class="hljs-comment"> * Allows the controller Mode to be set to manual (0) or Automatic (non-zero)</span><br><span class="hljs-comment"> * when the transition from manual to auto occurs, the controller is</span><br><span class="hljs-comment"> * automatically initialized</span><br><span class="hljs-comment"> ******************************************************************************/</span> <br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PID::SetMode</span><span class="hljs-params">(<span class="hljs-type">int</span> Mode)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">bool</span> newAuto = (Mode == AUTOMATIC);<br>    <span class="hljs-keyword">if</span>(newAuto == !inAuto)<br>    &#123;  <span class="hljs-comment">/*we just went from manual to auto*/</span><br>        PID::<span class="hljs-built_in">Initialize</span>();<br>    &#125;<br>    inAuto = newAuto;<br>&#125;<br> <br><span class="hljs-comment">/* Initialize()****************************************************************</span><br><span class="hljs-comment"> *	does all the things that need to happen to ensure a bumpless transfer</span><br><span class="hljs-comment"> *  from manual to automatic mode.</span><br><span class="hljs-comment"> ******************************************************************************/</span> <br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PID::Initialize</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>   ITerm = *myOutput;<br>   lastInput = *myInput;<br>   <span class="hljs-keyword">if</span>(ITerm &gt; outMax) ITerm = outMax;<br>   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ITerm &lt; outMin) ITerm = outMin;<br>&#125;<br><br><span class="hljs-comment">/* SetControllerDirection(...)*************************************************</span><br><span class="hljs-comment"> * The PID will either be connected to a DIRECT acting process (+Output leads </span><br><span class="hljs-comment"> * to +Input) or a REVERSE acting process(+Output leads to -Input.)  we need to</span><br><span class="hljs-comment"> * know which one, because otherwise we may increase the output when we should</span><br><span class="hljs-comment"> * be decreasing.  This is called from the constructor.</span><br><span class="hljs-comment"> ******************************************************************************/</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PID::SetControllerDirection</span><span class="hljs-params">(<span class="hljs-type">int</span> Direction)</span></span><br><span class="hljs-function"></span>&#123;<br>   <span class="hljs-keyword">if</span>(inAuto &amp;&amp; Direction !=controllerDirection)<br>   &#123;<br>	  kp = (<span class="hljs-number">0</span> - kp);<br>      ki = (<span class="hljs-number">0</span> - ki);<br>      kd = (<span class="hljs-number">0</span> - kd);<br>   &#125;   <br>   controllerDirection = Direction;<br>&#125;<br><br><span class="hljs-comment">/* Status Funcions*************************************************************</span><br><span class="hljs-comment"> * Just because you set the Kp=-1 doesn&#x27;t mean it actually happened.  these</span><br><span class="hljs-comment"> * functions query the internal state of the PID.  they&#x27;re here for display </span><br><span class="hljs-comment"> * purposes.  this are the functions the PID Front-end uses for example</span><br><span class="hljs-comment"> ******************************************************************************/</span><br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">PID::GetKp</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span>  dispKp; &#125;<br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">PID::GetKi</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span>  dispKi;&#125;<br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">PID::GetKd</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span>  dispKd;&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">PID::GetMode</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span>  inAuto ? AUTOMATIC : MANUAL;&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">PID::GetDirection</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span> controllerDirection;&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">此处为CPP代码，具体应用设置不做举例，</span><br><span class="hljs-comment">各系统需求不一样设置各异，</span><br><span class="hljs-comment">使用时可以为各级PID创建一个pid对象。</span><br><span class="hljs-comment">也可以将代码转化为C代码，同样的道理，</span><br><span class="hljs-comment">使用时为各级PID函数分配不同参数即可。</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><code class="hljs c">PIDDouble roll;<br>PIDDouble pitch;<br>PIDSingle yaw_heading;<br>PIDSingle yaw_rate;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DT 0.001f</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OUTER_DERIV_FILT_ENABLE 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INNER_DERIV_FILT_ENABLE 1</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Double_Roll_Pitch_PID_Calculation</span><span class="hljs-params">(PIDDouble* axis, <span class="hljs-type">float</span> set_point_angle, <span class="hljs-type">float</span> angle<span class="hljs-comment">/*BNO080 Rotation Angle*/</span>, <span class="hljs-type">float</span> rate<span class="hljs-comment">/*ICM-20602 Angular Rate*/</span>)</span><br>&#123;<br>	<span class="hljs-comment">/*********** Double PID Outer Begin (Roll and Pitch Angular Position Control) *************/</span><br>	axis-&gt;out.reference = set_point_angle;	<span class="hljs-comment">//Set point of outer PID control</span><br>	axis-&gt;out.meas_value = angle;			<span class="hljs-comment">//BNO080 rotation angle</span><br><br>	axis-&gt;out.error = axis-&gt;out.reference - axis-&gt;out.meas_value;	<span class="hljs-comment">//Define error of outer loop</span><br>	axis-&gt;out.p_result = axis-&gt;out.error * axis-&gt;out.kp;			<span class="hljs-comment">//Calculate P result of outer loop</span><br><br>	axis-&gt;out.error_sum = axis-&gt;out.error_sum + axis-&gt;out.error * DT;	<span class="hljs-comment">//Define summation of outer loop</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OUT_ERR_SUM_MAX 500</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> OUT_I_ERR_MIN -OUT_ERR_SUM_MAX</span><br>	<span class="hljs-keyword">if</span>(axis-&gt;out.error_sum &gt; OUT_ERR_SUM_MAX) axis-&gt;out.error_sum = OUT_ERR_SUM_MAX;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(axis-&gt;out.error_sum &lt; OUT_I_ERR_MIN) axis-&gt;out.error_sum = OUT_I_ERR_MIN;<br>	axis-&gt;out.i_result = axis-&gt;out.error_sum * axis-&gt;out.ki;			<span class="hljs-comment">//Calculate I result of outer loop</span><br><br>	axis-&gt;out.error_deriv = -rate;										<span class="hljs-comment">//Define derivative of outer loop (rate = ICM-20602 Angular Rate)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> !OUTER_DERIV_FILT_ENABLE</span><br>	axis-&gt;out.d_result = axis-&gt;out.error_deriv * axis-&gt;out.kd;			<span class="hljs-comment">//Calculate D result of outer loop</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>	axis-&gt;out.error_deriv_filt = axis-&gt;out.error_deriv_filt * <span class="hljs-number">0.4f</span> + axis-&gt;out.error_deriv * <span class="hljs-number">0.6f</span>;	<span class="hljs-comment">//filter for derivative</span><br>	axis-&gt;out.d_result = axis-&gt;out.error_deriv_filt * axis-&gt;out.kd;									<span class="hljs-comment">//Calculate D result of inner loop</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>	axis-&gt;out.pid_result = axis-&gt;out.p_result + axis-&gt;out.i_result + axis-&gt;out.d_result;  <span class="hljs-comment">//Calculate PID result of outer loop</span><br>	<span class="hljs-comment">/****************************************************************************************/</span><br>	<br>	<span class="hljs-comment">/************ Double PID Inner Begin (Roll and Pitch Angular Rate Control) **************/</span><br>	axis-&gt;in.reference = axis-&gt;out.pid_result;	<span class="hljs-comment">//Set point of inner PID control is the PID result of outer loop (for double PID control)</span><br>	axis-&gt;in.meas_value = rate;					<span class="hljs-comment">//ICM-20602 angular rate</span><br><br>	axis-&gt;in.error = axis-&gt;in.reference - axis-&gt;in.meas_value;	<span class="hljs-comment">//Define error of inner loop</span><br>	axis-&gt;in.p_result = axis-&gt;in.error * axis-&gt;in.kp;			<span class="hljs-comment">//Calculate P result of inner loop</span><br><br>	axis-&gt;in.error_sum = axis-&gt;in.error_sum + axis-&gt;in.error * DT;	<span class="hljs-comment">//Define summation of inner loop</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> IN_ERR_SUM_MAX 500</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> IN_I_ERR_MIN -IN_ERR_SUM_MAX</span><br>	<span class="hljs-keyword">if</span>(axis-&gt;out.error_sum &gt; IN_ERR_SUM_MAX) axis-&gt;out.error_sum = IN_ERR_SUM_MAX;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(axis-&gt;out.error_sum &lt; IN_I_ERR_MIN) axis-&gt;out.error_sum = IN_I_ERR_MIN;<br>	axis-&gt;in.i_result = axis-&gt;in.error_sum * axis-&gt;in.ki;							<span class="hljs-comment">//Calculate I result of inner loop</span><br><br>	axis-&gt;in.error_deriv = -(axis-&gt;in.meas_value - axis-&gt;in.meas_value_prev) / DT;	<span class="hljs-comment">//Define derivative of inner loop</span><br>	axis-&gt;in.meas_value_prev = axis-&gt;in.meas_value;									<span class="hljs-comment">//Refresh value_prev to the latest value</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> !INNER_DERIV_FILT_ENABLE</span><br>	axis-&gt;in.d_result = axis-&gt;in.error_deriv * axis-&gt;in.kd;				<span class="hljs-comment">//Calculate D result of inner loop</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>	axis-&gt;in.error_deriv_filt = axis-&gt;in.error_deriv_filt * <span class="hljs-number">0.5f</span> + axis-&gt;in.error_deriv * <span class="hljs-number">0.5f</span>;	<span class="hljs-comment">//filter for derivative</span><br>	axis-&gt;in.d_result = axis-&gt;in.error_deriv_filt * axis-&gt;in.kd;								<span class="hljs-comment">//Calculate D result of inner loop</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>	<br>	axis-&gt;in.pid_result = axis-&gt;in.p_result + axis-&gt;in.i_result + axis-&gt;in.d_result; <span class="hljs-comment">//Calculate PID result of inner loop</span><br>	<span class="hljs-comment">/****************************************************************************************/</span><br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Single_Yaw_Heading_PID_Calculation</span><span class="hljs-params">(PIDSingle* axis, <span class="hljs-type">float</span> set_point_angle, <span class="hljs-type">float</span> angle<span class="hljs-comment">/*BNO080 Rotation Angle*/</span>, <span class="hljs-type">float</span> rate<span class="hljs-comment">/*ICM-20602 Angular Rate*/</span>)</span><br>&#123;<br>	<span class="hljs-comment">/*********** Single PID Begin (Yaw Angular Position) *************/</span><br>	axis-&gt;reference = set_point_angle;	<span class="hljs-comment">//Set point of yaw heading @ yaw stick is center.</span><br>	axis-&gt;meas_value = angle;			<span class="hljs-comment">//Current BNO080_Yaw angle @ yaw stick is center.</span><br><br>	axis-&gt;error = axis-&gt;reference - axis-&gt;meas_value;	<span class="hljs-comment">//Define error of yaw angle control</span><br><br>	<span class="hljs-keyword">if</span>(axis-&gt;error &gt; <span class="hljs-number">180.f</span>) axis-&gt;error -= <span class="hljs-number">360.f</span>;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(axis-&gt;error &lt; <span class="hljs-number">-180.f</span>) axis-&gt;error += <span class="hljs-number">360.f</span>;<br>	<br>	axis-&gt;p_result = axis-&gt;error * axis-&gt;kp;			<span class="hljs-comment">//Calculate P result of yaw angle control</span><br><br>	axis-&gt;error_sum = axis-&gt;error_sum + axis-&gt;error * DT;	<span class="hljs-comment">//Define summation of yaw angle control</span><br>	axis-&gt;i_result = axis-&gt;error_sum * axis-&gt;ki;			<span class="hljs-comment">//Calculate I result of yaw angle control</span><br><br>	axis-&gt;error_deriv = -rate;						<span class="hljs-comment">//Define differentiation of yaw angle control</span><br>	axis-&gt;d_result = axis-&gt;error_deriv * axis-&gt;kd;	<span class="hljs-comment">//Calculate D result of yaw angle control</span><br>	<br>	axis-&gt;pid_result = axis-&gt;p_result + axis-&gt;i_result + axis-&gt;d_result; <span class="hljs-comment">//Calculate PID result of yaw angle control</span><br>	<span class="hljs-comment">/***************************************************************/</span><br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Single_Yaw_Rate_PID_Calculation</span><span class="hljs-params">(PIDSingle* axis, <span class="hljs-type">float</span> set_point_rate, <span class="hljs-type">float</span> rate<span class="hljs-comment">/*ICM-20602 Angular Rate*/</span>)</span><br>&#123;<br>	<span class="hljs-comment">/*********** Single PID Begin (Yaw Angular Rate Control) *************/</span><br>	axis-&gt;reference = set_point_rate;	<span class="hljs-comment">//Set point of yaw heading @ yaw stick is not center.</span><br>	axis-&gt;meas_value = rate;			<span class="hljs-comment">//Current ICM20602.gyro_z @ yaw stick is not center.</span><br><br>	axis-&gt;error = axis-&gt;reference - axis-&gt;meas_value;	<span class="hljs-comment">//Define error of yaw rate control</span><br>	axis-&gt;p_result = axis-&gt;error * axis-&gt;kp;			<span class="hljs-comment">//Calculate P result of yaw rate control</span><br><br>	axis-&gt;error_sum = axis-&gt;error_sum + axis-&gt;error * DT;	<span class="hljs-comment">//Define summation of yaw rate control</span><br>	axis-&gt;i_result = axis-&gt;error_sum * axis-&gt;ki;			<span class="hljs-comment">//Calculate I result of yaw rate control</span><br><br>	axis-&gt;error_deriv = -(axis-&gt;meas_value - axis-&gt;meas_value_prev) / DT;	<span class="hljs-comment">//Define differentiation of yaw rate control</span><br>	axis-&gt;meas_value_prev = axis-&gt;meas_value;								<span class="hljs-comment">//Refresh value_prev to the latest value</span><br>	axis-&gt;d_result = axis-&gt;error_deriv * axis-&gt;kd;							<span class="hljs-comment">//Calculate D result of yaw rate control</span><br><br>	axis-&gt;pid_result = axis-&gt;p_result + axis-&gt;i_result + axis-&gt;d_result; <span class="hljs-comment">//Calculate PID result of yaw control</span><br>	<span class="hljs-comment">/*******************************************************************/</span><br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Reset_PID_Integrator</span><span class="hljs-params">(PIDSingle* axis)</span><br>&#123;<br>	axis-&gt;error_sum = <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Reset_All_PID_Integrator</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>	Reset_PID_Integrator(&amp;roll.in);<br>	Reset_PID_Integrator(&amp;roll.out);<br>	Reset_PID_Integrator(&amp;pitch.in);<br>	Reset_PID_Integrator(&amp;pitch.out);<br>	Reset_PID_Integrator(&amp;yaw_heading);<br>	Reset_PID_Integrator(&amp;yaw_rate);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>文章内容为作者个人观点，难免有疏忽或错误，若有不同见解可以交流评论，若发现错误还请指正，若认同文章观点，欢迎关注，分享。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>如学习需要或项目合作可以扫码添加微信。<br>建有交流群，以方便大家平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code>。<br><img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>占位</p>
+<p><code>温馨提示：若需要获取分享的资料，进入公众号后台发送关键字内容即可自动获取，而不是在留言或个人微信聊天界面发送！！！</code></p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485862&idx=1&sn=830ede5ac467c8d396adfbea141f0526&chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&token=63320980&lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485987&idx=1&sn=106e52add61999ae4bddd8b28c7ed2b1&chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&token=63320980&lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=3&sn=d4c0d26781f307ffd26defdc4022c928&chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&token=63320980&lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PID算法3</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/PID算法3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C语言初学者可以利用的帮助文档</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E4%B8%80/" title="PID算法一">
+                        <span class="hidden-mobile">PID算法一</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

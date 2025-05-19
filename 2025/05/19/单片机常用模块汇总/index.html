@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="占位 学完51后可做些什么小项目练手很多初学者在看完51单片机的学习视频之后都会感觉似乎没什么可做的东西让自己去实践。一是因为一般教学视频主要还是教初学者入门，侧重点都是在于介绍常用的基本技能，不会花太多篇幅讲解学了单片机能做哪些具体的东西。而是因为很多初学者还没有掌握太多的电子应用知识，对电子产品的内部电路认知有限，所以很多同学看完视频后就开始迷茫了。即便是进入学校工作室或实验室学习的同学都会有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单片机常用模块汇总">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="占位 学完51后可做些什么小项目练手很多初学者在看完51单片机的学习视频之后都会感觉似乎没什么可做的东西让自己去实践。一是因为一般教学视频主要还是教初学者入门，侧重点都是在于介绍常用的基本技能，不会花太多篇幅讲解学了单片机能做哪些具体的东西。而是因为很多初学者还没有掌握太多的电子应用知识，对电子产品的内部电路认知有限，所以很多同学看完视频后就开始迷茫了。即便是进入学校工作室或实验室学习的同学都会有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6f417444-3284-449c-a5c6-457c2bd058b3.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/b1f97b2d-811b-47be-a110-0605e44e94be.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/292130b8-54a9-4c8f-a15a-4068eb7d028a.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/66849328-e477-44f8-bf92-da369ba171e1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/9258611b-9d40-41a2-8760-ac9b1b93d458.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6c879d69-0208-4c72-bb46-0db2fd9821ea.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/cd9a30f1-b3d0-4ad4-9892-f88a0e9a03b8.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/58bc113d-3182-4257-9787-5a96c1f837c2.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/e149f4da-98db-42d8-8a40-a70e56cbd1b8.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/890f9ee8-7658-4102-9875-00400ea3fc80.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/b257380e-4c4d-4e14-863c-552c5f5f32ce.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/72c8e8f7-bb64-4392-ac7f-1c2d3c45b7d6.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/a04cc382-0031-4e70-b811-372d608bf5c8.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/203eb6e7-0787-4c10-b71b-367ead5da9b0.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/c800c7d6-d992-42d4-9bfa-88b3b9450706.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/eaf6eb2f-1c9a-4791-b029-e9fdc51349e7.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/85e27d55-a6f8-43c4-b23f-6aafa69e5984.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/d45e074b-bfa2-4c72-9158-c9c895782509.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/65c4d4e2-84c1-4833-b3da-0928bdccef25.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6bc8e4a4-c5fb-41ef-a605-0be5a51bd16a.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/382a0d6a-0fd9-451b-8e2d-d3e7467b2e45.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/82607316-ac59-4701-b7ba-ad794a27bd8b.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/4fd470bd-3e3a-4d6c-bc12-e0a3d4f5cc1a.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/f1167292-7eca-4383-81f4-01b39b661db8.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/0bddb2fe-8f67-484e-ba68-413523614efa.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/2f0f1685-44c0-4ff2-ae54-45c009478b9c.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/8a37fdeb-c91e-4d2a-a8b2-8cbe9ef16cdc.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/7dec5945-8613-4c62-9446-2436d6fc51f8.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/33a5f0ff-4dee-4a49-ae1b-3f9afa6f51c8.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/a69ff726-43f8-42e9-850b-7cd19d09d0df.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/f9ec0289-271c-4341-b5d8-1cfcd4ba755b.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/2d3904ff-cb87-406c-8a75-f3c9bb32c5e1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/341283ef-1032-49ec-8401-2128fd3e455b.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/07685ed9-a629-4076-ae8a-d8c8d696b52f.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/b6acd9d6-ab45-4b81-90b6-f059b2d20538.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/26aa595d-76ac-424a-aa77-5ae7f89f691a.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/848b95d0-a45d-48bf-99d9-40e3d44719d6.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/95cdf42d-9b77-46f3-b493-3aebf41c3e1b.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6b45939d-4bd5-47e3-bd58-d71cd775b2d1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/e57195dc-bbf6-4756-983a-223bf5c05705.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/29010d17-3091-4cbe-a9ea-da5a7e59d018.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6a71aad6-ce86-4299-bc09-8c1698b63e50.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/9be52f4d-5d4f-4083-83e3-1b74baabc60e.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/c33c95bd-ece4-4b2b-b217-1563f3b85cd1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/ed0981b1-17a6-4231-85e5-b9cdb1287f29.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/3b23db1f-b5d8-4ad0-acbe-9317ccaccbf0.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/2ce57ad0-05d6-4ce5-a82e-e57eba59ba5c.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.612Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/6f417444-3284-449c-a5c6-457c2bd058b3.png">
+  
+  
+  
+  <title>单片机常用模块汇总 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="单片机常用模块汇总"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">单片机常用模块汇总</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>占位</p>
+<h2 id="学完51后可做些什么小项目练手"><a href="#学完51后可做些什么小项目练手" class="headerlink" title="学完51后可做些什么小项目练手"></a>学完51后可做些什么小项目练手</h2><p>很多初学者在看完51单片机的学习视频之后都会感觉似乎没什么可做的东西让自己去实践。一是因为一般教学视频主要还是教初学者入门，侧重点都是在于介绍常用的基本技能，不会花太多篇幅讲解学了单片机能做哪些具体的东西。而是因为很多初学者还没有掌握太多的电子应用知识，对电子产品的内部电路认知有限，所以很多同学看完视频后就开始迷茫了。即便是进入学校工作室或实验室学习的同学都会有这样的问题，更何况一般初学者呢，很多同学学完单片机也还有很多常见电子元器件不认识的，也分不清什么是贴片元器件，什么是插件元器件，总之感觉学的有点云里雾里。我自己大学期间就是从实验室出来的，对这种现象还是深有体会，甚至有些知识是在找工作面试的过程中不会，回答不出来才回去猛补的。并且工作那么多年我对学科基础的重要性深有体会，项目开发时很多没遇到的，难点问题你可以不会，但不希望你连基础的东西都没掌握好。所以有时我会写一些比较基础的内容，也是希望初学者可以少走一些弯路，平时多对本行业做些了解，开阔视野。</p>
+<p>这篇文章简单介绍一些开发常用模块，希望初学者可以根据这些模块自己设计一些小项目来练手，从而达到熟悉项目开发的目的。今天的这篇文章先让大家认识各种模块，然后也会分享一些常用模块的资料，方便各位初学者学习使用。所以你如果正在迷茫的话不妨在空闲时间看看我的文章，或许哪天就看到了适合你的内容了。虽然现在关注我这个号的人并不算多，我写的文章也还比较少，但后续会持续发布文章，目前主要以中低难度的内容为主，简单知识点介绍差不多之后续自然就会有更复杂的内容发布了。另外关注我的朋友从中学生到大学教授各年龄段，各技能水平的都有，所以平时发布的文章难免照顾不全面，写简单的内容掉“老手”粉，写复杂内容掉“新手”粉，这都是正常现象，我早已习惯，也理解大家的选择。当然不管怎么样今年还是给自己定个目标，多发布些内容争取早日实现关注破万吧，也非常感谢各位老铁的认可。另外昨晚有朋友已经帮我建立了第一个交流群，我会在今天的第二篇文章中分享群二维码，有需要的朋友可扫码加入。到时候遇到问题可以在群里交流，这样我写文章也会更有针对性。</p>
+<p><code>提示：接下来多图预警，注意流量！相关资料，文后查看关键字。</code></p>
+<h2 id="1-显示模块"><a href="#1-显示模块" class="headerlink" title="1.显示模块"></a>1.显示模块</h2><p>显示模块是最基础的人机交互单元，在现在的绝大多数电子产品中都会有应用，所以掌握一些常见显示模块的使用是单片机开发者必须掌握的技能。</p>
+<blockquote>
+<p>1.1 数码管</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/6f417444-3284-449c-a5c6-457c2bd058b3.png" srcset="/img/loading.gif" lazyload alt="各类数码管"></p>
+<blockquote>
+<p>1.2 点阵屏</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/b1f97b2d-811b-47be-a110-0605e44e94be.png" srcset="/img/loading.gif" lazyload alt="点阵屏"></p>
+<blockquote>
+<p>1.3 LCD1602及12864液晶屏</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/292130b8-54a9-4c8f-a15a-4068eb7d028a.png" srcset="/img/loading.gif" lazyload alt="LCD1602和12864液晶屏"></p>
+<blockquote>
+<p>1.4 Nokia 5110液晶屏</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/66849328-e477-44f8-bf92-da369ba171e1.png" srcset="/img/loading.gif" lazyload alt="Nokia 5110液晶屏"></p>
+<blockquote>
+<p>1.5 OLED液晶屏</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/9258611b-9d40-41a2-8760-ac9b1b93d458.png" srcset="/img/loading.gif" lazyload alt="OLED液晶屏"></p>
+<blockquote>
+<p>1.6 TFT液晶屏</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/6c879d69-0208-4c72-bb46-0db2fd9821ea.png" srcset="/img/loading.gif" lazyload alt="TFT液晶屏"></p>
+<blockquote>
+<p>1.7 段位液晶屏</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/cd9a30f1-b3d0-4ad4-9892-f88a0e9a03b8.png" srcset="/img/loading.gif" lazyload alt="段位液晶屏"></p>
+<h2 id="无线模块"><a href="#无线模块" class="headerlink" title="无线模块"></a>无线模块</h2><p>无线模块式是各类移动应用产品以及物联网设备的基础硬件组成单元，所以在单片机项目开发中使用频率也是非常高，掌握这些模块的使用对日后工作时项目开发非常有利。</p>
+<blockquote>
+<p>2.1 NRF2.4G</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/58bc113d-3182-4257-9787-5a96c1f837c2.png" srcset="/img/loading.gif" lazyload alt="NRF2.4G"></p>
+<blockquote>
+<p>2.2 蓝牙</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/e149f4da-98db-42d8-8a40-a70e56cbd1b8.png" srcset="/img/loading.gif" lazyload alt="蓝牙"></p>
+<blockquote>
+<p>2.3 WiFi</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/890f9ee8-7658-4102-9875-00400ea3fc80.png" srcset="/img/loading.gif" lazyload alt="WiFi"></p>
+<blockquote>
+<p>2.4 Zigbee</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/b257380e-4c4d-4e14-863c-552c5f5f32ce.png" srcset="/img/loading.gif" lazyload alt="Zigbee"></p>
+<blockquote>
+<p>2.5 GPS</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/72c8e8f7-bb64-4392-ac7f-1c2d3c45b7d6.png" srcset="/img/loading.gif" lazyload alt="GPS"></p>
+<blockquote>
+<p>2.6 GSM&#x2F;GPRS&#x2F;3G&#x2F;4G</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/a04cc382-0031-4e70-b811-372d608bf5c8.png" srcset="/img/loading.gif" lazyload alt="GSM&#x2F;GPRS&#x2F;3G&#x2F;4G"></p>
+<blockquote>
+<p>2.7 RFID模块</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/203eb6e7-0787-4c10-b71b-367ead5da9b0.png" srcset="/img/loading.gif" lazyload alt="RFID模块"></p>
+<h2 id="传感器模块"><a href="#传感器模块" class="headerlink" title="传感器模块"></a>传感器模块</h2><p>传感器是将自然世界的各种模拟信号通过一定的电路转化为电信号的产品。市面上各类电子产品功能实现的基本单元，小到各类玩具，大到机械工控，军工航天设备都离不开各种传感器的参与。</p>
+<blockquote>
+<p>3.1 温度传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/c800c7d6-d992-42d4-9bfa-88b3b9450706.png" srcset="/img/loading.gif" lazyload alt="温度传感器"></p>
+<blockquote>
+<p>3.2 湿度传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/eaf6eb2f-1c9a-4791-b029-e9fdc51349e7.png" srcset="/img/loading.gif" lazyload alt="湿度传感器"></p>
+<blockquote>
+<p>3.3 超声波传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/85e27d55-a6f8-43c4-b23f-6aafa69e5984.png" srcset="/img/loading.gif" lazyload alt="超声波传感器"></p>
+<blockquote>
+<p>3.4 烟雾传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/d45e074b-bfa2-4c72-9158-c9c895782509.png" srcset="/img/loading.gif" lazyload alt="烟雾传感器"></p>
+<blockquote>
+<p>3.5水位传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/65c4d4e2-84c1-4833-b3da-0928bdccef25.png" srcset="/img/loading.gif" lazyload alt="水位传感器"></p>
+<blockquote>
+<p>3.6 雨滴传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/6bc8e4a4-c5fb-41ef-a605-0be5a51bd16a.png" srcset="/img/loading.gif" lazyload alt="雨滴传感器"></p>
+<blockquote>
+<p>3.7 霍尔传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/382a0d6a-0fd9-451b-8e2d-d3e7467b2e45.png" srcset="/img/loading.gif" lazyload alt="霍尔传感器"></p>
+<p><strong>以下传感器在一般的竞赛项目中通常被用于智能车，无人机，机器人等比较有趣的项目中，如果有兴趣可以尝试。其中陀螺仪，加速度计，磁力计，气压计通常会集中在一个模块上。</strong></p>
+<blockquote>
+<p>3.8 光电传感器<br>光电在电子产品的应用非常广泛，光电传感器包括普通光敏传感器，红外对管，红外遥控，光电对管，以及热释电红外传感器等等，当然后面介绍的激光传感器，摄像头，光流模块也是光电传感器，但功能相对丰富一点，所以还是将它们分开来。</p>
+</blockquote>
+<p>&lt;<img src="https://files.mdnice.com/user/38598/82607316-ac59-4701-b7ba-ad794a27bd8b.png" srcset="/img/loading.gif" lazyload alt="1.光敏传感器">,<img src="https://files.mdnice.com/user/38598/4fd470bd-3e3a-4d6c-bc12-e0a3d4f5cc1a.png" srcset="/img/loading.gif" lazyload alt="2.红外对管">,<img src="https://files.mdnice.com/user/38598/f1167292-7eca-4383-81f4-01b39b661db8.png" srcset="/img/loading.gif" lazyload alt="3.红外遥控">,<img src="https://files.mdnice.com/user/38598/0bddb2fe-8f67-484e-ba68-413523614efa.png" srcset="/img/loading.gif" lazyload alt="4.光电对管">,<img src="https://files.mdnice.com/user/38598/2f0f1685-44c0-4ff2-ae54-45c009478b9c.png" srcset="/img/loading.gif" lazyload alt="5.热释电红外传感器">&gt;</p>
+<blockquote>
+<p>3.9 激光传感器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/8a37fdeb-c91e-4d2a-a8b2-8cbe9ef16cdc.png" srcset="/img/loading.gif" lazyload alt="激光传感器"></p>
+<blockquote>
+<p>3.10 摄像头</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/7dec5945-8613-4c62-9446-2436d6fc51f8.png" srcset="/img/loading.gif" lazyload alt="摄像头"></p>
+<blockquote>
+<p>3.11 光流</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/33a5f0ff-4dee-4a49-ae1b-3f9afa6f51c8.png" srcset="/img/loading.gif" lazyload alt="光流"></p>
+<blockquote>
+<p>3.12 陀螺仪</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/a69ff726-43f8-42e9-850b-7cd19d09d0df.png" srcset="/img/loading.gif" lazyload alt="陀螺仪"></p>
+<blockquote>
+<p>3.13 加速度计</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/f9ec0289-271c-4341-b5d8-1cfcd4ba755b.png" srcset="/img/loading.gif" lazyload alt="加速度计"></p>
+<blockquote>
+<p>3.14 磁力计</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/2d3904ff-cb87-406c-8a75-f3c9bb32c5e1.png" srcset="/img/loading.gif" lazyload alt="磁力计"></p>
+<blockquote>
+<p>3.15 气压计</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/341283ef-1032-49ec-8401-2128fd3e455b.png" srcset="/img/loading.gif" lazyload alt="气压计"></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>其他一些普通模块。如果你是使用面包板来来学习单片机，那这些模块也需要考虑购买。</p>
+<blockquote>
+<p>电机<br>电机一般包括有刷电机，无刷电机，步进电机，减速电机等等。</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/07685ed9-a629-4076-ae8a-d8c8d696b52f.png" srcset="/img/loading.gif" lazyload alt="电机"></p>
+<blockquote>
+<p>蜂鸣器<br>蜂鸣器包括有缘蜂鸣器和无源蜂鸣器。</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/b6acd9d6-ab45-4b81-90b6-f059b2d20538.png" srcset="/img/loading.gif" lazyload alt="蜂鸣器"></p>
+<blockquote>
+<p>喇叭</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/26aa595d-76ac-424a-aa77-5ae7f89f691a.png" srcset="/img/loading.gif" lazyload alt="喇叭"></p>
+<blockquote>
+<p>麦克风</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/848b95d0-a45d-48bf-99d9-40e3d44719d6.png" srcset="/img/loading.gif" lazyload alt="麦克风"></p>
+<blockquote>
+<p>按键</p>
+</blockquote>
+<p>&lt;<img src="https://files.mdnice.com/user/38598/95cdf42d-9b77-46f3-b493-3aebf41c3e1b.png" srcset="/img/loading.gif" lazyload alt="1">,<img src="https://files.mdnice.com/user/38598/6b45939d-4bd5-47e3-bd58-d71cd775b2d1.png" srcset="/img/loading.gif" lazyload alt="2">,<img src="https://files.mdnice.com/user/38598/e57195dc-bbf6-4756-983a-223bf5c05705.png" srcset="/img/loading.gif" lazyload alt="3">&gt;</p>
+<blockquote>
+<p>继电器</p>
+</blockquote>
+<p><img src="https://files.mdnice.com/user/38598/29010d17-3091-4cbe-a9ea-da5a7e59d018.png" srcset="/img/loading.gif" lazyload alt="继电器"></p>
+<blockquote>
+<p>电源模块<br>电源模块主要包括稳压，充电，开关电源等模块。</p>
+</blockquote>
+<p>&lt;<img src="https://files.mdnice.com/user/38598/6a71aad6-ce86-4299-bc09-8c1698b63e50.png" srcset="/img/loading.gif" lazyload alt="1">,<img src="https://files.mdnice.com/user/38598/9be52f4d-5d4f-4083-83e3-1b74baabc60e.png" srcset="/img/loading.gif" lazyload alt="2">,<img src="https://files.mdnice.com/user/38598/c33c95bd-ece4-4b2b-b217-1563f3b85cd1.png" srcset="/img/loading.gif" lazyload alt="3">&gt;</p>
+<blockquote>
+<p>电机驱动模块</p>
+</blockquote>
+<p>&lt;<img src="https://files.mdnice.com/user/38598/ed0981b1-17a6-4231-85e5-b9cdb1287f29.png" srcset="/img/loading.gif" lazyload alt="1">,<img src="https://files.mdnice.com/user/38598/3b23db1f-b5d8-4ad0-acbe-9317ccaccbf0.png" srcset="/img/loading.gif" lazyload>,<img src="https://files.mdnice.com/user/38598/2ce57ad0-05d6-4ce5-a82e-e57eba59ba5c.png" srcset="/img/loading.gif" lazyload alt="3">&gt;</p>
+<h2 id="模块资料"><a href="#模块资料" class="headerlink" title="模块资料"></a>模块资料</h2><p>部分模块资料获取关键字：<code>23041822A</code>。</p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+<p><img src="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg" srcset="/img/loading.gif" lazyload alt="欢迎添加作者微信"></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>单片机常用模块汇总</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/单片机常用模块汇总/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/" title="初学51单片机开发必备工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">初学51单片机开发必备工具</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%B8%E5%9E%8B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" title="单片机初学者典型疑惑解答">
+                        <span class="hidden-mobile">单片机初学者典型疑惑解答</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

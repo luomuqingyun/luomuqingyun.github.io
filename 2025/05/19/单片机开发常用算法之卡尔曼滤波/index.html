@@ -1,0 +1,629 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="占位  本文因没有制作相关图片后面算法内容似乎不能用纯文字描述出让人一看就懂的意思，精彩图文见优质的参考资料链接（公众号不支持跳转外链，所以网页链接转注脚了），图文说明确实比文字表达得更精彩，先借用别人链接参考参考。以后的文章再做动图演示。  算法——产品的软核我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单片机开发常用算法之卡尔曼滤波">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="占位  本文因没有制作相关图片后面算法内容似乎不能用纯文字描述出让人一看就懂的意思，精彩图文见优质的参考资料链接（公众号不支持跳转外链，所以网页链接转注脚了），图文说明确实比文字表达得更精彩，先借用别人链接参考参考。以后的文章再做动图演示。  算法——产品的软核我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.617Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>单片机开发常用算法之卡尔曼滤波 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="单片机开发常用算法之卡尔曼滤波"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">单片机开发常用算法之卡尔曼滤波</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>占位</p>
+<blockquote>
+<p>本文因没有制作相关图片后面算法内容似乎不能用纯文字描述出让人一看就懂的意思，精彩图文见优质的<code>参考资料</code>链接（公众号不支持跳转外链，所以网页链接转注脚了），图文说明确实比文字表达得更精彩，先借用别人链接参考参考。以后的文章再做动图演示。</p>
+</blockquote>
+<h2 id="算法——产品的软核"><a href="#算法——产品的软核" class="headerlink" title="算法——产品的软核"></a>算法——产品的软核</h2><p>我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制器I&#x2F;O口通断，或再配合着定时器、中断等功能，最后通过搭配其他一些外部器件就可以实现产品功能了。但是对于一些涉及到某些复杂控制，或需要复杂计算才能实现控制功能的产品，以上对微控制的简单操作就不能实现需要的产品功能，这样的产品就需要我们在程序中编写一些控制算法才能实现。往往生活中的很多电器产品都不是几行代码就能实现得了的，所以我们用单片机进行项目开发时通常离不开算法。</p>
+<p>在项目开发过程中涉及到的算法非常多，并且产品功能越复杂对算法的要求会越高，并且即使是同样的产品对它的要求越高需要的算法肯定也就更复杂，甚至如果算法设计得合理，有时还可以节约硬件成本。对于开发者来说，即便以后的不从事算法工程相关的工作也需要掌握一些算法知识。算法的本质就是对数据进行某些特定的处理或运算，从而获得我们需要的结果，进而控制微控制器做出相应的动作，最终实现产品功能。简单一点的算法应该就是我们最常见的一些基本运算吧，复杂一点的可能是排序、查找、滤波等算法，再复杂一点就需要处理开根号，微分，积分，矩阵，傅里叶变换等等一系列相对复杂的高等运算了。当然控制器不是人脑，只能进行二进制处理，肯定不能像人脑一样能够识别各种运算符号。但通过我们程序处理、优化再结合其内部运算单元就可以完成复杂运算了，当然其内部结构与运算单元往往也决定其能以怎么样是速度完成这些运算。当然，如果要实现一些复杂算法那肯定还是需要使用更高性能的控制器，比如，DSP芯片就是专门为数字信号处理而设计的芯片，不过现在一些性能比较高的微控制器内核也会附带一个简单的DSP单元。因为软件算法种类非常的多，几乎每一种成熟的算法都足以写一本书出来了，所以后续会在这里写一系列我熟悉的软件算法相关的文章，与大家一起交流学习。这篇文章我们先来介绍一种单片机开发时使用比较多的算法——卡尔曼滤波算法。</p>
+<h2 id="何为数字滤波器"><a href="#何为数字滤波器" class="headerlink" title="何为数字滤波器"></a>何为数字滤波器</h2><p>谈到滤波算法就不得不涉及数字滤波器，学习模拟电路的时候我们肯定都接触了滤波器，这也是模拟电路中很重要的一部分。通常情况下模拟滤波器都是由电路中的电阻、电容或电感以及相应的运放构成，在电路中起到对某些特定频率的信号进行抑制的作用。那数字滤波器呢？顾名思义它就是对数字信号进行处理从而达到预期频率响应的信号系统。既然有模拟滤波器了为何还需要数字滤波器呢？由于模拟滤波器是由各类模拟电子元器件构成，在实际工作状态下每种元器件的参数及性能都可能受电流，温度，电磁等环境影响，在某些情况下可能对产品的功能影响比较大，而傅里叶变化可以巧妙的将时域信号转化为频域信号，对模拟信号采样后再经过一定的处理可以把这些复杂的信号变得相对容易处理，这也就是数字滤波器最大的优势了，最大程度上克服了信号的环境影响，而具有很高的稳定性。因为傅里叶变换的运算比较复杂，即使是优化后的快速傅里叶变换对于普通单片机来说都是很消耗资源的，所以在一些要求不高的应用中也会使用卷积进行相应的运算来实现数字滤波效果，来达到设计效果。</p>
+<p>数字滤波器是通过其幅频特性和相频特性函数推导进行设计的，所以模拟电路中一些常见的滤波器电路模型都有其对应的数字滤波器模型。经典的数字滤波器包括FIR和IIR两种，随着设计的优化出现了维纳滤波器、卡尔曼滤波器、线性预测器、自适应滤波器等现代滤波器。关于数字滤波器的仿真可以使用Matlab软件，在软件命令行窗口中输入fdatool打开滤波器设计工具箱进行相应设置。可参考官方链接：<br><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/signal/filter-design.html?s_tid=CRUX_lftnav" title="数字滤波器设计">数字滤波器设计</a></p>
+<p>这些内容似乎都太深奥，很容易把人看晕。在我们学信号与系统这门课时往往不知道这门课具体可以做什么，正好现在刚好可以回顾一下。如果不想看书可以参考知乎上的一些回答，比如：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19714540/answer/1119070975" title="如何理解傅里叶变换公式？">如何理解傅里叶变换公式？</a>但是不是这篇文章的重点，总之很多控制算法都源自于这本书，如果是在校的单片机初学者看到这里往后应该要对信号与系统这门课更加重视一些。里面一些更细节的问题，后续在做介绍，接下来先介绍今天文章的主角。</p>
+<h2 id="卡尔曼滤波器"><a href="#卡尔曼滤波器" class="headerlink" title="卡尔曼滤波器"></a>卡尔曼滤波器</h2><p>卡尔曼滤波器是现代滤波器的一种，它是一种高效率的递归滤波器（自回归滤波器），它能够从一系列的不完全及包含噪声的测量中，估计动态系统的状态，确切的说它更是一种预测算法。所以在惯性导航，智能控制方面应用非常广泛。对于航空航天等高科技应用场景我们普通开发者参与的机会肯定是比较小的，但我们可以利用它进行设计无人机，智能小车，小机器人是完全可以实现的。这也是写这篇文章的原因，因为现在针对大学生的多数设计竞赛都会有相关的赛题，所以学习这种算法还是很有必要的。</p>
+<p>由于其原理详细介绍起来不比傅里叶变换简单，估计多数人都会望而却步，所以有条件的朋友可以参考这篇外文论文：<a target="_blank" rel="noopener" href="https://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/" title="How a Kalman filter works, in pictures">How a Kalman filter works, in pictures</a>。本想转述一遍大概意思，结果发现知乎上也有翻译版了：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39912633" title="图说卡尔曼滤波，一份通俗易懂的教程">图说卡尔曼滤波，一份通俗易懂的教程</a>。这样的介绍绝对比用纯文字介绍更形象生动，如果觉得翻译的差点意思可以移步到这篇文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/louisanu/p/12803272.html" title="卡尔曼滤波器预测原理">卡尔曼滤波器预测原理</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>单片机开发常用算法之卡尔曼滤波</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/单片机开发常用算法之卡尔曼滤波/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">单片机的启动文件代码分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档">
+                        <span class="hidden-mobile">小白入门STM32之学会看文档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

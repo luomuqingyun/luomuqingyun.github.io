@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[TOC] 小白如何入门STM32 自从在公众号写单片机文章以来被很多低年级的大学生或者电子爱好者问及过如何学习STM32单片机。这个问题很简单，但回答却很难，因为每一位提问者的基础不一样，不可能给到他们统一的答案，当然最简单的回复不过就是买块开发板，跟着教材或视频做项目就差不多了，但这也是最敷衍的答案。但是很多人拿到开发板后可能就那一刻心中还是踌躇满志的，然后看了几个视频之后却是一脸懵了，或者更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白入门STM32之学会看文档">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] 小白如何入门STM32 自从在公众号写单片机文章以来被很多低年级的大学生或者电子爱好者问及过如何学习STM32单片机。这个问题很简单，但回答却很难，因为每一位提问者的基础不一样，不可能给到他们统一的答案，当然最简单的回复不过就是买块开发板，跟着教材或视频做项目就差不多了，但这也是最敷衍的答案。但是很多人拿到开发板后可能就那一刻心中还是踌躇满志的，然后看了几个视频之后却是一脸懵了，或者更">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092051957.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092254778.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092259673.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092301594.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092313879.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.700Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092051957.png">
+  
+  
+  
+  <title>小白入门STM32之学会看文档 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="小白入门STM32之学会看文档"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">小白入门STM32之学会看文档</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><code>[TOC]</code></p>
+<h2 id="小白如何入门STM32"><a href="#小白如何入门STM32" class="headerlink" title="小白如何入门STM32"></a>小白如何入门STM32</h2><p><img src="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092051957.png" srcset="/img/loading.gif" lazyload alt="start "></p>
+<p>自从在公众号写单片机文章以来被很多低年级的大学生或者电子爱好者问及过如何学习STM32单片机。这个问题很简单，但回答却很难，因为每一位提问者的基础不一样，不可能给到他们统一的答案，当然最简单的回复不过就是买块开发板，跟着教材或视频做项目就差不多了，但这也是最敷衍的答案。但是很多人拿到开发板后可能就那一刻心中还是踌躇满志的，然后看了几个视频之后却是一脸懵了，或者更多的是无从下手，最后也就不了了之，开发板被丢在某个角落吃灰去了。这种情况再正常不过了，因为开发板教授的视频内容多数都是假设用户有了一定的基础和理解能力了，但对于多数提问者他们的各项基础理论可能并没有掌握多少，直接让他们去看视频可能会出现很多专业术语听着都是云里雾里，然后对着视频看例程代码也因为缺乏理论基础而看不懂一些基础语法或操作，就这样越看越懵，也就从入门到放弃了，。</p>
+<p>难道对于“小白”朋友就真的不能入门STM32了吗？方法肯定是有的，但是前提你必须真滴要有毅力，坚持去学习，总之学习STM32不可能一蹴而就。那可以从哪里开始？关键就是要学会查资料，看文档，哪里不会补哪里，有视频则结合视频看芯片文档，有文档教材则结合教材与芯片文档。如果电子基础还不牢固则多看电子技术基础相关的书籍或资料将<code>基本元器件特性</code>掌握，之前写过一些介绍性的文章可以选择性查看：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=563523953&lang=zh_CN#rd">零基础电子技术知识集合</a>。如果C语言编程还不够熟练，就不得不多看代码，从基础的开始多模仿，多动手。如果有一定的编程和电子基础但看视频或发现自己并不能很好理解其中内容，那更需要学会及时从资料，文档中去查找答案，解决疑惑。之前写过一篇关于如何快速开始使用一款新单片机开发的文章或许可以能帮上一部分朋友：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN&scene=21#wechat_redirect">怎么快速上手一款新的MCU</a></p>
+<h2 id="从看懂原理图开始"><a href="#从看懂原理图开始" class="headerlink" title="从看懂原理图开始"></a>从看懂原理图开始</h2><p>在和初学者聊天的过程中发现一个很特别的现象，多数初学者都不会看原理图。他们提问时可能只会告诉你遇到的异常现象或贴出异常代码，而不会想着需要附带原理图给你。甚至问他们手头有没有原理图，部分人还连原理图是什么也不清楚。简单的说原理图就是电路之间的连线图，是你认识一块板子或电路模块的基础，和我们初中物理学的电路类似，比如一个电池，一个灯泡再加一个开关通过导线连接就构成了一个灯光控制电路。从初中到大学积累的电子技术基础知识就是为了让你能够看得懂电路上的某根连线是为了实现什么功能，或者是你想实现什么功能需要哪些元器件，怎么连接它们。如果你手头拿着一块电路板，你要怎么使用这块板？首先你就需要拿到电路板的原理图，有原理图你才能知道各硬件之间的电路连接，才能知道怎么去控制某个元外围器件。原理图就如我们通过外貌去识别一个人一样，它是我们认识电路的最基础方法，从学会看原理图开始进行学习STM32能够助我们在学习过程有条不紊。</p>
+<h2 id="在哪里查找芯片资料"><a href="#在哪里查找芯片资料" class="headerlink" title="在哪里查找芯片资料"></a>在哪里查找芯片资料</h2><p>芯片数据手册或参考手册是开发过程中必不可少的资料，从设计电路到编程开发都少不了它，对于初学者来说更加至关重要，当你碰到不懂的专业词汇时，可能通过查找文档就能发现答案。如果你有使用开发板进行学习，卖家肯定会把它的附带资料都会给你，其中肯定会有开发板原理图，各芯片数据手册或参考手册等各类资料。对于一般学习使用来说使用卖家提供的资料就差不多了，至少初学者看是绰绰有余的了，如果你需要获取最新一手的资料，一是可以向卖家询问获取，另外最好的办法是在芯片官方网站下载。官网的资料肯定会保持持续更新，有新的改动一般都会第一时间在官网发布。针对STM32来说需要芯片资料其他更多的开发资料都可以直接去官网根据自己的需求查找，下载，部分有中文译本，如果没有对应的中文文档可以查找同系列的型号，一般同一系列的差别不会特别大，具体差异也可以结合英文资料确认。</p>
+<p><img src="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092254778.png" srcset="/img/loading.gif" lazyload alt="官网获取资料的方法"></p>
+<p><img src="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092259673.png" srcset="/img/loading.gif" lazyload alt="根据型号进行搜索"></p>
+<p><img src="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092301594.png" srcset="/img/loading.gif" lazyload alt="文档列表和类型选择"></p>
+<h2 id="查看哪些文档"><a href="#查看哪些文档" class="headerlink" title="查看哪些文档"></a>查看哪些文档</h2><p>对于STM32来说芯片手册有很多包括数据手册，用户参考手册，以及使用手册，库函数（STD库）使用手册等。数据手册一般是芯片功能和新能的参数的概述，在首页都会有写明该系列芯片所有功能，看这些手册你可以知道你使用的这颗芯片可能实现哪些功能，并且还能认识一些你不知道的关键词。数据手册一般是按小系列划分文档，比如STM32F103x4，STM32F103x8，STM32F103xE等等。参考手册会包含某个大的系列的所有功能汇总介绍以及配置使用方法，比如时钟配置，电源控制，中断系统，各外设功能寄存器设置等等,按系列划分比如STM32F1xx，STM32F14xx等。使用手册一般包含某一特定功能的使用详细配置过程以及注意事项。库函数使用手册通常在库文件夹中，其中是对库函数的详细用途和参数介绍。对于初学者来说更多时候需要阅读的是用户参考手册和库函数使用手册（对编译器熟悉后可以直接在编译器中跳转进行查看库函数信息，无论是HAL库还是STD库）。</p>
+<p><img src="https://raw.githubusercontent.com/luomuqingyun/pic/main/img/202405092313879.png" srcset="/img/loading.gif" lazyload alt="STM32F103x8，STM32F103xB系列芯片功能"></p>
+<hr>
+<p>占位</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>文章内容为作者个人观点，难免有疏忽或错误，若有不同见解可以交流评论，若发现错误还请指正，若认同文章观点，欢迎关注，分享。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如学习需要或项目开发合作可以扫码添加微信。<br><img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>有电子开发交流群，供平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code>，未备注则默认不邀请进群。</p>
+</blockquote>
+</blockquote>
+<p><code>温馨提示：部分文章中附有分享文件，若需要获取，进入公众号后台发送文提示的关键词，即可自动获取。不要在文章留言区或微信聊天时发送关键词,望悉知！！！</code></p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247486549&idx=1&sn=aa7a3ea1c22bd5b797986314e4aa0e2c&chksm=ea790424dd0e8d32da20a9219be731e7691ce1711f2e6b42fc144e3586fe53ff41c3070df904&token=241279816&lang=zh_CN#rd">PID算法基础汇总</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485862&idx=1&sn=830ede5ac467c8d396adfbea141f0526&chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&token=63320980&lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485987&idx=1&sn=106e52add61999ae4bddd8b28c7ed2b1&chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&token=63320980&lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=3&sn=d4c0d26781f307ffd26defdc4022c928&chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&token=63320980&lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>小白入门STM32之学会看文档</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/小白入门STM32之学会看文档/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" title="单片机开发常用算法之卡尔曼滤波">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">单片机开发常用算法之卡尔曼滤波</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%95%B4%E7%90%86/" title="如何高效的进行代码格式整理">
+                        <span class="hidden-mobile">如何高效的进行代码格式整理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

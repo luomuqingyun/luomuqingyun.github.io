@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://luomuqingyun.github.io/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" target="_self">
+          STM32启动文件
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" target="_self">
+        <div>
+          如何获取STM32启动文件接触过STM32单片机的都知道，使用STM32开发肯定是需要添加启动文件的，讲解STM32的教材或教材或多或少都会在建立工程文件的入门部分内容中讲解一些关于启动文件相关的知识，而不会像51单片机教材那样几乎啥都不会说明。部分原因就是STM32单片机内核比51复杂很多，开发过程中我们很有可能需要对启动文件或其他一些内核依赖文件做一些处理。并且如果是用keil建立工程时软件不
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" target="_self">
+          STM32单片机编程之数据对齐
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" target="_self">
+        <div>
+          存储器的大小端存储器的大小端储存方式是计算机系统中的两种不同的数据储存设置。与之相关的知识在学习单片机开发的过程也经常被提及，很多初学者可能经常为之困惑，想记住它但又可能记反。实际上这个知识点也用不着我们去死记硬背，其一是因为做基础的开发时不会涉及这些东西，其二是因为不管使用哪种模式单片机内核都已经给我们的程序做好了“预案”。这两种方式就像我们现在书写是从左上到右下，而古代书写是自右上到左下类似。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/jump%20or%20not%20jump%20%E8%BF%99%E6%98%AF%E4%B8%AA%E9%97%AE%E9%A2%98/" target="_self">
+          jump or not jump 这是个问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/jump%20or%20not%20jump%20%E8%BF%99%E6%98%AF%E4%B8%AA%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          又是一年跳槽季，你跳不明天就是三月了，新的一个月到来，职场上也将迎来一年一度的跳槽季——金三银四。前面刚过完正月，现在各位朋友的年终奖都应该到手了吧？在这个时间节点上，公司新一年的目标也差不多确定下来了，需要大干一场的，这时正是招兵买马的时机，部分程序员们也在年终奖到手的那一刻就已经准备好递交辞职信了吧（&quot;他大爷的，我早就看xxx不爽了，现在不走还留到过年吗？&quot;）。再往后面可就
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
+          keil使用过程中的一些常见问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          几篇keil使用问题的文章keil作为单片机学习入门必备的软件，用户量还是非常庞大的，当然使用过程中遇到的问题也是五花八门，特别是初学者，有时可能卡在一个问题上几天都解决不了。今天分享几篇keil使用过程容易遇到的问题以及相关解决方案的文章。都是很久之前写的文章了，这几年使用keil的频率不高也没有遇到啥特别的问题，所以没写了。 解决KEIL中ARM编译器不能编译的问题 关于keil中无法跳转到函
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" target="_self">
+          keil开发模块化编程步骤
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" target="_self">
+        <div>
+          占位 搭建keil模块化编程工程在单片机开发模块化编程实例详解这篇文章中介绍了使用C语言进行模块化编程的原理，但没有讲解怎么使用keil软件进行搭建工程，部分初学者尝试时可能会遇到了一些问题，导致工程创建失败，这篇文章我就来讲解一下整个工程搭建的完整步骤。 搭建步骤  新建工程   这一步很简单，搭建过工程的可以直接跳过。       新建文件   这一步也挺简单，搭建过工程的可以直接跳过。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/windows%E7%8E%A9%E6%9C%BA%E6%8A%80%E5%B7%A7/" target="_self">
+          windows玩机技巧
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/windows%E7%8E%A9%E6%9C%BA%E6%8A%80%E5%B7%A7/" target="_self">
+        <div>
+          分享几个windows玩机技巧咱们这类技术人平时在亲戚朋友面前介绍自己的工作可能最简单明了的回复方式就是我是搞电脑的，然后可能就会有人说：我家的电脑出XX毛病了，你待会给我看看撒。看看就看看咱不就是做这一行的嘛，修电脑这不都是份内活吗，何止修，咱还可以玩得六六的呢！今天这篇文章就介绍几个玩机小技巧，希望能给新手或电脑基础不是那么好的盆友在学习，工作过程中提升一丢丢效率。 快速打开系统工具wind
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" target="_self">
+          python程序运行莫名警告
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" target="_self">
+        <div>
+          占位 记一个python程序调试警告虽然我的主业是电子开发，平时主要用的开发语言是C/C++，但由于工作的原因，也会用到其他一些开发语言，所以python和js都能使用得上。昨天晚上发布的介绍卡尔曼滤波算法的文章因为没有图片说明最后想说的也没法描述，只能草草收场。因为后续还会介绍其他算法问题，肯定都是需要做图说明的，但每一个如果都要做图的话确实比较浪费时间，所以今天空闲时就想着得找个办法把这个问题
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/%E4%B8%80%E6%AC%BE%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%AB%AF%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AE%A1%E7%90%86%E7%A5%9E%E5%99%A8/" target="_self">
+          一款强大的桌面端电子书管理神器
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/%E4%B8%80%E6%AC%BE%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%AB%AF%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AE%A1%E7%90%86%E7%A5%9E%E5%99%A8/" target="_self">
+        <div>
+          阅读者的福利，推荐一款桌面端阅读器现在喜欢看书的朋友想必偏爱电子书的应该比较多吧，市面上基于移动端的电子书阅读软件是非常多了，但桌面端的支持软件还是不多的，即便有支持的格式也有一定的局限。所以今天就给各位推荐一款我使用多年的压箱底的桌面端阅读器——calibre阅读器。它是一款功能强大并且免费、开源的电子书管理工具，因为开源所以社区有非常多的实用工具，可以酌情自行安装，总之，你想要的功能它都有。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA%E4%B8%8E%E8%88%B5%E6%9C%BA/" target="_self">
+          伺服电机与舵机
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA%E4%B8%8E%E8%88%B5%E6%9C%BA/" target="_self">
+        <div>
+          何为伺服电机伺服电机是一种可以根据所供应的电流和电压生成转矩和速度的机电设备。其功能是将电信号转换成转轴的角位移或角速度。所以伺服电机又称执行电机，在自动控制系统中用作执行元件，把所收到的电信号转换成电动机轴上的角位移或角速度输出。它的这一功能和上一篇接介绍的步进电机很相似，并且两者在外观上也有一定的相似，但它比步进电机的控制更为精准。因为步进电机是开环控制，内部不会对输入信号执行结果进行反馈。伺
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8ETI%E5%AE%98%E7%BD%91%E6%B3%A8%E5%86%8C%E5%92%8C%E7%BD%91%E9%A1%B5%E7%89%88Filter%20Pro%E4%BD%BF%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+          关于TI官网注册和网页版Filter Pro使用的问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/19/%E5%85%B3%E4%BA%8ETI%E5%AE%98%E7%BD%91%E6%B3%A8%E5%86%8C%E5%92%8C%E7%BD%91%E9%A1%B5%E7%89%88Filter%20Pro%E4%BD%BF%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          占位 关于Filter Pro软件电路参数问题前段时间小破站上有留言说TI的滤波器电路设计软件Filter Pro使用时出问题，设计参数与TI-TINA的仿真相差很大。但我在自己电脑上设计了一个简单电路，软件生成的电路参数与计算结果是没问题的。因为电脑上没安装TI-TINA了，也没看到他的实际电路和TI-TINA软件设置情况，所以也不知道那位朋友具体是哪里出了意外。我个人猜测如果是软件问题的话可能
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-19 14:42" pubdate>
+              2025-05-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

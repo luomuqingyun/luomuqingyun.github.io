@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="占位 市场上MCU那么多如何学我在之前的文章中提到过如果仅仅是学会51单片机的一些基础应用并不能让你就此拥有项目开发能力。就像你刚学C语言的时候，做一个乘法表，做个排序，或者做个杨辉三角等算法可能没问题，想要开发出一个自己像样的软件可能性还是不大。51在国内基本上是单片机入门必修，因为太经典，也正是因为经典所以功能少，用途不多，拿这个大块头开发产品的公司应该很难找，除非是做开发板的公司。 综上原因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎么快速上手一款新的MCU">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E6%AC%BE%E6%96%B0%E7%9A%84MCU/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="占位 市场上MCU那么多如何学我在之前的文章中提到过如果仅仅是学会51单片机的一些基础应用并不能让你就此拥有项目开发能力。就像你刚学C语言的时候，做一个乘法表，做个排序，或者做个杨辉三角等算法可能没问题，想要开发出一个自己像样的软件可能性还是不大。51在国内基本上是单片机入门必修，因为太经典，也正是因为经典所以功能少，用途不多，拿这个大块头开发产品的公司应该很难找，除非是做开发板的公司。 综上原因">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/0b85efd0-1601-4626-8b6e-1c09178b6e09.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/4979a9fc-a73f-4af8-8c8a-f93ec431c2c1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/659b642c-fcce-4f9c-becc-038eadd2c655.jpg">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.706Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/0b85efd0-1601-4626-8b6e-1c09178b6e09.png">
+  
+  
+  
+  <title>怎么快速上手一款新的MCU - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="怎么快速上手一款新的MCU"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">怎么快速上手一款新的MCU</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>占位</p>
+<h2 id="市场上MCU那么多如何学"><a href="#市场上MCU那么多如何学" class="headerlink" title="市场上MCU那么多如何学"></a>市场上MCU那么多如何学</h2><p>我在之前的文章中提到过如果仅仅是学会51单片机的一些基础应用并不能让你就此拥有项目开发能力。就像你刚学C语言的时候，做一个乘法表，做个排序，或者做个杨辉三角等算法可能没问题，想要开发出一个自己像样的软件可能性还是不大。51在国内基本上是单片机入门必修，因为太经典，也正是因为经典所以功能少，用途不多，拿这个大块头开发产品的公司应该很难找，除非是做开发板的公司。</p>
+<p>综上原因你会用51单片机开发一些程序并不能保证你可以找到一份开发工作，但这也不意味着学51单片机是无意义的。首先，你完全可以用手头上功能简单的51单片机自己试着额外搭配一些模块做些小项目，增强自己的动手能力。另外，你可以通过51单片机的基础学一些功能更多，性能更强的单片机。比如你觉得51单片机开发板的程序开发都没问题，你又有绘制PCB的能力，那不妨自己用增强型的51单片机或其他8位机做一块开发板出来，如果你不会画PCB也可以买些其他MCU核心板回来用洞洞板焊接或用面包板搭建电路来学习。如果这些都可以掌握了，那你就可以继续学习一些16位或32位的MCU。那么问题来了，市场上各种各样型号的MCU我们该怎么选，又怎么快速的学习呢？这对于单片机初学者来说确实是一个问题，所以今天的内容就讲解一些快速上手一款新的MCU的方法，至于该怎么选择学习新的MCU型号，建议哪款用的人多就学那款。当然如果你是初入职场的开发者，学习时使用的MCU和工作时使用的不一样（现实情况往往是这样的），希望本文的内容也可以帮助到你。</p>
+<h2 id="如何快速上手"><a href="#如何快速上手" class="headerlink" title="如何快速上手"></a>如何快速上手</h2><p>对于如何学习单片机是没有统一标准的，有的人喜欢看视频，有的人喜欢看文章，如果想快速上手一款MCU最简单的方法是看<code>数据手册（datasheet）</code>。但是一般情况下部分简单点的MCU数据手册可能只有几十百来页，功能复杂一些的MCU可能<code>数据手册，用户手册，应用手册</code>加起来就有几百页，或上千页，甚至可能全是英文手册，那怎么快速上得了手呢？</p>
+<blockquote>
+<p>首先，我们需要了解MCU基本的特性</p>
+</blockquote>
+<p>在数据手册上我们可以快速的了解到新的MCU相关的ROM，RAM，I&#x2F;O口，中断源及中断控制器，定时计数器，通信接口，ADC，DMA功能，时钟系统，运算器等硬件资源，以及工作电压、电流等工作环境信息。</p>
+<p>了解这些基本信息之后，接下来我们使用这款单片机时才会心中有底，在设计电路的时候怎么可以怎么优化设计。比如，从这些信息中可获知哪些引脚是特殊的输入输出引脚，如开漏或强电流引脚等；引脚有哪些复用功能，如串口，SPI,USB等；是否带有内部RC振荡器，如果有在那精度是否满足应用需求，如果没有哪些引脚是晶振引脚；看定时器是多少位的，一共有多少个定时器，哪些引脚可以输出定时信号，哪些引脚可以捕获计数信号；中断源有多少，是否支持中断优先级配置，等等……</p>
+<p><img src="https://files.mdnice.com/user/38598/0b85efd0-1601-4626-8b6e-1c09178b6e09.png" srcset="/img/loading.gif" lazyload alt="举例SMT32某系列时钟树"></p>
+<blockquote>
+<p>其次，了解各功能的配置信息</p>
+</blockquote>
+<p>一般情况下手册中对各模块功能的使用条件和配置步骤都会在对应的使用章节中都会接受。这里一般会提示我们实现某功能需按怎么样的顺序设置相关寄存器。实际上，寄存器是我们了解一款MCU的关键，因为我们的程序最终要实现功能绝大多数情况都是要和寄存器打交道的，所以寄存器的配置是程序运行的基础。尽管寄存器操作对使用MCU非常重要，但我们绝对不用去记忆的，在使用时根据功能进行配置即可。</p>
+<p><img src="https://files.mdnice.com/user/38598/4979a9fc-a73f-4af8-8c8a-f93ec431c2c1.png" srcset="/img/loading.gif" lazyload alt="举例SMT32某系列部分寄存器"></p>
+<blockquote>
+<p>最后，进行编程测试</p>
+</blockquote>
+<p>当我们了解以上信息之后，基本上就可以根据手册进行编程测试了。现在很多MCU的功能都是非常强大的，正是因为强大所以它内部硬件结构就非常复杂，是51单片机不能比拟的复杂，想想现在的手机CPU就知道了，当然一般产品使用的单片机还不会使用CPU那么高的集成工艺，但也是几十纳米级的工艺了。为实现其高性能，其内部寄存器数量往往是我们无法记忆的多。这也是我前面说不要记忆寄存器的原因之一，其二原因是因为这些芯片太复杂，如果每个用户都要自己去设置寄存器进行编程那对于产品开发进度是不利的，同时也不利于芯片的推广，所以现在很多芯片厂家都会提供其官方开发的库函数给用户。用户根据这些库函数就可快速的进行开发设置，只需要结合自己的项目实际情况设置一些具体参数就可以对芯片功能进行初始化，获取某些寄存器数据，等等……当然库函数可以帮助我们提供上手新芯片的效率，但也容易降低程序执行的效率，所以当我们对这款芯片熟悉之后在某些时候还是可以使用自己的程序来优化代码的。</p>
+<h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><p>使用以上方法进行学习的基础条件是你具备了一定的电子和编程经验了，不适合没有任何基础的初学者通过上述方法实践，否则你会学的非常痛苦！即推荐此快速上手实践的方法并不是鼓励初学者不学习基础的51编程而直接学习复杂的芯片，更是希望你在学习单片机的过程中要把基础学踏实，而非一蹴而就！</p>
+<p>因为不乏有大一的学生加我微信，他们有来自电子信息，自动化，计算机，物联网，甚至机械专业的同学都有。在与他们交流的过程中我确实感受到了他们对学单片机还是有一些迷茫，所以写这篇文章也希望他们能够正是学习过程中的问题。有的同学觉得学校不太好，担心毕业找不到工作，有的觉得学了一遍什么都没学会，还没焊电路好玩。但是我觉得对于大一的同学来说真的不用迷茫，你们在大一开始接触单片机就已经至少比其他80%同专业的同学先行一步了，应该为自己骄傲，初学时大家都会遇到类似问题。并且单片机学习本身是一件比较枯燥的事情，它不像焊接那么有趣，也没使用EDA工具绘制简单PCB那么容易入门，但一旦你把基础学扎实，后面接触其他芯片就容易多了。所以对自己要有信心，另外学习知识都要持之以恒，希望还在迷茫的同学能及时调整好自己的学习状态。总之多动手，多看手册，多编程，多与人交流，你就不会陷入弥漫了。</p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
+</ul>
+<hr>
+<p><img src="https://files.mdnice.com/user/38598/659b642c-fcce-4f9c-becc-038eadd2c655.jpg" srcset="/img/loading.gif" lazyload alt="欢迎扫码关注公众号"></p>
+<hr>
+<p><img src="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg" srcset="/img/loading.gif" lazyload alt="扫码添加作者微信"></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>怎么快速上手一款新的MCU</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/怎么快速上手一款新的MCU/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/" title="开发者应该学会如何提问">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">开发者应该学会如何提问</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E8%BF%BD%E8%B8%AA%E5%BA%93/" title="推荐一个嵌入式系统代码错误追踪库">
+                        <span class="hidden-mobile">推荐一个嵌入式系统代码错误追踪库</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

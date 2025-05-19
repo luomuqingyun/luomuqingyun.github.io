@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="如何获取STM32启动文件接触过STM32单片机的都知道，使用STM32开发肯定是需要添加启动文件的，讲解STM32的教材或教材或多或少都会在建立工程文件的入门部分内容中讲解一些关于启动文件相关的知识，而不会像51单片机教材那样几乎啥都不会说明。部分原因就是STM32单片机内核比51复杂很多，开发过程中我们很有可能需要对启动文件或其他一些内核依赖文件做一些处理。并且如果是用keil建立工程时软件不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32启动文件">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="如何获取STM32启动文件接触过STM32单片机的都知道，使用STM32开发肯定是需要添加启动文件的，讲解STM32的教材或教材或多或少都会在建立工程文件的入门部分内容中讲解一些关于启动文件相关的知识，而不会像51单片机教材那样几乎啥都不会说明。部分原因就是STM32单片机内核比51复杂很多，开发过程中我们很有可能需要对启动文件或其他一些内核依赖文件做一些处理。并且如果是用keil建立工程时软件不">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/0873e759-de38-4e4b-9cc5-82c2e3b3b28c.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/c29deba2-22c9-472b-985c-0bb60e3f137c.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/423e836a-ed63-403b-b975-77ed3d1987b1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/5f98eb66-4aea-454b-858a-728de22624bd.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/41a7ea34-cd39-44b4-879d-2cb8e5143b96.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/4f4aecd9-f22c-434b-a017-a1227d0e7e24.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/f02207fa-85c3-4eee-b282-615fe0086eda.png">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-19T06:42:00.744Z">
+<meta property="article:author" content="LUOMUQINGYUN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/0873e759-de38-4e4b-9cc5-82c2e3b3b28c.png">
+  
+  
+  
+  <title>STM32启动文件 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32启动文件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">STM32启动文件</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="如何获取STM32启动文件"><a href="#如何获取STM32启动文件" class="headerlink" title="如何获取STM32启动文件"></a>如何获取STM32启动文件</h2><p>接触过STM32单片机的都知道，使用STM32开发肯定是需要添加启动文件的，讲解STM32的教材或教材或多或少都会在建立工程文件的入门部分内容中讲解一些关于启动文件相关的知识，而不会像51单片机教材那样几乎啥都不会说明。部分原因就是STM32单片机内核比51复杂很多，开发过程中我们很有可能需要对启动文件或其他一些内核依赖文件做一些处理。并且如果是用keil建立工程时软件不会像建立51工程那样问你要不要添加启动文件进去了，需要自己根据所以用的芯片型号手动选择文件添加。</p>
+<p>在建立工程时教程里面都会告你需要在哪些文件夹中去复制哪些文件到工程文件夹，其中就会提及启动文件。一般情况下如果我们使用ST官方标准库做开发的话标准库文件中都会带有启动文件。</p>
+<p><img src="https://files.mdnice.com/user/38598/0873e759-de38-4e4b-9cc5-82c2e3b3b28c.png" srcset="/img/loading.gif" lazyload alt="标准库启动文件"></p>
+<p>在标准库对应目录下就可以有该库一系列芯片型号的启动文件。51单片机启动文件一样里面都是汇编程序，当然在上级目录我们也会看到官方还提供了其他一下主流开发工具对应的启动文件。</p>
+<p><img src="https://files.mdnice.com/user/38598/c29deba2-22c9-472b-985c-0bb60e3f137c.png" srcset="/img/loading.gif" lazyload alt="其他平台启动文件"></p>
+<p>keil因为已经被ARM收购，所以其启动文件会存放arm文件夹下，其他平台的可以自行查看。如果你使用的标准库比较古老，那可能该目录下没有arm文件夹，而对应的应该为mdk文件夹，因为之前arm还没收购keil。<br>使用时最好找到自己芯片型号对应的文件进行复制，如何确定自己使用的芯片与哪个文件匹配，可以参考官方选项手册，可以查看芯片参考手册中对应数据手册。</p>
+<p><img src="https://files.mdnice.com/user/38598/423e836a-ed63-403b-b975-77ed3d1987b1.png" srcset="/img/loading.gif" lazyload alt="STM32F1系列对应数据手册"></p>
+<p>同一系列的芯片分类是依据芯片flash存储空间容量来确定的，所以可以直接从芯片名称确定自己使用哪个文件。<br><img src="https://files.mdnice.com/user/38598/5f98eb66-4aea-454b-858a-728de22624bd.png" srcset="/img/loading.gif" lazyload alt="命名规则"></p>
+<h2 id="关于使用库开发"><a href="#关于使用库开发" class="headerlink" title="关于使用库开发"></a>关于使用库开发</h2><p>既然提到了库开发就顺便介绍一下相关知识。如果你想用标准库进行开发，手头上没有标准库或没有最新版本的标准库，可以在st官网进行下载，F1系列芯片的最新版本为3.6，如果不是大版本号（比如2.x与3.x）不同库代码内容差异不会太大，所以你使用3.x都没可以。</p>
+<p><img src="https://files.mdnice.com/user/38598/41a7ea34-cd39-44b4-879d-2cb8e5143b96.png" srcset="/img/loading.gif" lazyload alt="STM32官网标准库资料"></p>
+<p>另外要注意的是尽量使用一个固定版本的库，这样更方便自己后续的项目移植，初学者当然是建议使用最新版本，进行开发，不过现在标准库都非常稳定了，官方也不会进行太多的更新，自从STM32Cube发布之后官方对标准库的维护更少了，所以官方是推荐使用新的HAL库的，这几年官方对部分新产型号芯片都不再推出标准库了，所以如果使用新款芯片找不到标准库文件就直接使用HAL库吧，习惯了都一样。使用STM32Cube建立工程还是非常方便的，可视化流程，一套设置之后就可以生成完整的工程项目，平时习惯使用哪个开发平台就生成哪个平台的工程，连复制粘贴过程都省了（包括库文件和启动文件以及其他依赖文件），何乐而不为呢？</p>
+<p><img src="https://files.mdnice.com/user/38598/4f4aecd9-f22c-434b-a017-a1227d0e7e24.png" srcset="/img/loading.gif" lazyload alt="HAL库工程文件下的启动文件"></p>
+<p>最后你只需直接打开工程再添加自己的项目代码即可进行开发。</p>
+<p><img src="https://files.mdnice.com/user/38598/f02207fa-85c3-4eee-b282-615fe0086eda.png" srcset="/img/loading.gif" lazyload alt="HAL库项目树视图"></p>
+<p>当然官方提供的库都是只是一种工具而已，自己喜欢哪种风格就用哪种库，完全没必要在这个问题上纠结。如果你不想使用库开发也可以直接编写寄存器函数，当然自己编写寄存器函数也不要忘了添加一种现成的启动文件，以及相关依赖文件。在一般的开发过程中，我们不会频繁的新建工程，通常都是直接复制现有工程，然后再对工程文件进行一定的修改即可投入到下一个项目中使用。初学者在学习的时候可多操作几遍新建工程的完整过程以加强理解，熟悉之后也大可不必没吃都要新建一个工程来浪费时间了。</p>
+<h2 id="启动文件分析"><a href="#启动文件分析" class="headerlink" title="启动文件分析"></a>启动文件分析</h2><p>其实STM32的启动文件中的代码进行的操作和51单片机的启动文件基本内容差不多，只是因为STM32功能更多了所以内容会更多，另外，二者指令集不一样，所以表面上看起来没有任何相同的语句，但真实用途都是为了引导芯片执行进入到用户代码区域。</p>
+<p>芯片型号众多，文件内容就不贴出了，这里F1系列中的一款为例做介绍，其他型号大同小异。</p>
+<p>当然在这之前大家需要对以下知识点有一定的了解，几乎都是和内核以及指令集相关的知识，所以在学习STM32的过程中还要多看看与内核相关的书籍比如<code>《Cortex-M3权威指南》</code>，学其他芯片一是一样，至于你使用的芯片是什么内核，就参考该内核的资料。51内核只是比较简单所以教材里都不会单独列一本书进行讲解，但涉及到复杂的芯片时光内核都可以写几本书了。</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">1. 栈(Stack)</span><span class="hljs-punctuation">:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">栈是MCU中的一块内存空间,用栈指针管理,具有LIFO(后进先出)的特点。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">主要用于存储函数调用时的返回地址、参数、局部变量等信息。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">在启动代码中我们定义Stack_Mem作为栈空间,__initial_sp作为栈指针初值。</span><br><br><span class="hljs-attribute">2. 堆(Heap)</span><span class="hljs-punctuation">:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">堆也是MCU内存空间,我们通过malloc/free在程序运行时动态分配和释放。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">在启动代码中,我们定义了Heap_Mem作为堆空间,__heap_base和__heap_limit表示开始和结束。</span><br><br><span class="hljs-attribute">3. 中断向量表(__Vectors)</span><span class="hljs-punctuation">:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">这是一块非常重要的数据结构,存放各种中断和异常的处理函数入口。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">首个入口是复位后需要执行的Reset_Handler函数。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">向量表让CPU可以快速响应各种异步事件。</span><br><br><span class="hljs-attribute">4. 复位处理(Reset_Handler)</span><span class="hljs-punctuation">:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">上电或重置后首先执行的函数,完成基本的初始化工作。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">它会调用SystemInit做底层初始化,然后跳转到C语言main函数。</span><br><br><span class="hljs-attribute">5. 相关寄存器和汇编指令</span><span class="hljs-punctuation">:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">启动代码中大量用到寄存器和汇编指令,这需要时间逐步学习。</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">可以先理解代码主要逻辑,不必刨根问底汇编细节。</span><br></code></pre></td></tr></table></figure>
+
+<p>现在再分析一下这个启动代码主要完成的操作:</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">1. 设置代码段为启动代码,使用Thumb指令集</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">2. 定义栈段STACK,分配1024字节栈空间,并定义栈指针初值符号__initial_sp</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">3. 定义堆段HEAP,分配512字节堆空间,并定义堆开始和结束符号__heap_base和__heap_limit</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">4. 定义中断向量表__Vectors,里面包含栈指针初值设置,复位处理函数Reset_Handler入口等</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">5. 复位处理函数Reset_Handler</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">调用SystemInit系统初始化函数</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">跳转执行C库入口__main</span><br><br><span class="hljs-attribute">6. 定义各个外设中断处理函数入口,初始化为空操作</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">7. __user_initial_stackheap函数</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">初始化栈指针为栈底地址</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">初始化堆起始和结束地址</span><br><br><span class="hljs-attribute">再总结一下启动代码主要工作内容</span><span class="hljs-punctuation">:</span><br><span class="hljs-punctuation"></span><br>第一部分是定义栈空间Stack_Mem,大小是1024字节,后面又定义了堆空间Heap_Mem,大小是512字节。栈和堆都是MCU中的重要内存区域,我们的C程序都需要依赖它们正常运行。<br><br>第二部分是中断向量表__Vectors,这是核心的数据结构,它定义了各种异常发生时,CPU需要跳转执行的函数入口。比如第一个入口就是复位后需要执行的Reset_Handler函数。<br><br>第三部分首先是Reset_Handler复位处理函数,它会依次调用SystemInit做系统初始化,然后跳转到C语言入口__main。<br><br>后面还定义了空的中断处理函数,这些我们之后会逐步补充代码实现各种中断服务。<br><br>最后一部分是__user_initial_stackheap函数,它会正式设置栈指针和堆空间的地址,完成内存区域的初始化。<br><br>简单概括整个过程既为：<br>  <span class="hljs-bullet">-</span> <span class="hljs-string">设置代码段和指令集</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">配置栈和堆空间</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">定义向量表和中断函数</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">系统初始化和跳转到C库入口</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">栈和堆地址初始化</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">程序结束循环</span><br><br>通过这些代码操作完成了STM32处理器启动前的基本设置,之后CPU会跳入C语言main函数中执行我们的代码，这些特定内核的启动操作都相似，如果你看多了就会发现如果是常规开发，各芯片厂家官方配套的启动代码内容都是差不多。<br></code></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>文章内容为作者个人观点，难免有疏忽或错误，若有不同见解可以交流评论，若发现错误还请指正，若认同文章观点，欢迎关注，分享。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>如有需要可以进入公众号后台点击<code>联系小编</code>添加作者微信。<br>部分资料链接在交流群公告中，如果要进群，加好友时记得备注信息<code>进群</code>。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>占位</p>
+<p><code>温馨提示：若需要获取分享的资料连接，进入公众号后台发送关键字内容即可自动获取，而不是在留言或个人微信聊天界面发送！！！</code></p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485862&idx=1&sn=830ede5ac467c8d396adfbea141f0526&chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&token=63320980&lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485987&idx=1&sn=106e52add61999ae4bddd8b28c7ed2b1&chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&token=63320980&lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=3&sn=d4c0d26781f307ffd26defdc4022c928&chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&token=63320980&lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>STM32启动文件</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/STM32启动文件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>LUOMUQINGYUN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/Qiling%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6/" title="Qiling代码框架">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Qiling代码框架</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" title="STM32单片机编程之数据对齐">
+                        <span class="hidden-mobile">STM32单片机编程之数据对齐</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

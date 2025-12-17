@@ -8,35 +8,39 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="author" content="luomuqingyun">
   <meta name="keywords" content="">
   
-    <meta name="description" content="占位 在实践中学习单片机开发是一项“实践密集型”的工作，在单片机课程的学习过程中，我们不仅需要有电子技术、编程等书本上的理论基础，平时更需要在电脑上多练习编程，进行程序调试或仿真，但要成为一名真正的开发者，分析，设计电路的能力更要掌握，在步入职场初期可能还需要自己焊接电路板，这样一来焊接工艺你也应该要有所了解。总之，从事单片机开发工作确实需要有足够强的动手能力，很多知识都需要你在实践之后才会get">
+    <meta name="description" content="C51开发常用工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初学51单片机开发必备工具">
 <meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="占位 在实践中学习单片机开发是一项“实践密集型”的工作，在单片机课程的学习过程中，我们不仅需要有电子技术、编程等书本上的理论基础，平时更需要在电脑上多练习编程，进行程序调试或仿真，但要成为一名真正的开发者，分析，设计电路的能力更要掌握，在步入职场初期可能还需要自己焊接电路板，这样一来焊接工艺你也应该要有所了解。总之，从事单片机开发工作确实需要有足够强的动手能力，很多知识都需要你在实践之后才会get">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="C51开发常用工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/659b642c-fcce-4f9c-becc-038eadd2c655.jpg">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
 <meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T06:42:00.605Z">
-<meta property="article:author" content="LUOMUQINGYUN">
+<meta property="article:modified_time" content="2025-05-22T15:08:51.050Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="C51">
+<meta property="article:tag" content="开发工具">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://files.mdnice.com/user/38598/659b642c-fcce-4f9c-becc-038eadd2c655.jpg">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>初学51单片机开发必备工具 - Hexo</title>
+  
+  <title>初学51单片机开发必备工具 - 落木青云</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -74,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -84,6 +88,17 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -100,7 +115,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>落木青云</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -196,7 +211,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -243,6 +258,15 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
   </div>
 
 
@@ -266,6 +290,643 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="编程"
+        id="heading-41282bf95e43c64d579757573a03cdde" role="tab" data-toggle="collapse" href="#collapse-41282bf95e43c64d579757573a03cdde"
+        aria-expanded="true"
+      >
+        编程
+        <span class="list-group-count">(47)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-41282bf95e43c64d579757573a03cdde"
+           role="tabpanel" aria-labelledby="heading-41282bf95e43c64d579757573a03cdde">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="单片机"
+        id="heading-d1f314cc6e06520a45c2ad7d0dc7fab2" role="tab" data-toggle="collapse" href="#collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+        aria-expanded="false"
+      >
+        单片机
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+           role="tabpanel" aria-labelledby="heading-d1f314cc6e06520a45c2ad7d0dc7fab2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" title="51单片机开发看这一篇就够了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机开发看这一篇就够了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E5%8D%95%E7%89%87%E6%9C%BA%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E4%B8%8B/" title="51单片机进阶开发（三）之单片机底层逻辑下"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（三）之单片机底层逻辑下</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8BIIC%E9%80%9A%E4%BF%A1/" title="51单片机进阶开发（五）之IIC通信"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（五）之IIC通信</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（六）之浅谈SPI</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/" title="51单片机进阶开发（四）之AD、DA"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（四）之AD、DA</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89/" title="STM32位带操作（修改）"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32位带操作（修改）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" title="STM32单片机编程之数据对齐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32单片机编程之数据对齐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" title="STM32启动文件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32启动文件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">小白入门STM32之学会看文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%B0%86STC%E5%8D%95%E7%89%87%E6%9C%BA%E6%B7%BB%E5%8A%A0%E5%88%B0keil%E9%80%89%E5%9E%8B%E8%A1%A8/" title="怎么将STC单片机添加到keil选型表"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么将STC单片机添加到keil选型表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%B5%85%E6%9E%90STM32%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84/" title="浅析STM32存储器映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">浅析STM32存储器映射</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础"
+        id="heading-0796ba76b4b553687e5ffaeb78512ccb" role="tab" data-toggle="collapse" href="#collapse-0796ba76b4b553687e5ffaeb78512ccb"
+        aria-expanded="false"
+      >
+        基础
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0796ba76b4b553687e5ffaeb78512ccb"
+           role="tabpanel" aria-labelledby="heading-0796ba76b4b553687e5ffaeb78512ccb">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%B8%E5%9E%8B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" title="单片机初学者典型疑惑解答"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机初学者典型疑惑解答</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机的启动文件代码分析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/" title="数学与编程"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">数学与编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/" title="系统环境变量设置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">系统环境变量设置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A7%A3%E8%AF%B4/" title="计算机定点数解说"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机定点数解说</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具"
+        id="heading-20dce2c6fa909a5cd62526615fe2788a" role="tab" data-toggle="collapse" href="#collapse-20dce2c6fa909a5cd62526615fe2788a"
+        aria-expanded="true"
+      >
+        工具
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-20dce2c6fa909a5cd62526615fe2788a"
+           role="tabpanel" aria-labelledby="heading-20dce2c6fa909a5cd62526615fe2788a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/" title="初学51单片机开发必备工具"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">初学51单片机开发必备工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D/" title="单片机开发系列之一体化平台介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之一体化平台介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B251%E3%80%81STM32%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/" title="单片机开发系列之本地部署51、STM32开发平台"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之本地部署51、STM32开发平台</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%AF%91%E5%99%A8/" title="单片机开发系列之编译器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之编译器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%95%B4%E7%90%86/" title="如何高效的进行代码格式整理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何高效的进行代码格式整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BF%AB%E9%80%9F%E5%B0%86%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5ECloudSpace/" title="快速将工程导入ECloudSpace"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快速将工程导入ECloudSpace</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="算法"
+        id="heading-046a899ee7a6ec88d370211a518c9e80" role="tab" data-toggle="collapse" href="#collapse-046a899ee7a6ec88d370211a518c9e80"
+        aria-expanded="false"
+      >
+        算法
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-046a899ee7a6ec88d370211a518c9e80"
+           role="tabpanel" aria-labelledby="heading-046a899ee7a6ec88d370211a518c9e80">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="PID算法基础汇总"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法基础汇总</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8B%E7%AE%80%E4%BB%8B/" title="PID算法（一）之简介"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（一）之简介</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E8%87%AA%E9%80%82%E5%BA%94%E6%8E%A7%E5%88%B6/" title="PID算法（七）之自适应控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（七）之自适应控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E4%B8%B2%E7%BA%A7PID/" title="PID算法（三）之串级PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（三）之串级PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8B%E4%BD%8D%E7%BD%AEPID%E4%B8%8E%E5%A2%9E%E9%87%8FPID/" title="PID算法（二）之位置PID与增量PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（二）之位置PID与增量PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%87%AA%E6%8A%97%E6%89%B0/" title="PID算法（五）之自抗扰"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（五）之自抗扰</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" title="PID算法（八）之遗传算法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（八）之遗传算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%A8%A1%E7%B3%8A%E6%8E%A7%E5%88%B6/" title="PID算法（六）之模糊控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（六）之模糊控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（四）之鲁棒性</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" title="单片机开发常用算法之卡尔曼滤波"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发常用算法之卡尔曼滤波</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="经验"
+        id="heading-32a8e000e928e6dc255876d9fc0178b3" role="tab" data-toggle="collapse" href="#collapse-32a8e000e928e6dc255876d9fc0178b3"
+        aria-expanded="false"
+      >
+        经验
+        <span class="list-group-count">(12)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-32a8e000e928e6dc255876d9fc0178b3"
+           role="tabpanel" aria-labelledby="heading-32a8e000e928e6dc255876d9fc0178b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">C语言初学者可以利用的帮助文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="keil使用过程中的一些常见问题"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil使用过程中的一些常见问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" title="keil开发模块化编程步骤"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil开发模块化编程步骤</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" title="python程序运行莫名警告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">python程序运行莫名警告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8EQT%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%AE%9A%E4%BD%8Ddll%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="关于QT程序无法定位dll文件问题问题解决方法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于QT程序无法定位dll文件问题问题解决方法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E4%B8%ADC%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%9F%A5%E8%AF%86/" title="单片机开发中C语言指针知识"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发中C语言指针知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8C%89%E9%94%AE%E7%A8%8B%E5%BA%8F%E5%88%86%E4%BA%AB/" title="单片机开发实用按键程序分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发实用按键程序分享</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="单片机开发模块化编程实例详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发模块化编程实例详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/" title="开发者应该学会如何提问"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发者应该学会如何提问</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E6%AC%BE%E6%96%B0%E7%9A%84MCU/" title="怎么快速上手一款新的MCU"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么快速上手一款新的MCU</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%9B%B4%E6%8E%A5%E5%AD%A6STM32%E8%BF%98%E6%98%AF%E5%85%88%E5%AD%A651%EF%BC%9F/" title="直接学STM32还是先学51？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">直接学STM32还是先学51？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%A8%8B%E5%BA%8F%E7%9C%8B%E5%BE%97%E6%87%82%E5%8D%B4%E5%86%99%E4%B8%8D%E5%87%BA%E6%80%8E%E4%B9%88%E5%8A%9E/" title="程序看得懂却写不出怎么办"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">程序看得懂却写不出怎么办</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="资料"
+        id="heading-447564e4e2b0171973515a26650e66a2" role="tab" data-toggle="collapse" href="#collapse-447564e4e2b0171973515a26650e66a2"
+        aria-expanded="false"
+      >
+        资料
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-447564e4e2b0171973515a26650e66a2"
+           role="tabpanel" aria-labelledby="heading-447564e4e2b0171973515a26650e66a2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/" title="51单片机学习推荐书单"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机学习推荐书单</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/" title="分享一个很好看C51的交通灯仿真项目"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享一个很好看C51的交通灯仿真项目</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E8%BF%BD%E8%B8%AA%E5%BA%93/" title="推荐一个嵌入式系统代码错误追踪库"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐一个嵌入式系统代码错误追踪库</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -275,13 +936,23 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">初学51单片机开发必备工具</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
                 <p>占位</p>
-<h2 id="在实践中学习"><a href="#在实践中学习" class="headerlink" title="在实践中学习"></a>在实践中学习</h2><p>单片机开发是一项“实践密集型”的工作，在单片机课程的学习过程中，我们不仅需要有电子技术、编程等书本上的理论基础，平时更需要在电脑上多练习编程，进行程序调试或仿真，但要成为一名真正的开发者，分析，设计电路的能力更要掌握，在步入职场初期可能还需要自己焊接电路板，这样一来焊接工艺你也应该要有所了解。总之，从事单片机开发工作确实需要有足够强的动手能力，很多知识都需要你在实践之后才会get到。当然，学习过程中你的每一份努力日后都可能在不经意之间帮助到你，所以“过来人”强烈建议初学者学习过程中养成多动手的实践的好习惯。这篇文章就介绍一些初学者需要掌握，平时开发常用的一些工具。   </p>
+<h2 id="在实践中学习">在实践中学习</h2>
+<p>单片机开发是一项“实践密集型”的工作，在单片机课程的学习过程中，我们不仅需要有电子技术、编程等书本上的理论基础，平时更需要在电脑上多练习编程，进行程序调试或仿真，但要成为一名真正的开发者，分析，设计电路的能力更要掌握，在步入职场初期可能还需要自己焊接电路板，这样一来焊接工艺你也应该要有所了解。总之，从事单片机开发工作确实需要有足够强的动手能力，很多知识都需要你在实践之后才会get到。当然，学习过程中你的每一份努力日后都可能在不经意之间帮助到你，所以“过来人”强烈建议初学者学习过程中养成多动手的实践的好习惯。这篇文章就介绍一些初学者需要掌握，平时开发常用的一些工具。</p>
 <p><strong><code>说明：本文是针对51单片机开发初学者推荐的一些必备工具，其他单片机开发工具以后另作介绍。一是希望初学者有针对性的去了解这些常用工具并取己所需，熟练运用；二是希望初学者在入门阶段把时间精力投放在学习和技术积累上，而不要浪费在一些无意义的“奇巧淫技”的折腾上面。想着各种软件都玩儿的初学者还是等你有一定技术积累之后再去玩吧！</code></strong></p>
-<h2 id="软件工具表"><a href="#软件工具表" class="headerlink" title="软件工具表"></a>软件工具表</h2><blockquote>
+<h2 id="软件工具表">软件工具表</h2>
+<blockquote>
 <ul>
 <li>编程开发工具</li>
 </ul>
@@ -295,7 +966,7 @@
 <li>电路仿真工具</li>
 </ul>
 <ol>
-<li>Multisim </li>
+<li>Multisim</li>
 <li>Proteus</li>
 </ol>
 </blockquote>
@@ -304,7 +975,7 @@
 <li>电路绘制工具</li>
 </ul>
 <ol>
-<li>Cadence </li>
+<li>Cadence</li>
 <li>Altium Designer</li>
 </ol>
 </blockquote>
@@ -324,13 +995,14 @@
 <li>其他值得学习的软件工具</li>
 </ul>
 <ol>
-<li>Matlab  </li>
-<li>Labview   </li>
+<li>Matlab</li>
+<li>Labview</li>
 <li>AutoCad</li>
 </ol>
 </blockquote>
 <p>当然单片机开发过程中涉及到的其他软件还非常多，对于平时开发而言选择工具的原则就是哪个使用广泛就选哪个，不管怎么选用用户量大的工具你能用的资料会更多，可以节省很多时间。等你有足够开发经验后自然会有自己习惯的一整套软件工具，比如我很久之前介绍过的一些开源工具都是不错的选择，甚至有时你也可能会自己开发或构建一些针对自己当前工作的快捷实用工具。</p>
-<h2 id="硬件工具表"><a href="#硬件工具表" class="headerlink" title="硬件工具表"></a>硬件工具表</h2><blockquote>
+<h2 id="硬件工具表">硬件工具表</h2>
+<blockquote>
 <ol>
 <li>单片机开发板或核心板</li>
 <li>USB转串口工具</li>
@@ -340,9 +1012,9 @@
 <li>常用无线通信模块</li>
 <li>万用表</li>
 <li>面包板</li>
-<li>杜邦线  </li>
+<li>杜邦线</li>
 <li>洞洞板</li>
-<li>电烙铁和热风枪  </li>
+<li>电烙铁和热风枪</li>
 <li>焊锡丝</li>
 <li>吸锡器</li>
 <li>镊子</li>
@@ -360,11 +1032,12 @@
 </ol>
 </blockquote>
 <p>关于硬件工具我一直是建议初学者使用面包板进行学习单片机的，这样可以增强自己的动手能力又可以很方便的学习电路知识，使用核心板搭接各种模块还能节约成本，因为一般通用的模块在学习其他单片机时可以复用，而不用再次购买。以上列表中稳压电源，示波器，函数信号发生器比较昂贵，个人不一定要购买，但初学者一定要对这些仪器有所了解。万用表和焊接工具有条件的可以自己准备一套。</p>
-<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
+<h4 id="推荐阅读">推荐阅读</h4>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485523&amp;idx=1&amp;sn=b7fcd1b86e2467d6f03b1a520c39bb06&amp;chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&amp;token=1711068967&amp;lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485581&amp;idx=1&amp;sn=b36e6536717774f7931c7aa93d5b237a&amp;chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&amp;token=466212876&amp;lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485572&amp;idx=1&amp;sn=17cefa35d9d660083d419a7e9b6db6f7&amp;chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&amp;token=1711068967&amp;lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485420&amp;idx=2&amp;sn=728ca4abbadf7caf51c392e7d7045cbe&amp;chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&amp;token=1711068967&amp;lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
 </ul>
 <hr>
 <p><img src="https://files.mdnice.com/user/38598/659b642c-fcce-4f9c-becc-038eadd2c655.jpg" srcset="/img/loading.gif" lazyload alt="欢迎扫码关注公众号"></p>
@@ -379,6 +1052,43 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C51/" class="print-no-link">#C51</a>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="print-no-link">#开发工具</a>
+      
+    </div>
   
 </div>
 
@@ -395,7 +1105,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>LUOMUQINGYUN</div>
+          <div>luomuqingyun</div>
         </div>
       
       
@@ -433,9 +1143,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E5%9F%BA%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA%E7%9A%84%E4%B9%A6%E7%B1%8D/" title="分享基本控制理论的书籍">
+                      <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/" title="分享一个很好看C51的交通灯仿真项目">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">分享基本控制理论的书籍</span>
+                        <span class="hidden-mobile">分享一个很好看C51的交通灯仿真项目</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -443,8 +1153,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E6%B1%87%E6%80%BB/" title="单片机常用模块汇总">
-                        <span class="hidden-mobile">单片机常用模块汇总</span>
+                      <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%A4%E4%B8%AA%E7%94%B5%E5%AD%90%E5%BC%80%E5%8F%91%E8%80%85%E7%94%A8%E5%BE%97%E4%B8%8A%E7%9A%84%E5%A5%BD%E5%B7%A5%E5%85%B7/" title="分享两个电子开发者用得上的好工具">
+                        <span class="hidden-mobile">分享两个电子开发者用得上的好工具</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -455,6 +1165,33 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'c553b64f647ea0f76ce7db140e3cdd0d'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -547,7 +1284,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   
@@ -695,6 +1432,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

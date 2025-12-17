@@ -8,23 +8,23 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="author" content="luomuqingyun">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前面的文章中介绍过单片机开发常用通信协议中的UART，IIC，SPI三种。这三种通信协议是平时项目开发过程中使用概率最高的，市面上使用的多数芯片或电子模块都会带有其中一种或几种。这三种通信协议也是最基础，最容易实现的，它们的抗干扰能力也相对较弱，所以它们通常不适合用做长距离通信，一般用于近距离的，比如芯片间通信或板间通信。如果做稍微长距离的通信，对数据的可靠性要求更高就需要控制速率或做一些特殊处">
+    <meta name="description" content="单片机CAN总线知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CAN 总线简介">
 <meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/CAN%20%E6%80%BB%E7%BA%BF%E7%AE%80%E4%BB%8B/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前面的文章中介绍过单片机开发常用通信协议中的UART，IIC，SPI三种。这三种通信协议是平时项目开发过程中使用概率最高的，市面上使用的多数芯片或电子模块都会带有其中一种或几种。这三种通信协议也是最基础，最容易实现的，它们的抗干扰能力也相对较弱，所以它们通常不适合用做长距离通信，一般用于近距离的，比如芯片间通信或板间通信。如果做稍微长距离的通信，对数据的可靠性要求更高就需要控制速率或做一些特殊处">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="单片机CAN总线知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/ab6dc1e1-ff02-46f9-863f-9a2eb0f39eda.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/8afb8303-08a2-4fc8-8cee-341d5c3c95d9.png">
@@ -53,14 +53,17 @@
 <meta property="og:image" content="https://files.mdnice.com/user/38598/797b1bfe-686c-4a53-a326-9326707ca46a.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
 <meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T06:42:00.714Z">
-<meta property="article:author" content="LUOMUQINGYUN">
+<meta property="article:modified_time" content="2025-05-22T15:11:37.775Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="技术原理">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://files.mdnice.com/user/38598/ab6dc1e1-ff02-46f9-863f-9a2eb0f39eda.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>CAN 总线简介 - Hexo</title>
+  
+  <title>CAN 总线简介 - 落木青云</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -98,7 +101,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -108,6 +111,17 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -124,7 +138,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>落木青云</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -220,7 +234,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -267,6 +281,15 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
   </div>
 
 
@@ -290,6 +313,112 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="电子技术"
+        id="heading-d1fa29713b5d40886d4256852f81febd" role="tab" data-toggle="collapse" href="#collapse-d1fa29713b5d40886d4256852f81febd"
+        aria-expanded="true"
+      >
+        电子技术
+        <span class="list-group-count">(7)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-d1fa29713b5d40886d4256852f81febd"
+           role="tabpanel" aria-labelledby="heading-d1fa29713b5d40886d4256852f81febd">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/CAN%20%E6%80%BB%E7%BA%BF%E7%AE%80%E4%BB%8B/" title="CAN 总线简介"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">CAN 总线简介</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA%E4%B8%8E%E8%88%B5%E6%9C%BA/" title="伺服电机与舵机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">伺服电机与舵机</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E6%B1%87%E6%80%BB/" title="单片机常用模块汇总"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机常用模块汇总</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%B5%84%E6%96%99%E5%88%86%E4%BA%AB/" title="嵌入式相关技术资料分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">嵌入式相关技术资料分享</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E8%AF%A6%E8%A7%A3/" title="步进电机控制详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">步进电机控制详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="电子技术基础知识"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">电子技术基础知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%9B%B4%E6%B5%81%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA%E4%B8%8E%E9%A9%B1%E5%8A%A8/" title="直流无刷电机与驱动"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">直流无刷电机与驱动</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -299,12 +428,22 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">CAN 总线简介</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
-                <p><img src="https://files.mdnice.com/user/38598/ab6dc1e1-ff02-46f9-863f-9a2eb0f39eda.png" srcset="/img/loading.gif" lazyload></p>
-<p>前面的文章中介绍过单片机开发常用通信协议中的UART，IIC，SPI三种。这三种通信协议是平时项目开发过程中使用概率最高的，市面上使用的多数芯片或电子模块都会带有其中一种或几种。这三种通信协议也是最基础，最容易实现的，它们的抗干扰能力也相对较弱，所以它们通常不适合用做长距离通信，一般用于近距离的，比如芯片间通信或板间通信。如果做稍微长距离的通信，对数据的可靠性要求更高就需要控制速率或做一些特殊处理或使用其他相对抗干扰更强的通信协议，比如CAN，TCP&#x2F;IP等。其中，CAN总线是一种被广泛应用于工业控制的通信协议，是应用最广泛的现场总线之一，接下来我们一起来了解它。<br><img src="https://files.mdnice.com/user/38598/8afb8303-08a2-4fc8-8cee-341d5c3c95d9.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="CAN总线历史"><a href="#CAN总线历史" class="headerlink" title="CAN总线历史"></a>CAN总线历史</h2><p><img src="https://files.mdnice.com/user/38598/7e52cbf1-ecd8-4e54-b689-90a4cbec247f.png" srcset="/img/loading.gif" lazyload alt="CAN总线协议发展历史"></p>
+                <p><img src="https://files.mdnice.com/user/38598/ab6dc1e1-ff02-46f9-863f-9a2eb0f39eda.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>前面的文章中介绍过单片机开发常用通信协议中的UART，IIC，SPI三种。这三种通信协议是平时项目开发过程中使用概率最高的，市面上使用的多数芯片或电子模块都会带有其中一种或几种。这三种通信协议也是最基础，最容易实现的，它们的抗干扰能力也相对较弱，所以它们通常不适合用做长距离通信，一般用于近距离的，比如芯片间通信或板间通信。如果做稍微长距离的通信，对数据的可靠性要求更高就需要控制速率或做一些特殊处理或使用其他相对抗干扰更强的通信协议，比如CAN，TCP/IP等。其中，CAN总线是一种被广泛应用于工业控制的通信协议，是应用最广泛的现场总线之一，接下来我们一起来了解它。<br>
+<img src="https://files.mdnice.com/user/38598/8afb8303-08a2-4fc8-8cee-341d5c3c95d9.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="CAN总线历史">CAN总线历史</h2>
+<p><img src="https://files.mdnice.com/user/38598/7e52cbf1-ecd8-4e54-b689-90a4cbec247f.png" srcset="/img/loading.gif" lazyload alt="CAN总线协议发展历史"></p>
 <p>CAN（Controller Area Network）总线，即控制器局域网总线，是一种功能丰富的车用总线标准。该协议最初是由德国博世（Bosch）公司在1983年制定的，之后在美国密歇根州底特律举行的汽车工程师协会(SAE) 会议上正式发布推出。1987年，Intel公司推出的首款CAN总线芯片（82526）上市销售。1991年，奔驰汽车发布的第一款基于CAN总线的多路布线系统汽车——W140量产，1993年，国际标准化组织（ISO）发布了CAN标准ISO 11898。后来CAN标准被重新编译分成两个部分：ISO 11898-1涵盖了数据链路层，ISO 11898-2涵盖了高速CAN总线的物理层，所以ISO 11898是针对通信速率为125Kbps~1Mbps的高速通信标准。与此同时，还有另一个标准ISO 11519是针对通信速率为125Kbps以下的低速CAN通信标准，不过ISO 11519后来被此后发布的ISO 11898-3:2006所替代。当然，现在新版的CAN总线芯片支持的通信速率最高波特率也已达5Mbps。</p>
 <p><img src="https://files.mdnice.com/user/38598/416b973b-dae6-42c0-9c95-4a05de57af5a.png" srcset="/img/loading.gif" lazyload alt="奔驰W140"></p>
 <p>至今，CAN总线依然还在不断扩展、完善和提升，所以标准也还在不停更新，目前在用CAN总线版本分为2.0A、2.0B、FD，并且新一代的协议标准也即将推出。当前，CAN总线也是五个应用于车载诊断 (OBD)-II标准的协议之一，现在世界范围内大部分国家都会强制要求生产的汽车必须带有OBD2接口，所以有兴趣的朋友可以通过此接口读取车辆信息，DIY一些有趣的应用。</p>
@@ -315,10 +454,12 @@
 <p><img src="https://files.mdnice.com/user/38598/d7488fbd-6707-4d4a-8a05-e261ee099c0e.png" srcset="/img/loading.gif" lazyload alt="汽车CAN总线应用"></p>
 <p>如今，经过数十年的发展CAN总线的应用早已不局限于车辆工程领域，它已被应用于各种控制领域，比如航空，航海，医疗器械，物联网，自动化，建筑机械电子等各种工业控制领域。</p>
 <p><img src="https://files.mdnice.com/user/38598/13ecff57-5631-45af-84ba-1c3faa39e109.png" srcset="/img/loading.gif" lazyload alt="CAN总线应用场景举例"></p>
-<h2 id="ISO-OSI模型"><a href="#ISO-OSI模型" class="headerlink" title="ISO&#x2F;OSI模型"></a>ISO&#x2F;OSI模型</h2><p>ISO&#x2F;OSI基本参照模型是一种概念模型，由国际标准化组织提出，是一个试图使各种计算机在世界范围内互连为网络的标准框架，其定义于ISO&#x2F;IEC 7498-1。该模型将通信系统中的数据流划分为七个层，从分布式应用程序数据的最高层表示到跨通信介质传输数据的物理实现。每个中间层为其上一层提供功能，其自身功能则由其下一层提供，功能的类别通过标准的通信协议在软件中实现，类比TCP&#x2F;IP网络协议模型。</p>
-<p><img src="https://files.mdnice.com/user/38598/88e07985-1be5-4488-b12f-1cc89960eee1.png" srcset="/img/loading.gif" lazyload alt="ISO&#x2F;OSI基本参照模型"></p>
-<p><img src="https://files.mdnice.com/user/38598/d6e33615-d9b6-4c39-8ec2-50b1e565f878.png" srcset="/img/loading.gif" lazyload alt="TCP&#x2F;IP计算机网络协议模型"></p>
-<h2 id="CAN总线的硬件实现"><a href="#CAN总线的硬件实现" class="headerlink" title="CAN总线的硬件实现"></a>CAN总线的硬件实现</h2><p><img src="https://files.mdnice.com/user/38598/8716b1e7-d980-4fce-a686-d9e555142a13.png" srcset="/img/loading.gif" lazyload alt="CAN网拓扑结构"></p>
+<h2 id="ISO-OSI模型">ISO/OSI模型</h2>
+<p>ISO/OSI基本参照模型是一种概念模型，由国际标准化组织提出，是一个试图使各种计算机在世界范围内互连为网络的标准框架，其定义于ISO/IEC 7498-1。该模型将通信系统中的数据流划分为七个层，从分布式应用程序数据的最高层表示到跨通信介质传输数据的物理实现。每个中间层为其上一层提供功能，其自身功能则由其下一层提供，功能的类别通过标准的通信协议在软件中实现，类比TCP/IP网络协议模型。</p>
+<p><img src="https://files.mdnice.com/user/38598/88e07985-1be5-4488-b12f-1cc89960eee1.png" srcset="/img/loading.gif" lazyload alt="ISO/OSI基本参照模型"></p>
+<p><img src="https://files.mdnice.com/user/38598/d6e33615-d9b6-4c39-8ec2-50b1e565f878.png" srcset="/img/loading.gif" lazyload alt="TCP/IP计算机网络协议模型"></p>
+<h2 id="CAN总线的硬件实现">CAN总线的硬件实现</h2>
+<p><img src="https://files.mdnice.com/user/38598/8716b1e7-d980-4fce-a686-d9e555142a13.png" srcset="/img/loading.gif" lazyload alt="CAN网拓扑结构"></p>
 <p>CAN总线的物理层使用双绞线作为网络介质，两个信号分别称作CAN_HI和CAN_LO，他们组成一对差分信号，由CAN总线节点的物理层接口———总线收发器驱动。</p>
 <p>但是它的具体硬件电路实现有两种模式，分别对应前面提到的高速标准和低速标准电路，其中高速、短距离的是“闭环网络”，它的总线最大长度为40m，通信速度最高为1Mbps，总线的两端各要求有一个“120 欧”的电阻。</p>
 <p><img src="https://files.mdnice.com/user/38598/f3079a53-2e6e-4962-be05-ec4a42010eac.png" srcset="/img/loading.gif" lazyload alt="CAN总线高速标准硬件电路"></p>
@@ -327,16 +468,17 @@
 <p><img src="https://files.mdnice.com/user/38598/54973f8e-d997-4e58-aac4-d0ee87826dc0.png" srcset="/img/loading.gif" lazyload alt="汽车CAN总线控制网络分布"></p>
 <p>CAN总线通信信号与两线电平关系：</p>
 <ul>
-<li>总线电平 &#x3D; CAN_H 的电压 – CAN_L 的电压。</li>
+<li>总线电平 = CAN_H 的电压 – CAN_L 的电压。</li>
 <li>显性电平对应逻辑 0，CAN_HI拉高，CAN_LO拉低。</li>
 <li>隐性电平对应逻辑 1，CAN_HI，CAN_LO均浮空。</li>
 </ul>
 <p>CAN总线的规范中，将二进制位‘0’定义为“显性位”或“显性信号”、‘1’定义为“隐性位”或“隐性信号”。在传输显性位‘0’时，CAN_HI信号将被拉高到CAN总线收发器的工作电源电压VDD，同时CAN_LO信号将被拉低到CAN总线收发器GND。传输隐性位‘1’时，CAN总线收发器不驱动CAN_HI和CAN_LO两个信号，即两个信号处于浮空状态。两种通信速率电路的电平信号稍有不一样，但处理方式相通。</p>
 <p><img src="https://files.mdnice.com/user/38598/9d30ef11-da48-4784-827c-69e301abf942.png" srcset="/img/loading.gif" lazyload alt="两种速率信号对比"></p>
-<h2 id="CAN总线协议"><a href="#CAN总线协议" class="headerlink" title="CAN总线协议"></a>CAN总线协议</h2><p>CAN总线协议主要定义了ISO&#x2F;OSI基本参照模型中的数据链路层及物理层两层，其他部分内容ISO并未进行标准化定义，这些模型层中除ISO之外其他一些组织架构或公司根据自身使用定义了一些标准，比如前面提到的汽车OBD接口可能包含很多种应用层的协议标准类型。</p>
+<h2 id="CAN总线协议">CAN总线协议</h2>
+<p>CAN总线协议主要定义了ISO/OSI基本参照模型中的数据链路层及物理层两层，其他部分内容ISO并未进行标准化定义，这些模型层中除ISO之外其他一些组织架构或公司根据自身使用定义了一些标准，比如前面提到的汽车OBD接口可能包含很多种应用层的协议标准类型。</p>
 <p><img src="https://files.mdnice.com/user/38598/d768b834-9d30-4df4-af4d-6da5a6fecae4.png" srcset="/img/loading.gif" lazyload alt="CAN总线协议模型"></p>
 <p><img src="https://files.mdnice.com/user/38598/ac94e014-0634-4b52-8e9e-15dd0451e18b.png" srcset="/img/loading.gif" lazyload alt="CAN总线协议与OBD联系"></p>
-<p>CAN总线是一种多主(或无主)网络架构，任何节点都可以随时启动消息发送过程，但是发送者必须在发送消息ID期间侦测网络状态确保是否发送成功，一旦发送不成功则停止发送过程，直到网络恢复空闲状态后再次启动发送过程。CAN总线发送帧&#x2F;消息ID和远程请求标志位的过程称作抢占总线的仲裁过程。</p>
+<p>CAN总线是一种多主(或无主)网络架构，任何节点都可以随时启动消息发送过程，但是发送者必须在发送消息ID期间侦测网络状态确保是否发送成功，一旦发送不成功则停止发送过程，直到网络恢复空闲状态后再次启动发送过程。CAN总线发送帧/消息ID和远程请求标志位的过程称作抢占总线的仲裁过程。</p>
 <p>CAN有4种帧类型（部分资料将帧间隔也算作帧格式的一种，就是5种帧）：</p>
 <ul>
 <li>数据帧：包含用于传输的节点数据的帧。</li>
@@ -361,13 +503,15 @@
 <p><img src="https://files.mdnice.com/user/38598/5751b294-52e2-45c4-a06c-625d8c6cef0a.png" srcset="/img/loading.gif" lazyload alt="远程帧格式"></p>
 <p>错误帧由两个不同的字段组成：</p>
 <ul>
-<li>第一段由不同站点提供的错误标志（6-12个显性位&#x2F;隐性位）的叠加给出。</li>
+<li>第一段由不同站点提供的错误标志（6-12个显性位/隐性位）的叠加给出。</li>
 <li>接下来的第二段是错误帧定界符（ERROR DELIMITER，8个隐性位）。</li>
 </ul>
 <p>错误标志也有两种：</p>
 <ul>
-<li>主动错误标志:<br>六个显性位 - 由网络上错误状态为“主动错误”的出错的节点传送。</li>
-<li>被动错误标志<br>六个隐性位 - 由网络上错误状态为“被动错误”的出错的节点传送。</li>
+<li>主动错误标志:<br>
+六个显性位 - 由网络上错误状态为“主动错误”的出错的节点传送。</li>
+<li>被动错误标志<br>
+六个隐性位 - 由网络上错误状态为“被动错误”的出错的节点传送。</li>
 </ul>
 <p><img src="https://files.mdnice.com/user/38598/f431cdae-9d39-4ebf-bb9a-24de53b43962.png" srcset="/img/loading.gif" lazyload alt="错误帧格式"></p>
 <p>过载帧包含两个位字段：过载标志（Overload Flag）和过载定界符（Overload Delimiter）。</p>
@@ -377,7 +521,7 @@
 <li>2.中断检测到一个显性位。</li>
 </ul>
 <p><img src="https://files.mdnice.com/user/38598/d57f1fc0-e2c5-4d44-bb2e-c6bbbcd76109.png" srcset="/img/loading.gif" lazyload alt="过载帧格式"></p>
-<p><img src="https://files.mdnice.com/user/38598/797b1bfe-686c-4a53-a326-9326707ca46a.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://files.mdnice.com/user/38598/797b1bfe-686c-4a53-a326-9326707ca46a.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <hr>
 <p>占位</p>
 <blockquote>
@@ -389,23 +533,25 @@
 </blockquote>
 <blockquote>
 <blockquote>
-<p>如学习需要或项目开发合作可以扫码添加微信。<br><img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>如学习需要或项目开发合作可以扫码添加微信。<br>
+<img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>建有电子开发交流群，供平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code>，未备注则默认不邀请进群，进群后请遵守群规。</p>
 <p><strong>注意：加好友的人比较多，为提高交流效率，尽量不要无意义的提问，毕竟大家都是成年人了，当然闲聊除外</strong></p>
 </blockquote>
 </blockquote>
 <p><code>温馨提示：部分文章中附有分享文件，若需要获取，进入公众号后台发送文章中提示的关键词，即可自动获取。请不要在留言或个人微信聊天界面发送关键词，留言区没有机器人回复，个人聊天默认不回复此类信息，望悉知！！！</code></p>
-<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247486549&idx=1&sn=aa7a3ea1c22bd5b797986314e4aa0e2c&chksm=ea790424dd0e8d32da20a9219be731e7691ce1711f2e6b42fc144e3586fe53ff41c3070df904&token=241279816&lang=zh_CN#rd">PID算法基础汇总</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485862&idx=1&sn=830ede5ac467c8d396adfbea141f0526&chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&token=63320980&lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485987&idx=1&sn=106e52add61999ae4bddd8b28c7ed2b1&chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&token=63320980&lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=3&sn=d4c0d26781f307ffd26defdc4022c928&chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&token=63320980&lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+<h4 id="推荐阅读">推荐阅读</h4>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247486549&amp;idx=1&amp;sn=aa7a3ea1c22bd5b797986314e4aa0e2c&amp;chksm=ea790424dd0e8d32da20a9219be731e7691ce1711f2e6b42fc144e3586fe53ff41c3070df904&amp;token=241279816&amp;lang=zh_CN#rd">PID算法基础汇总</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485581&amp;idx=1&amp;sn=b36e6536717774f7931c7aa93d5b237a&amp;chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&amp;token=466212876&amp;lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485862&amp;idx=1&amp;sn=830ede5ac467c8d396adfbea141f0526&amp;chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&amp;token=63320980&amp;lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485523&amp;idx=1&amp;sn=b7fcd1b86e2467d6f03b1a520c39bb06&amp;chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&amp;token=1711068967&amp;lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485606&amp;idx=1&amp;sn=2b433faa2e436fc762dc538c9cf3fe14&amp;chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&amp;token=1580674001&amp;lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485572&amp;idx=1&amp;sn=17cefa35d9d660083d419a7e9b6db6f7&amp;chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&amp;token=1711068967&amp;lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485987&amp;idx=1&amp;sn=106e52add61999ae4bddd8b28c7ed2b1&amp;chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&amp;token=63320980&amp;lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485420&amp;idx=2&amp;sn=728ca4abbadf7caf51c392e7d7045cbe&amp;chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&amp;token=1711068967&amp;lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=3&amp;sn=d4c0d26781f307ffd26defdc4022c928&amp;chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&amp;token=63320980&amp;lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=4&amp;sn=211c2d0871a19c5e92cdf0c34f01d96b&amp;chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&amp;token=970763775&amp;lang=zh_CN#rd">零基础电子技术知识集合</a></li>
 </ul>
 <hr>
 
@@ -416,6 +562,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" class="category-chain-item">电子技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="print-no-link">#技术原理</a>
+      
+    </div>
   
 </div>
 
@@ -432,7 +606,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>LUOMUQINGYUN</div>
+          <div>luomuqingyun</div>
         </div>
       
       
@@ -470,9 +644,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI">
+                      <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/" title="51单片机进阶开发（四）之AD、DA">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">51单片机进阶开发（六）之浅谈SPI</span>
+                        <span class="hidden-mobile">51单片机进阶开发（四）之AD、DA</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -480,8 +654,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档">
-                        <span class="hidden-mobile">C语言初学者可以利用的帮助文档</span>
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="PID算法基础汇总">
+                        <span class="hidden-mobile">PID算法基础汇总</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -492,6 +666,33 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '4178a3c4be6e095af64a219f3f205c8a'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -584,7 +785,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   
@@ -732,6 +933,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

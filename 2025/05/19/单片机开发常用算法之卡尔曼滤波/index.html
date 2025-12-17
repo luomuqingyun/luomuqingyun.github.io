@@ -8,32 +8,36 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="author" content="luomuqingyun">
   <meta name="keywords" content="">
   
-    <meta name="description" content="占位  本文因没有制作相关图片后面算法内容似乎不能用纯文字描述出让人一看就懂的意思，精彩图文见优质的参考资料链接（公众号不支持跳转外链，所以网页链接转注脚了），图文说明确实比文字表达得更精彩，先借用别人链接参考参考。以后的文章再做动图演示。  算法——产品的软核我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制">
+    <meta name="description" content="卡尔曼滤波算法介绍">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单片机开发常用算法之卡尔曼滤波">
 <meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="占位  本文因没有制作相关图片后面算法内容似乎不能用纯文字描述出让人一看就懂的意思，精彩图文见优质的参考资料链接（公众号不支持跳转外链，所以网页链接转注脚了），图文说明确实比文字表达得更精彩，先借用别人链接参考参考。以后的文章再做动图演示。  算法——产品的软核我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="卡尔曼滤波算法介绍">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T06:42:00.617Z">
-<meta property="article:author" content="LUOMUQINGYUN">
+<meta property="article:modified_time" content="2025-05-22T15:09:06.811Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="编程经验">
+<meta property="article:tag" content="算法应用">
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>单片机开发常用算法之卡尔曼滤波 - Hexo</title>
+  
+  <title>单片机开发常用算法之卡尔曼滤波 - 落木青云</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -71,7 +75,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -81,6 +85,17 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -97,7 +112,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>落木青云</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -193,7 +208,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -240,6 +255,15 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
   </div>
 
 
@@ -263,6 +287,643 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="编程"
+        id="heading-41282bf95e43c64d579757573a03cdde" role="tab" data-toggle="collapse" href="#collapse-41282bf95e43c64d579757573a03cdde"
+        aria-expanded="true"
+      >
+        编程
+        <span class="list-group-count">(47)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-41282bf95e43c64d579757573a03cdde"
+           role="tabpanel" aria-labelledby="heading-41282bf95e43c64d579757573a03cdde">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="单片机"
+        id="heading-d1f314cc6e06520a45c2ad7d0dc7fab2" role="tab" data-toggle="collapse" href="#collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+        aria-expanded="false"
+      >
+        单片机
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+           role="tabpanel" aria-labelledby="heading-d1f314cc6e06520a45c2ad7d0dc7fab2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" title="51单片机开发看这一篇就够了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机开发看这一篇就够了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E5%8D%95%E7%89%87%E6%9C%BA%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E4%B8%8B/" title="51单片机进阶开发（三）之单片机底层逻辑下"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（三）之单片机底层逻辑下</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8BIIC%E9%80%9A%E4%BF%A1/" title="51单片机进阶开发（五）之IIC通信"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（五）之IIC通信</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（六）之浅谈SPI</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/" title="51单片机进阶开发（四）之AD、DA"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（四）之AD、DA</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89/" title="STM32位带操作（修改）"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32位带操作（修改）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" title="STM32单片机编程之数据对齐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32单片机编程之数据对齐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" title="STM32启动文件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32启动文件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">小白入门STM32之学会看文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%B0%86STC%E5%8D%95%E7%89%87%E6%9C%BA%E6%B7%BB%E5%8A%A0%E5%88%B0keil%E9%80%89%E5%9E%8B%E8%A1%A8/" title="怎么将STC单片机添加到keil选型表"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么将STC单片机添加到keil选型表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%B5%85%E6%9E%90STM32%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84/" title="浅析STM32存储器映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">浅析STM32存储器映射</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础"
+        id="heading-0796ba76b4b553687e5ffaeb78512ccb" role="tab" data-toggle="collapse" href="#collapse-0796ba76b4b553687e5ffaeb78512ccb"
+        aria-expanded="false"
+      >
+        基础
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0796ba76b4b553687e5ffaeb78512ccb"
+           role="tabpanel" aria-labelledby="heading-0796ba76b4b553687e5ffaeb78512ccb">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%B8%E5%9E%8B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" title="单片机初学者典型疑惑解答"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机初学者典型疑惑解答</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机的启动文件代码分析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/" title="数学与编程"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">数学与编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/" title="系统环境变量设置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">系统环境变量设置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A7%A3%E8%AF%B4/" title="计算机定点数解说"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机定点数解说</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具"
+        id="heading-20dce2c6fa909a5cd62526615fe2788a" role="tab" data-toggle="collapse" href="#collapse-20dce2c6fa909a5cd62526615fe2788a"
+        aria-expanded="false"
+      >
+        工具
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-20dce2c6fa909a5cd62526615fe2788a"
+           role="tabpanel" aria-labelledby="heading-20dce2c6fa909a5cd62526615fe2788a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/" title="初学51单片机开发必备工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">初学51单片机开发必备工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D/" title="单片机开发系列之一体化平台介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之一体化平台介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B251%E3%80%81STM32%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/" title="单片机开发系列之本地部署51、STM32开发平台"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之本地部署51、STM32开发平台</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%AF%91%E5%99%A8/" title="单片机开发系列之编译器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之编译器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%95%B4%E7%90%86/" title="如何高效的进行代码格式整理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何高效的进行代码格式整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BF%AB%E9%80%9F%E5%B0%86%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5ECloudSpace/" title="快速将工程导入ECloudSpace"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快速将工程导入ECloudSpace</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="算法"
+        id="heading-046a899ee7a6ec88d370211a518c9e80" role="tab" data-toggle="collapse" href="#collapse-046a899ee7a6ec88d370211a518c9e80"
+        aria-expanded="true"
+      >
+        算法
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-046a899ee7a6ec88d370211a518c9e80"
+           role="tabpanel" aria-labelledby="heading-046a899ee7a6ec88d370211a518c9e80">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="PID算法基础汇总"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法基础汇总</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8B%E7%AE%80%E4%BB%8B/" title="PID算法（一）之简介"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（一）之简介</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E8%87%AA%E9%80%82%E5%BA%94%E6%8E%A7%E5%88%B6/" title="PID算法（七）之自适应控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（七）之自适应控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E4%B8%B2%E7%BA%A7PID/" title="PID算法（三）之串级PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（三）之串级PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8B%E4%BD%8D%E7%BD%AEPID%E4%B8%8E%E5%A2%9E%E9%87%8FPID/" title="PID算法（二）之位置PID与增量PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（二）之位置PID与增量PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%87%AA%E6%8A%97%E6%89%B0/" title="PID算法（五）之自抗扰"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（五）之自抗扰</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" title="PID算法（八）之遗传算法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（八）之遗传算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%A8%A1%E7%B3%8A%E6%8E%A7%E5%88%B6/" title="PID算法（六）之模糊控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（六）之模糊控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（四）之鲁棒性</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" title="单片机开发常用算法之卡尔曼滤波"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">单片机开发常用算法之卡尔曼滤波</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="经验"
+        id="heading-32a8e000e928e6dc255876d9fc0178b3" role="tab" data-toggle="collapse" href="#collapse-32a8e000e928e6dc255876d9fc0178b3"
+        aria-expanded="false"
+      >
+        经验
+        <span class="list-group-count">(12)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-32a8e000e928e6dc255876d9fc0178b3"
+           role="tabpanel" aria-labelledby="heading-32a8e000e928e6dc255876d9fc0178b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">C语言初学者可以利用的帮助文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="keil使用过程中的一些常见问题"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil使用过程中的一些常见问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" title="keil开发模块化编程步骤"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil开发模块化编程步骤</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" title="python程序运行莫名警告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">python程序运行莫名警告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8EQT%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%AE%9A%E4%BD%8Ddll%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="关于QT程序无法定位dll文件问题问题解决方法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于QT程序无法定位dll文件问题问题解决方法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E4%B8%ADC%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%9F%A5%E8%AF%86/" title="单片机开发中C语言指针知识"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发中C语言指针知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8C%89%E9%94%AE%E7%A8%8B%E5%BA%8F%E5%88%86%E4%BA%AB/" title="单片机开发实用按键程序分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发实用按键程序分享</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="单片机开发模块化编程实例详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发模块化编程实例详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/" title="开发者应该学会如何提问"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发者应该学会如何提问</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E6%AC%BE%E6%96%B0%E7%9A%84MCU/" title="怎么快速上手一款新的MCU"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么快速上手一款新的MCU</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%9B%B4%E6%8E%A5%E5%AD%A6STM32%E8%BF%98%E6%98%AF%E5%85%88%E5%AD%A651%EF%BC%9F/" title="直接学STM32还是先学51？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">直接学STM32还是先学51？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%A8%8B%E5%BA%8F%E7%9C%8B%E5%BE%97%E6%87%82%E5%8D%B4%E5%86%99%E4%B8%8D%E5%87%BA%E6%80%8E%E4%B9%88%E5%8A%9E/" title="程序看得懂却写不出怎么办"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">程序看得懂却写不出怎么办</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="资料"
+        id="heading-447564e4e2b0171973515a26650e66a2" role="tab" data-toggle="collapse" href="#collapse-447564e4e2b0171973515a26650e66a2"
+        aria-expanded="false"
+      >
+        资料
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-447564e4e2b0171973515a26650e66a2"
+           role="tabpanel" aria-labelledby="heading-447564e4e2b0171973515a26650e66a2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/" title="51单片机学习推荐书单"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机学习推荐书单</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/" title="分享一个很好看C51的交通灯仿真项目"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享一个很好看C51的交通灯仿真项目</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E8%BF%BD%E8%B8%AA%E5%BA%93/" title="推荐一个嵌入式系统代码错误追踪库"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐一个嵌入式系统代码错误追踪库</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -272,6 +933,14 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">单片机开发常用算法之卡尔曼滤波</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
@@ -279,12 +948,16 @@
 <blockquote>
 <p>本文因没有制作相关图片后面算法内容似乎不能用纯文字描述出让人一看就懂的意思，精彩图文见优质的<code>参考资料</code>链接（公众号不支持跳转外链，所以网页链接转注脚了），图文说明确实比文字表达得更精彩，先借用别人链接参考参考。以后的文章再做动图演示。</p>
 </blockquote>
-<h2 id="算法——产品的软核"><a href="#算法——产品的软核" class="headerlink" title="算法——产品的软核"></a>算法——产品的软核</h2><p>我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制器I&#x2F;O口通断，或再配合着定时器、中断等功能，最后通过搭配其他一些外部器件就可以实现产品功能了。但是对于一些涉及到某些复杂控制，或需要复杂计算才能实现控制功能的产品，以上对微控制的简单操作就不能实现需要的产品功能，这样的产品就需要我们在程序中编写一些控制算法才能实现。往往生活中的很多电器产品都不是几行代码就能实现得了的，所以我们用单片机进行项目开发时通常离不开算法。</p>
+<h2 id="算法——产品的软核">算法——产品的软核</h2>
+<p>我们生活中的电子产品随处可见，有简单的，也有复杂的，其中大多数产品都需要用到微控制器进行控制。对于简单的电器可能只需要简单的控制几个微控制器I/O口通断，或再配合着定时器、中断等功能，最后通过搭配其他一些外部器件就可以实现产品功能了。但是对于一些涉及到某些复杂控制，或需要复杂计算才能实现控制功能的产品，以上对微控制的简单操作就不能实现需要的产品功能，这样的产品就需要我们在程序中编写一些控制算法才能实现。往往生活中的很多电器产品都不是几行代码就能实现得了的，所以我们用单片机进行项目开发时通常离不开算法。</p>
 <p>在项目开发过程中涉及到的算法非常多，并且产品功能越复杂对算法的要求会越高，并且即使是同样的产品对它的要求越高需要的算法肯定也就更复杂，甚至如果算法设计得合理，有时还可以节约硬件成本。对于开发者来说，即便以后的不从事算法工程相关的工作也需要掌握一些算法知识。算法的本质就是对数据进行某些特定的处理或运算，从而获得我们需要的结果，进而控制微控制器做出相应的动作，最终实现产品功能。简单一点的算法应该就是我们最常见的一些基本运算吧，复杂一点的可能是排序、查找、滤波等算法，再复杂一点就需要处理开根号，微分，积分，矩阵，傅里叶变换等等一系列相对复杂的高等运算了。当然控制器不是人脑，只能进行二进制处理，肯定不能像人脑一样能够识别各种运算符号。但通过我们程序处理、优化再结合其内部运算单元就可以完成复杂运算了，当然其内部结构与运算单元往往也决定其能以怎么样是速度完成这些运算。当然，如果要实现一些复杂算法那肯定还是需要使用更高性能的控制器，比如，DSP芯片就是专门为数字信号处理而设计的芯片，不过现在一些性能比较高的微控制器内核也会附带一个简单的DSP单元。因为软件算法种类非常的多，几乎每一种成熟的算法都足以写一本书出来了，所以后续会在这里写一系列我熟悉的软件算法相关的文章，与大家一起交流学习。这篇文章我们先来介绍一种单片机开发时使用比较多的算法——卡尔曼滤波算法。</p>
-<h2 id="何为数字滤波器"><a href="#何为数字滤波器" class="headerlink" title="何为数字滤波器"></a>何为数字滤波器</h2><p>谈到滤波算法就不得不涉及数字滤波器，学习模拟电路的时候我们肯定都接触了滤波器，这也是模拟电路中很重要的一部分。通常情况下模拟滤波器都是由电路中的电阻、电容或电感以及相应的运放构成，在电路中起到对某些特定频率的信号进行抑制的作用。那数字滤波器呢？顾名思义它就是对数字信号进行处理从而达到预期频率响应的信号系统。既然有模拟滤波器了为何还需要数字滤波器呢？由于模拟滤波器是由各类模拟电子元器件构成，在实际工作状态下每种元器件的参数及性能都可能受电流，温度，电磁等环境影响，在某些情况下可能对产品的功能影响比较大，而傅里叶变化可以巧妙的将时域信号转化为频域信号，对模拟信号采样后再经过一定的处理可以把这些复杂的信号变得相对容易处理，这也就是数字滤波器最大的优势了，最大程度上克服了信号的环境影响，而具有很高的稳定性。因为傅里叶变换的运算比较复杂，即使是优化后的快速傅里叶变换对于普通单片机来说都是很消耗资源的，所以在一些要求不高的应用中也会使用卷积进行相应的运算来实现数字滤波效果，来达到设计效果。</p>
-<p>数字滤波器是通过其幅频特性和相频特性函数推导进行设计的，所以模拟电路中一些常见的滤波器电路模型都有其对应的数字滤波器模型。经典的数字滤波器包括FIR和IIR两种，随着设计的优化出现了维纳滤波器、卡尔曼滤波器、线性预测器、自适应滤波器等现代滤波器。关于数字滤波器的仿真可以使用Matlab软件，在软件命令行窗口中输入fdatool打开滤波器设计工具箱进行相应设置。可参考官方链接：<br><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/signal/filter-design.html?s_tid=CRUX_lftnav" title="数字滤波器设计">数字滤波器设计</a></p>
+<h2 id="何为数字滤波器">何为数字滤波器</h2>
+<p>谈到滤波算法就不得不涉及数字滤波器，学习模拟电路的时候我们肯定都接触了滤波器，这也是模拟电路中很重要的一部分。通常情况下模拟滤波器都是由电路中的电阻、电容或电感以及相应的运放构成，在电路中起到对某些特定频率的信号进行抑制的作用。那数字滤波器呢？顾名思义它就是对数字信号进行处理从而达到预期频率响应的信号系统。既然有模拟滤波器了为何还需要数字滤波器呢？由于模拟滤波器是由各类模拟电子元器件构成，在实际工作状态下每种元器件的参数及性能都可能受电流，温度，电磁等环境影响，在某些情况下可能对产品的功能影响比较大，而傅里叶变化可以巧妙的将时域信号转化为频域信号，对模拟信号采样后再经过一定的处理可以把这些复杂的信号变得相对容易处理，这也就是数字滤波器最大的优势了，最大程度上克服了信号的环境影响，而具有很高的稳定性。因为傅里叶变换的运算比较复杂，即使是优化后的快速傅里叶变换对于普通单片机来说都是很消耗资源的，所以在一些要求不高的应用中也会使用卷积进行相应的运算来实现数字滤波效果，来达到设计效果。</p>
+<p>数字滤波器是通过其幅频特性和相频特性函数推导进行设计的，所以模拟电路中一些常见的滤波器电路模型都有其对应的数字滤波器模型。经典的数字滤波器包括FIR和IIR两种，随着设计的优化出现了维纳滤波器、卡尔曼滤波器、线性预测器、自适应滤波器等现代滤波器。关于数字滤波器的仿真可以使用Matlab软件，在软件命令行窗口中输入fdatool打开滤波器设计工具箱进行相应设置。可参考官方链接：<br>
+<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/signal/filter-design.html?s_tid=CRUX_lftnav" title="数字滤波器设计">数字滤波器设计</a></p>
 <p>这些内容似乎都太深奥，很容易把人看晕。在我们学信号与系统这门课时往往不知道这门课具体可以做什么，正好现在刚好可以回顾一下。如果不想看书可以参考知乎上的一些回答，比如：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19714540/answer/1119070975" title="如何理解傅里叶变换公式？">如何理解傅里叶变换公式？</a>但是不是这篇文章的重点，总之很多控制算法都源自于这本书，如果是在校的单片机初学者看到这里往后应该要对信号与系统这门课更加重视一些。里面一些更细节的问题，后续在做介绍，接下来先介绍今天文章的主角。</p>
-<h2 id="卡尔曼滤波器"><a href="#卡尔曼滤波器" class="headerlink" title="卡尔曼滤波器"></a>卡尔曼滤波器</h2><p>卡尔曼滤波器是现代滤波器的一种，它是一种高效率的递归滤波器（自回归滤波器），它能够从一系列的不完全及包含噪声的测量中，估计动态系统的状态，确切的说它更是一种预测算法。所以在惯性导航，智能控制方面应用非常广泛。对于航空航天等高科技应用场景我们普通开发者参与的机会肯定是比较小的，但我们可以利用它进行设计无人机，智能小车，小机器人是完全可以实现的。这也是写这篇文章的原因，因为现在针对大学生的多数设计竞赛都会有相关的赛题，所以学习这种算法还是很有必要的。</p>
+<h2 id="卡尔曼滤波器">卡尔曼滤波器</h2>
+<p>卡尔曼滤波器是现代滤波器的一种，它是一种高效率的递归滤波器（自回归滤波器），它能够从一系列的不完全及包含噪声的测量中，估计动态系统的状态，确切的说它更是一种预测算法。所以在惯性导航，智能控制方面应用非常广泛。对于航空航天等高科技应用场景我们普通开发者参与的机会肯定是比较小的，但我们可以利用它进行设计无人机，智能小车，小机器人是完全可以实现的。这也是写这篇文章的原因，因为现在针对大学生的多数设计竞赛都会有相关的赛题，所以学习这种算法还是很有必要的。</p>
 <p>由于其原理详细介绍起来不比傅里叶变换简单，估计多数人都会望而却步，所以有条件的朋友可以参考这篇外文论文：<a target="_blank" rel="noopener" href="https://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/" title="How a Kalman filter works, in pictures">How a Kalman filter works, in pictures</a>。本想转述一遍大概意思，结果发现知乎上也有翻译版了：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39912633" title="图说卡尔曼滤波，一份通俗易懂的教程">图说卡尔曼滤波，一份通俗易懂的教程</a>。这样的介绍绝对比用纯文字介绍更形象生动，如果觉得翻译的差点意思可以移步到这篇文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/louisanu/p/12803272.html" title="卡尔曼滤波器预测原理">卡尔曼滤波器预测原理</a></p>
 
                 
@@ -294,6 +967,43 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C/" class="print-no-link">#编程经验</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8/" class="print-no-link">#算法应用</a>
+      
+    </div>
   
 </div>
 
@@ -310,7 +1020,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>LUOMUQINGYUN</div>
+          <div>luomuqingyun</div>
         </div>
       
       
@@ -348,9 +1058,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析">
+                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E4%B8%ADC%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%9F%A5%E8%AF%86/" title="单片机开发中C语言指针知识">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单片机的启动文件代码分析</span>
+                        <span class="hidden-mobile">单片机开发中C语言指针知识</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -358,8 +1068,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档">
-                        <span class="hidden-mobile">小白入门STM32之学会看文档</span>
+                      <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="单片机开发模块化编程实例详解">
+                        <span class="hidden-mobile">单片机开发模块化编程实例详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -370,6 +1080,33 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '2ce582bf87ca29008a8b9c2e5dec15cd'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -418,6 +1155,27 @@
   
 
 
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
 
 
 
@@ -462,7 +1220,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   
@@ -609,7 +1367,52 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

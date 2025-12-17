@@ -1,0 +1,1574 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="luomuqingyun">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PID算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID算法（五）之自抗扰">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%87%AA%E6%8A%97%E6%89%B0/index.html">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="PID算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/c13fcb0f-fd82-4432-b096-57127879cbce.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/32ac6dea-0ad3-4701-bbc2-f9c472415199.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/19b4cb9e-dd2e-4b67-8722-5820957b3113.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/9bed3313-82b5-4c4e-9212-05e76ab6c8a8.jpg">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/a9ecf00f-4fd0-4da7-9a94-a4ac6f19a41e.jpg">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-22T15:12:33.907Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="编程经验">
+<meta property="article:tag" content="算法应用">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/c13fcb0f-fd82-4432-b096-57127879cbce.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>PID算法（五）之自抗扰 - 落木青云</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>落木青云</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PID算法（五）之自抗扰"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="编程"
+        id="heading-41282bf95e43c64d579757573a03cdde" role="tab" data-toggle="collapse" href="#collapse-41282bf95e43c64d579757573a03cdde"
+        aria-expanded="true"
+      >
+        编程
+        <span class="list-group-count">(47)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-41282bf95e43c64d579757573a03cdde"
+           role="tabpanel" aria-labelledby="heading-41282bf95e43c64d579757573a03cdde">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="单片机"
+        id="heading-d1f314cc6e06520a45c2ad7d0dc7fab2" role="tab" data-toggle="collapse" href="#collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+        aria-expanded="false"
+      >
+        单片机
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+           role="tabpanel" aria-labelledby="heading-d1f314cc6e06520a45c2ad7d0dc7fab2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" title="51单片机开发看这一篇就够了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机开发看这一篇就够了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E5%8D%95%E7%89%87%E6%9C%BA%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E4%B8%8B/" title="51单片机进阶开发（三）之单片机底层逻辑下"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（三）之单片机底层逻辑下</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8BIIC%E9%80%9A%E4%BF%A1/" title="51单片机进阶开发（五）之IIC通信"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（五）之IIC通信</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（六）之浅谈SPI</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/" title="51单片机进阶开发（四）之AD、DA"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（四）之AD、DA</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89/" title="STM32位带操作（修改）"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32位带操作（修改）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" title="STM32单片机编程之数据对齐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32单片机编程之数据对齐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" title="STM32启动文件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32启动文件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">小白入门STM32之学会看文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%B0%86STC%E5%8D%95%E7%89%87%E6%9C%BA%E6%B7%BB%E5%8A%A0%E5%88%B0keil%E9%80%89%E5%9E%8B%E8%A1%A8/" title="怎么将STC单片机添加到keil选型表"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么将STC单片机添加到keil选型表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%B5%85%E6%9E%90STM32%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84/" title="浅析STM32存储器映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">浅析STM32存储器映射</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础"
+        id="heading-0796ba76b4b553687e5ffaeb78512ccb" role="tab" data-toggle="collapse" href="#collapse-0796ba76b4b553687e5ffaeb78512ccb"
+        aria-expanded="false"
+      >
+        基础
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0796ba76b4b553687e5ffaeb78512ccb"
+           role="tabpanel" aria-labelledby="heading-0796ba76b4b553687e5ffaeb78512ccb">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%B8%E5%9E%8B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" title="单片机初学者典型疑惑解答"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机初学者典型疑惑解答</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机的启动文件代码分析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/" title="数学与编程"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">数学与编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/" title="系统环境变量设置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">系统环境变量设置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A7%A3%E8%AF%B4/" title="计算机定点数解说"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机定点数解说</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具"
+        id="heading-20dce2c6fa909a5cd62526615fe2788a" role="tab" data-toggle="collapse" href="#collapse-20dce2c6fa909a5cd62526615fe2788a"
+        aria-expanded="false"
+      >
+        工具
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-20dce2c6fa909a5cd62526615fe2788a"
+           role="tabpanel" aria-labelledby="heading-20dce2c6fa909a5cd62526615fe2788a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/" title="初学51单片机开发必备工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">初学51单片机开发必备工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D/" title="单片机开发系列之一体化平台介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之一体化平台介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B251%E3%80%81STM32%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/" title="单片机开发系列之本地部署51、STM32开发平台"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之本地部署51、STM32开发平台</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%AF%91%E5%99%A8/" title="单片机开发系列之编译器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之编译器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%95%B4%E7%90%86/" title="如何高效的进行代码格式整理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何高效的进行代码格式整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BF%AB%E9%80%9F%E5%B0%86%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5ECloudSpace/" title="快速将工程导入ECloudSpace"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快速将工程导入ECloudSpace</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="算法"
+        id="heading-046a899ee7a6ec88d370211a518c9e80" role="tab" data-toggle="collapse" href="#collapse-046a899ee7a6ec88d370211a518c9e80"
+        aria-expanded="true"
+      >
+        算法
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-046a899ee7a6ec88d370211a518c9e80"
+           role="tabpanel" aria-labelledby="heading-046a899ee7a6ec88d370211a518c9e80">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="PID算法基础汇总"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法基础汇总</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8B%E7%AE%80%E4%BB%8B/" title="PID算法（一）之简介"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（一）之简介</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E8%87%AA%E9%80%82%E5%BA%94%E6%8E%A7%E5%88%B6/" title="PID算法（七）之自适应控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（七）之自适应控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E4%B8%B2%E7%BA%A7PID/" title="PID算法（三）之串级PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（三）之串级PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8B%E4%BD%8D%E7%BD%AEPID%E4%B8%8E%E5%A2%9E%E9%87%8FPID/" title="PID算法（二）之位置PID与增量PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（二）之位置PID与增量PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%87%AA%E6%8A%97%E6%89%B0/" title="PID算法（五）之自抗扰"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">PID算法（五）之自抗扰</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" title="PID算法（八）之遗传算法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（八）之遗传算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%A8%A1%E7%B3%8A%E6%8E%A7%E5%88%B6/" title="PID算法（六）之模糊控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（六）之模糊控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（四）之鲁棒性</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" title="单片机开发常用算法之卡尔曼滤波"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发常用算法之卡尔曼滤波</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="经验"
+        id="heading-32a8e000e928e6dc255876d9fc0178b3" role="tab" data-toggle="collapse" href="#collapse-32a8e000e928e6dc255876d9fc0178b3"
+        aria-expanded="false"
+      >
+        经验
+        <span class="list-group-count">(12)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-32a8e000e928e6dc255876d9fc0178b3"
+           role="tabpanel" aria-labelledby="heading-32a8e000e928e6dc255876d9fc0178b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">C语言初学者可以利用的帮助文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="keil使用过程中的一些常见问题"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil使用过程中的一些常见问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" title="keil开发模块化编程步骤"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil开发模块化编程步骤</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" title="python程序运行莫名警告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">python程序运行莫名警告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8EQT%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%AE%9A%E4%BD%8Ddll%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="关于QT程序无法定位dll文件问题问题解决方法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于QT程序无法定位dll文件问题问题解决方法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E4%B8%ADC%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%9F%A5%E8%AF%86/" title="单片机开发中C语言指针知识"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发中C语言指针知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8C%89%E9%94%AE%E7%A8%8B%E5%BA%8F%E5%88%86%E4%BA%AB/" title="单片机开发实用按键程序分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发实用按键程序分享</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="单片机开发模块化编程实例详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发模块化编程实例详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/" title="开发者应该学会如何提问"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发者应该学会如何提问</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E6%AC%BE%E6%96%B0%E7%9A%84MCU/" title="怎么快速上手一款新的MCU"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么快速上手一款新的MCU</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%9B%B4%E6%8E%A5%E5%AD%A6STM32%E8%BF%98%E6%98%AF%E5%85%88%E5%AD%A651%EF%BC%9F/" title="直接学STM32还是先学51？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">直接学STM32还是先学51？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%A8%8B%E5%BA%8F%E7%9C%8B%E5%BE%97%E6%87%82%E5%8D%B4%E5%86%99%E4%B8%8D%E5%87%BA%E6%80%8E%E4%B9%88%E5%8A%9E/" title="程序看得懂却写不出怎么办"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">程序看得懂却写不出怎么办</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="资料"
+        id="heading-447564e4e2b0171973515a26650e66a2" role="tab" data-toggle="collapse" href="#collapse-447564e4e2b0171973515a26650e66a2"
+        aria-expanded="false"
+      >
+        资料
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-447564e4e2b0171973515a26650e66a2"
+           role="tabpanel" aria-labelledby="heading-447564e4e2b0171973515a26650e66a2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/" title="51单片机学习推荐书单"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机学习推荐书单</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/" title="分享一个很好看C51的交通灯仿真项目"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享一个很好看C51的交通灯仿真项目</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E8%BF%BD%E8%B8%AA%E5%BA%93/" title="推荐一个嵌入式系统代码错误追踪库"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐一个嵌入式系统代码错误追踪库</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PID算法（五）之自抗扰</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p><em><strong>幸福的家庭都是相似的，不幸的家庭各有各的不幸。</strong></em></p>
+<p>如果列夫·托尔斯泰是名理科生，或许他会说，<code>线性控制系统都是相似的，非线性控制系统各有各的不同。</code></p>
+</blockquote>
+<h2 id="线性控制系统">线性控制系统</h2>
+<p><strong>线性控制系统（Linear Control System）</strong> 是指系统的数学模型是线性微分方程或线性差分方程控制的系统。这类系统的特点是符合线性<code>叠加原理</code>，即系统对输入的响应是输入的线性叠加。</p>
+<p>根据定义和图解可知PID控制算法的系统输入，输出关系是符合线性关系的，所以他是最常见的线性控制器设计方法之一。</p>
+<p><img src="https://files.mdnice.com/user/38598/c13fcb0f-fd82-4432-b096-57127879cbce.png" srcset="/img/loading.gif" lazyload alt="PID算法框架"></p>
+<ul>
+<li>
+<p>线性控制系统通常可以用传递函数或状态空间模型来描述。</p>
+</li>
+<li>
+<p>线性系统满足叠加原理,即系统对两个输入信号叠加后的响应等于对两个输入的响应叠加。这一特点简化了线性系统的分析。</p>
+</li>
+<li>
+<p>线性系统的参数不随状态或输入改变而改变,系统特性保持不变。这称为时不变性,使系统行为稳定可预测。线性时不变系统可用简单的频域分析方法,如频率响应、根轨迹等。频域方法直观而有效。</p>
+</li>
+<li>
+<p>线性方程组的解通常存在并且唯一,理论上能得到系统的精确数学模型。这使线性系统的稳定性分析简单化。</p>
+</li>
+<li>
+<p>线性控制系统的分析方法有根轨迹法、频率响应方法、状态空间方法等。这些方法可以用来分析系统的时域和频域特性,稳定性等。</p>
+</li>
+<li>
+<p>线性控制理论是经典控制理论的重要组成部分,在工程控制系统的设计中应用非常广泛。</p>
+</li>
+</ul>
+<h2 id="非线性控制系统">非线性控制系统</h2>
+<p><strong>非线性控制系统（Nonlinear Control System）</strong> 顾名思义它正好与线性控制系统相对。非线性控制系统的数学模型包含非线性项,通常为非线性微分方程或者非线性差分方程。这类方程中会出现乘幂、指数、三角函数等非线性表达式。常见的非线性方程有:</p>
+<ul>
+<li>带有乘幂项的多项式方程</li>
+<li>正弦/余弦函数的三角方程</li>
+<li>指数函数方程</li>
+<li>含有反函数的隐函数方程</li>
+</ul>
+<p>这使得非线性系统行为复杂多变,难以建立精确的数学模型。</p>
+<ul>
+<li>非线性叠加原理不成立：</li>
+</ul>
+<p>非线性系统的输入和输出不满足线性叠加原理。多个输入叠加后产生的输出不等于对应输出的叠加。这意味着系统特性依赖于工作状态变化。</p>
+<ul>
+<li>参数变化系统：</li>
+</ul>
+<p>非线性系统的参数往往会随状态变量变化而变化,产生参数变化的特性。这导致系统动态特性随工作条件改变。</p>
+<ul>
+<li>存在复杂动态特性：</li>
+</ul>
+<p>非线性系统可能出现线性系统没有的复杂动态,如多稳态、混沌、奇异性等。这给系统分析和控制带来难度。</p>
+<ul>
+<li>全局性与局部性：<br>
+非线性系统难以求得全局解,往往只能在某工作区域求局部近似解。这也是非线性系统分析和设计的困难之处。</li>
+</ul>
+<p>非线性系统拟合效果好,但设计复杂，并且非线性系统具有复杂变化的动力学特性,给控制系统设计带来挑战。需要使用特定方法分析其非线性行为,才能设计出满足控制要求的非线性控制器。</p>
+<p>线性系统理论成熟,有一系列成熟分析工具,这使其在工程控制中应用广泛。但线性系统也存在一定局限,无法描述复杂非线性过程。两者优劣各有侧重,需要根据实际选择合适的系统描述方法。</p>
+<h2 id="自抗扰控制">自抗扰控制</h2>
+<p><strong>自抗扰控制（Active Disturbance Rejection Control，简称ADRC）</strong><br>
+是由中国科学院的韩京清教授（1937年11月1日—2008年4月21日）基于PID控制理论提出的一种应对非线性，时变，不确定性和扰动的独立于复杂数学模型的现代控制方法。自抗扰控制继承了传统PID控制的优势：误差反馈控制，并且改进了PID控制中的缺点：误差提取法和加权误差。当然，经过几十年的发展，现在ADRC控制理论新的继承者们已经实现了线性ADRC控制理论，所以给人感觉上似乎ADRC控制理论又回到PID控制理论了。以后再细写吧，有意愿的朋友可以读读韩京清教授的书籍和论文。<code>温馨提示：MATLAB上都有现成的PID和ADRC仿真模型，有安装软件的朋友可去探索，仿真实现后可以生成C语言试试</code>。</p>
+<p><img src="https://files.mdnice.com/user/38598/32ac6dea-0ad3-4701-bbc2-f9c472415199.png" srcset="/img/loading.gif" lazyload alt="ADRC控制模型"></p>
+<p><img src="https://files.mdnice.com/user/38598/19b4cb9e-dd2e-4b67-8722-5820957b3113.png" srcset="/img/loading.gif" lazyload alt="ADRC控制模型英文描述"></p>
+<p>ADRC主要思想和特点包括:</p>
+<ul>
+<li>扩张状态观测器(ESO):</li>
+</ul>
+<p>利用扩张状态观测器在线实时估计系统的全部状态变量和外部扰动。不依赖对象模型。</p>
+<ul>
+<li>状态错误反馈(状态反馈)</li>
+</ul>
+<p>将ESO估计的状态反馈进行控制,抑制系统对扰动的敏感性。</p>
+<ul>
+<li>自抗扰控制律</li>
+</ul>
+<p>设计一个鲁棒的PD控制律来抵抗系统的内部参数变化。</p>
+<ul>
+<li>串级补偿(滤波补偿)</li>
+</ul>
+<p>串级加入一个滤波器补偿时滞,提高系统的动态特性。</p>
+<ul>
+<li>无需精确模型</li>
+</ul>
+<p>ADRC不依赖对象模型,对参数变化和外部扰动都具有很强的适应性。</p>
+<ul>
+<li>（相对）简单实用</li>
+</ul>
+<p>ADRC算法简单,易于工程实现,适用于各类非线性反应迟缓过程的控制。</p>
+<p>ADRC已经成功应用于各种复杂工业过程的控制,显示出良好的抗扰性、适应性和鲁棒性,是一种非常有效的现代控制方法。它为复杂非线性过程的控制问题提供了一个较好的解决方案。</p>
+<h2 id="ADRC调试">ADRC调试</h2>
+<p>ADRC算法调试主要涉及以下几个方面:</p>
+<ul>
+<li>ESO参数调试</li>
+</ul>
+<p>ESO的带宽选择应大于控制对象的主要动态过程的频率。初值可取较大,再逐步减小,直到得到满意的状态估计响应。</p>
+<ol start="2">
+<li>反馈控制参数调试</li>
+</ol>
+<p>选择合适的反馈控制参数,如PID控制中KP、KI、KD的取值,以获得所需的控制效果。</p>
+<ol start="3">
+<li>滤波补偿参数调试</li>
+</ol>
+<p>调整滤波补偿器参数,补偿系统的时滞特性,提高系统动态响应速度。</p>
+<ol start="4">
+<li>整定和测试</li>
+</ol>
+<p>整定控制参数,进行步响应测试,观察调整过程,直到获得满意的速度响应、稳定性和抗扰动性。</p>
+<ol start="5">
+<li>在线调整</li>
+</ol>
+<p>由于ADRC对对象参数变化不敏感,可建立在线调节机制,在运行过程中实时调整参数,适应参数变化。</p>
+<p>总体来说,ADRC算法调试注重ESO、控制器和补偿器的参数协调整定,既要保证稳定性,又要获得满意的动态特性。多次测试和参数调整是获得最佳控制效果的关键。</p>
+<h2 id="参考控制程序">参考控制程序</h2>
+<p>附一个可以借鉴的ADRC控制无人机程序,源于github开源仓库，程序调试的不错，值得参考，链接：<br>
+<code>https://github.com/wustflywithdream/ADRC</code></p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br></pre></td><td class="code"><pre><code class="hljs xl">#include <span class="hljs-string">&quot;Headfile.h&quot;</span><br>#include <span class="hljs-string">&quot;ADRC.h&quot;</span><br><span class="hljs-comment">/*----------------------------------------------------------------------------------------------------------------------/</span><br><span class="hljs-comment">        *               本程序只供购买者学习使用，版权著作权属于无名科创团队，</span><br><span class="hljs-comment">        *               无名科创团队将飞控程序源码提供给购买者，</span><br><span class="hljs-comment">        *               购买者要为无名科创团队提供保护，</span><br><span class="hljs-comment">        *               未经作者许可，不得将源代码提供给他人</span><br><span class="hljs-comment">        *               不得将源代码放到网上供他人免费下载，</span><br><span class="hljs-comment">        *               更不能以此销售牟利，如发现上述行为，</span><br><span class="hljs-comment">        *               无名科创团队将诉之以法律解决！！！</span><br><span class="hljs-comment">-----------------------------------------------------------------------------------------------------------------------/</span><br><span class="hljs-comment">        *               生命不息、奋斗不止；前人栽树，后人乘凉！！！</span><br><span class="hljs-comment">        *               开源不易，且学且珍惜，祝早日逆袭、进阶成功！！！</span><br><span class="hljs-comment">-----------------------------------------------------------------------------------------------------------------------/</span><br><span class="hljs-comment">	*		无名科创开源飞控 V1.1	武汉科技大学  By.YuYi</span><br><span class="hljs-comment">	*		CSDN博客: http://blog.csdn.net/u011992534</span><br><span class="hljs-comment">	*               优酷ID：NamelessCotrun无名小哥</span><br><span class="hljs-comment">	*               无名科创开源飞控QQ群：540707961</span><br><span class="hljs-comment">        *               https://shop348646912.taobao.com/?spm=2013.1.1000126.2.5ce78a88ht1sO2</span><br><span class="hljs-comment">        *               百度贴吧:无名科创开源飞控</span><br><span class="hljs-comment">        *               修改日期:2017/10/30</span><br><span class="hljs-comment">        *               版本：V1.1</span><br><span class="hljs-comment">        *               版权所有，盗版必究。</span><br><span class="hljs-comment">        *               Copyright(C) 武汉科技大学无名科创团队 2017-2019</span><br><span class="hljs-comment">        *               All rights reserved</span><br><span class="hljs-comment">----------------------------------------------------------------------------------------------------------------------*/</span><br>Fhan_Data ADRC_Pitch_Controller;<br>Fhan_Data ADRC_Roll_Controller;<br>const float ADRC_Unit[<span class="hljs-number">3</span>][<span class="hljs-number">16</span>]=<br>&#123;<br><span class="hljs-comment">/*TD跟踪微分器   改进最速TD,h0=N*h      扩张状态观测器ESO           扰动补偿     非线性组合*/</span><br><span class="hljs-comment">/*  r     h      N                  beta_01   beta_02    beta_03     b0     beta_0  beta_1     beta_2     N1     C    alpha1  alpha2  zeta  b*/</span><br> &#123;<span class="hljs-number">300000</span> ,<span class="hljs-number">0.005</span> , <span class="hljs-number">3</span>,               <span class="hljs-number">300</span>,      <span class="hljs-number">4000</span>,      <span class="hljs-number">10000</span>,     <span class="hljs-number">0.001</span>,    <span class="hljs-number">0.002</span>,   <span class="hljs-number">2.0</span>,      <span class="hljs-number">0.0010</span>,    <span class="hljs-number">5</span>,    <span class="hljs-number">5</span>,    <span class="hljs-number">0.8</span>,   <span class="hljs-number">1.5</span>,    <span class="hljs-number">50</span>,    <span class="hljs-number">0</span>&#125;,<br> &#123;<span class="hljs-number">300000</span> ,<span class="hljs-number">0.005</span> , <span class="hljs-number">3</span>,               <span class="hljs-number">300</span>,      <span class="hljs-number">4000</span>,      <span class="hljs-number">10000</span>,     <span class="hljs-number">0.001</span>,    <span class="hljs-number">0.002</span>,   <span class="hljs-number">2.0</span>,      <span class="hljs-number">0.0010</span>,    <span class="hljs-number">5</span>,    <span class="hljs-number">5</span>,    <span class="hljs-number">0.8</span>,   <span class="hljs-number">1.5</span>,    <span class="hljs-number">50</span>,    <span class="hljs-number">0</span>&#125;,<br> &#123;<span class="hljs-number">300000</span> ,<span class="hljs-number">0.005</span> , <span class="hljs-number">3</span>,               <span class="hljs-number">300</span>,      <span class="hljs-number">4000</span>,      <span class="hljs-number">10000</span>,     <span class="hljs-number">0.001</span>,    <span class="hljs-number">0.002</span>,   <span class="hljs-number">1.2</span>,      <span class="hljs-number">0.0005</span>,    <span class="hljs-number">5</span>,    <span class="hljs-number">5</span>,    <span class="hljs-number">0.8</span>,   <span class="hljs-number">1.5</span>,    <span class="hljs-number">50</span>,    <span class="hljs-number">0</span>&#125;,<br>&#125;;<br><br><br>float Constrain_Float(float amt, float low, float high)&#123;<br>  return ((amt)&lt;(low)?(low):((amt)&gt;(high)?(high):(amt)));<br>&#125;<br><br>int16_t Sign_ADRC(float Input)<br>&#123;<br>    int16_t output=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span>(Input&gt;<span class="hljs-number">1</span>E-<span class="hljs-number">6</span>) output=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(Input&lt;-<span class="hljs-number">1</span>E-<span class="hljs-number">6</span>) output=-<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> output=<span class="hljs-number">0</span>;<br>    return output;<br>&#125;<br><br>int16_t Fsg_ADRC(float x,float d)<br>&#123;<br>  int16_t output=<span class="hljs-number">0</span>;<br>  output=(Sign_ADRC(x+d)-Sign_ADRC(x-d))/<span class="hljs-number">2</span>;<br>  return output;<br>&#125;<br><br><br>void ADRC_Init(Fhan_Data *fhan_Input1,Fhan_Data *fhan_Input2)<br>&#123;<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>r=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>h=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>N0=(uint16)(ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>]);<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>beta_01=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>beta_02=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">4</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>beta_03=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">5</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>b0=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">6</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>beta_0=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">7</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>beta_1=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">8</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>beta_2=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">9</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>N1=(uint16)(ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">10</span>]);<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>c=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">11</span>];<br><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>alpha1=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">12</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>alpha2=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">13</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>zeta=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">14</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input1</span>-&gt;</span>b=ADRC_Unit[<span class="hljs-number">0</span>][<span class="hljs-number">15</span>];<br><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>r=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>h=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>N0=(uint16)(ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]);<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>beta_01=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">3</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>beta_02=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">4</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>beta_03=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">5</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>b0=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">6</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>beta_0=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">7</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>beta_1=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">8</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>beta_2=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">9</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>N1=(uint16)(ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">10</span>]);<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>c=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">11</span>];<br><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>alpha1=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">12</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>alpha2=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">13</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>zeta=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">14</span>];<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input2</span>-&gt;</span>b=ADRC_Unit[<span class="hljs-number">1</span>][<span class="hljs-number">15</span>];<br>&#125;<br><br><br><br><span class="hljs-comment">//ADRC最速跟踪微分器TD，改进的算法fhan</span><br>void Fhan_ADRC(Fhan_Data *fhan_Input,float expect_ADRC)<span class="hljs-comment">//安排ADRC过度过程</span><br>&#123;<br>  float d=<span class="hljs-number">0</span>,a0=<span class="hljs-number">0</span>,y=<span class="hljs-number">0</span>,a1=<span class="hljs-number">0</span>,a2=<span class="hljs-number">0</span>,a=<span class="hljs-number">0</span>;<br>  float x1_delta=<span class="hljs-number">0</span>;<span class="hljs-comment">//ADRC状态跟踪误差项</span><br>  <span class="hljs-function"><span class="hljs-title">x1_delta</span>=fhan_Input-&gt;</span>x1-expect_ADRC;<span class="hljs-comment">//用x1-v(k)替代x1得到离散更新公式</span><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">h0</span>=fhan_Input-&gt;</span>N0*<span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span>h;<span class="hljs-comment">//用h0替代h，解决最速跟踪微分器速度超调问题</span><br>  <span class="hljs-function"><span class="hljs-title">d</span>=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">r</span>*fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h0</span>*fhan_Input-&gt;</span>h0;<span class="hljs-comment">//d=rh^2;</span><br>  <span class="hljs-function"><span class="hljs-title">a0</span>=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h0</span>*fhan_Input-&gt;</span>x2;<span class="hljs-comment">//a0=h*x2</span><br>  y=x1_delta+a0;<span class="hljs-comment">//y=x1+a0</span><br>  a1=<span class="hljs-built_in">sqrt</span>(d*(d+<span class="hljs-number">8</span>*ABS(y)));<span class="hljs-comment">//a1=sqrt(d*(d+8*ABS(y))])</span><br>  a2=a0+Sign_ADRC(y)*(a1-d)/<span class="hljs-number">2</span>;<span class="hljs-comment">//a2=a0+sign(y)*(a1-d)/2;</span><br>  a=(a0+y)*Fsg_ADRC(y,d)+a2*(<span class="hljs-number">1</span>-Fsg_ADRC(y,d));<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">fh</span>=-fhan_Input-&gt;</span>r*(a/d)*Fsg_ADRC(a,d)<br>                  -<span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span>r*Sign_ADRC(a)*(<span class="hljs-number">1</span>-Fsg_ADRC(a,d));<span class="hljs-comment">//得到最速微分加速度跟踪量</span><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">x1</span>+=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h</span>*fhan_Input-&gt;</span>x2;<span class="hljs-comment">//跟新最速跟踪状态量x1</span><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">x2</span>+=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h</span>*fhan_Input-&gt;</span>fh;<span class="hljs-comment">//跟新最速跟踪状态量微分x2</span><br>&#125;<br><br><br><span class="hljs-comment">//原点附近有连线性段的连续幂次函数</span><br>float Fal_ADRC(float e,float alpha,float zeta)<br>&#123;<br>    int16 s=<span class="hljs-number">0</span>;<br>    float fal_output=<span class="hljs-number">0</span>;<br>    s=(Sign_ADRC(e+zeta)-Sign_ADRC(e-zeta))/<span class="hljs-number">2</span>;<br>    fal_output=e*s/(powf(zeta,<span class="hljs-number">1</span>-alpha))+powf(ABS(e),alpha)*Sign_ADRC(e)*(<span class="hljs-number">1</span>-s);<br>    return fal_output;<br>&#125;<br><br><br><br><br><span class="hljs-comment">/************扩张状态观测器********************/</span><br><span class="hljs-comment">//状态观测器参数beta01=1/h  beta02=1/(3*h^2)  beta03=2/(8^2*h^3) ...</span><br>void ESO_ADRC(Fhan_Data *fhan_Input)<br>&#123;<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">e</span>=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">z1</span>-fhan_Input-&gt;</span>y;<span class="hljs-comment">//状态误差</span><br><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">fe</span>=Fal_ADRC(fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">e</span>,0.5,fhan_Input-&gt;</span>h);<span class="hljs-comment">//非线性函数，提取跟踪状态与当前状态误差</span><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">fe1</span>=Fal_ADRC(fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">e</span>,0.25,fhan_Input-&gt;</span>h);<br><br>  <span class="hljs-comment">/*************扩展状态量更新**********/</span><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">z1</span>+=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h</span>*(fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">z2</span>-fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">beta_01</span>*fhan_Input-&gt;</span>e);<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">z2</span>+=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h</span>*(fhan_Input-&gt;</span>z3<br>                                 -<span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">beta_02</span>*fhan_Input-&gt;</span>fe<br>                                   +<span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">b</span>*fhan_Input-&gt;</span>u);<br> <span class="hljs-comment">//ESO估计状态加速度信号，进行扰动补偿，传统MEMS陀螺仪漂移较大，估计会产生漂移</span><br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">z3</span>+=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">h</span>*(-fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">beta_03</span>*fhan_Input-&gt;</span>fe1);<br>&#125;<br><br><br><span class="hljs-comment">/************非线性组合****************/</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">void Nolinear_Conbination_ADRC(Fhan_Data *fhan_Input)</span><br><span class="hljs-comment">&#123;</span><br><span class="hljs-comment">  float d=0,a0=0,y=0,a1=0,a2=0,a=0;</span><br><span class="hljs-comment">  float Sy=0,Sa=0;//ADRC状态跟踪误差项</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">  fhan_Input-&gt;h1=fhan_Input-&gt;N1*fhan_Input-&gt;h;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">  d=fhan_Input-&gt;r*fhan_Input-&gt;h1*fhan_Input-&gt;h1;</span><br><span class="hljs-comment">  a0=fhan_Input-&gt;h1*fhan_Input-&gt;c*fhan_Input-&gt;e2;</span><br><span class="hljs-comment">  y=fhan_Input-&gt;e1+a0;</span><br><span class="hljs-comment">  a1=sqrt(d*(d+8*ABS(y)));</span><br><span class="hljs-comment">  a2=a0+Sign_ADRC(y)*(a1-d)/2;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">  Sy=Fsg_ADRC(y,d);</span><br><span class="hljs-comment">  a=(a0+y-a2)*Sy+a2;</span><br><span class="hljs-comment">  Sa=Fsg_ADRC(a,d);</span><br><span class="hljs-comment">  fhan_Input-&gt;u0=-fhan_Input-&gt;r*((a/d)-Sign_ADRC(a))*Sa-fhan_Input-&gt;r*Sign_ADRC(a);</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">  //a=(a0+y)*Fsg_ADRC(y,d)+a2*(1-Fsg_ADRC(y,d));</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">  //fhan_Input-&gt;fh=-fhan_Input-&gt;r*(a/d)*Fsg_ADRC(a,d)</span><br><span class="hljs-comment">  //                -fhan_Input-&gt;r*Sign_ADRC(a)*(1-Fsg_ADRC(a,d));//得到最速微分加速度跟踪量</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">*/</span><br>void Nolinear_Conbination_ADRC(Fhan_Data *fhan_Input)<br>&#123;<br>  float temp_e2=<span class="hljs-number">0</span>;<br>  <span class="hljs-function"><span class="hljs-title">temp_e2</span>=Constrain_Float(fhan_Input-&gt;</span>e2,-<span class="hljs-number">3000</span>,<span class="hljs-number">3000</span>);<br>  <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">u0</span>=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">beta_1</span>*Fal_ADRC(fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">e1</span>,fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">alpha1</span>,fhan_Input-&gt;</span>zeta)<br>                +<span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">beta_2</span>*Fal_ADRC(temp_e2,fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">alpha2</span>,fhan_Input-&gt;</span>zeta);<br><br>&#125;<br><br><br>void ADRC_Control(Fhan_Data *fhan_Input,float expect_ADRC,float feedback_ADRC)<br>&#123;<br>    <span class="hljs-comment">/*自抗扰控制器第1步*/</span><br>    <span class="hljs-comment">/********</span><br><span class="hljs-comment">        **</span><br><span class="hljs-comment">        **</span><br><span class="hljs-comment">        **</span><br><span class="hljs-comment">        **</span><br><span class="hljs-comment">        **</span><br><span class="hljs-comment">     ********/</span><br>      <span class="hljs-comment">/*****</span><br><span class="hljs-comment">      安排过度过程，输入为期望给定，</span><br><span class="hljs-comment">      由TD跟踪微分器得到：</span><br><span class="hljs-comment">      过度期望信号x1，过度期望微分信号x2</span><br><span class="hljs-comment">      ******/</span><br>      Fhan_ADRC(fhan_Input,expect_ADRC);<br><br>    <span class="hljs-comment">/*自抗扰控制器第2步*/</span><br>    <span class="hljs-comment">/********</span><br><span class="hljs-comment">            *</span><br><span class="hljs-comment">            *</span><br><span class="hljs-comment">       ****</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     ********/</span><br>      <span class="hljs-comment">/************系统输出值为反馈量，状态反馈，ESO扩张状态观测器的输入*********/</span><br>      <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span>y=feedback_ADRC;<br>      <span class="hljs-comment">/*****</span><br><span class="hljs-comment">      扩张状态观测器，得到反馈信号的扩张状态：</span><br><span class="hljs-comment">      1、状态信号z1；</span><br><span class="hljs-comment">      2、状态速度信号z2；</span><br><span class="hljs-comment">      3、状态加速度信号z3。</span><br><span class="hljs-comment">      其中z1、z2用于作为状态反馈与TD微分跟踪器得到的x1,x2做差后，</span><br><span class="hljs-comment">      经过非线性函数映射，乘以beta系数后，</span><br><span class="hljs-comment">      组合得到未加入状态加速度估计扰动补偿的原始控制量u</span><br><span class="hljs-comment">      *********/</span><br>      ESO_ADRC(fhan_Input);<span class="hljs-comment">//低成本MEMS会产生漂移，扩展出来的z3此项会漂移，目前暂时未想到办法解决，未用到z3</span><br>    <span class="hljs-comment">/*自抗扰控制器第3步*/</span><br>    <span class="hljs-comment">/********</span><br><span class="hljs-comment">           **</span><br><span class="hljs-comment">         **</span><br><span class="hljs-comment">       **</span><br><span class="hljs-comment">         **</span><br><span class="hljs-comment">           **</span><br><span class="hljs-comment">     ********/</span><br>      <span class="hljs-comment">/********状态误差反馈率***/</span><br>      <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">e0</span>+=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">e1</span>*fhan_Input-&gt;</span>h;<span class="hljs-comment">//状态积分项</span><br>      <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">e1</span>=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">x1</span>-fhan_Input-&gt;</span>z1;<span class="hljs-comment">//状态偏差项</span><br>      <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">e2</span>=fhan_Input-&gt;</span><span class="hljs-function"><span class="hljs-title">x2</span>-fhan_Input-&gt;</span>z2;<span class="hljs-comment">//状态微分项，</span><br>      <span class="hljs-comment">/********线性组合*******/</span><br>     <span class="hljs-comment">/*</span><br><span class="hljs-comment">      fhan_Input-&gt;u0=//fhan_Input-&gt;beta_0*fhan_Input-&gt;e0</span><br><span class="hljs-comment">                    +fhan_Input-&gt;beta_1*fhan_Input-&gt;e1</span><br><span class="hljs-comment">                    +fhan_Input-&gt;beta_2*fhan_Input-&gt;e2;</span><br><span class="hljs-comment">     */</span><br>      Nolinear_Conbination_ADRC(fhan_Input);<br>      <span class="hljs-comment">/**********扰动补偿*******/</span><br>      <span class="hljs-comment">//fhan_Input-&gt;u=fhan_Input-&gt;u0</span><br>      <span class="hljs-comment">//             -fhan_Input-&gt;z3/fhan_Input-&gt;b0;</span><br>      <span class="hljs-comment">//由于MEMS传感器漂移比较严重，当beta_03取值比较大时，长时间z3漂移比较大，目前不加入扰动补偿控制量</span><br>      <span class="hljs-function"><span class="hljs-title">fhan_Input</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">u</span>=Constrain_Float(fhan_Input-&gt;</span>u0,-<span class="hljs-number">200</span>,<span class="hljs-number">200</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="号外消息">号外消息</h2>
+<p>今天交流群被暂时停用了，大家都还能发消息，但相互看不见，目前新建了交流群，旧群可能还能恢复。又被击到了，太闹腾，不想一个个去拉人进群了，看到消息的朋友可以加入到新群。</p>
+<p><img src="https://files.mdnice.com/user/38598/9bed3313-82b5-4c4e-9212-05e76ab6c8a8.jpg" srcset="/img/loading.gif" lazyload alt="旧群被停用无法加人"></p>
+<p><img src="https://files.mdnice.com/user/38598/a9ecf00f-4fd0-4da7-9a94-a4ac6f19a41e.jpg" srcset="/img/loading.gif" lazyload alt="新群二维码"></p>
+<p>注意：交流群用于大家日常工作、学习嵌入式，单片机技术交流。请勿发不相关广告，并且不得讨论政治问题，也不得发布违反国家禁令的言论，违者将赠送飞机票一张！</p>
+<hr>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>文章内容为作者个人观点，难免有疏忽或错误，若有不同见解可以交流评论，若发现错误还请指正，若认同文章观点，欢迎关注，分享。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>如学习需要或项目合作可以扫码添加微信。<br>
+<s>建有交流群，以方便大家平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code></s> 目前进群开发可直接扫码进群。<br>
+<img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>占位</p>
+<p><code>温馨提示：若需要获取分享的资料，进入公众号后台发送关键字内容即可自动获取，而不是在留言或个人微信聊天界面发送！！！</code></p>
+<h4 id="推荐阅读">推荐阅读</h4>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485581&amp;idx=1&amp;sn=b36e6536717774f7931c7aa93d5b237a&amp;chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&amp;token=466212876&amp;lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485862&amp;idx=1&amp;sn=830ede5ac467c8d396adfbea141f0526&amp;chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&amp;token=63320980&amp;lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485523&amp;idx=1&amp;sn=b7fcd1b86e2467d6f03b1a520c39bb06&amp;chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&amp;token=1711068967&amp;lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485606&amp;idx=1&amp;sn=2b433faa2e436fc762dc538c9cf3fe14&amp;chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&amp;token=1580674001&amp;lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485572&amp;idx=1&amp;sn=17cefa35d9d660083d419a7e9b6db6f7&amp;chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&amp;token=1711068967&amp;lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485987&amp;idx=1&amp;sn=106e52add61999ae4bddd8b28c7ed2b1&amp;chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&amp;token=63320980&amp;lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485420&amp;idx=2&amp;sn=728ca4abbadf7caf51c392e7d7045cbe&amp;chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&amp;token=1711068967&amp;lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=3&amp;sn=d4c0d26781f307ffd26defdc4022c928&amp;chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&amp;token=63320980&amp;lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=4&amp;sn=211c2d0871a19c5e92cdf0c34f01d96b&amp;chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&amp;token=970763775&amp;lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C/" class="print-no-link">#编程经验</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8/" class="print-no-link">#算法应用</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PID算法（五）之自抗扰</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/PID算法（五）之自抗扰/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>luomuqingyun</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E4%B8%B2%E7%BA%A7PID/" title="PID算法（三）之串级PID">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PID算法（三）之串级PID</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8B%E4%BD%8D%E7%BD%AEPID%E4%B8%8E%E5%A2%9E%E9%87%8FPID/" title="PID算法（二）之位置PID与增量PID">
+                        <span class="hidden-mobile">PID算法（二）之位置PID与增量PID</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '4889ce1e9e900bd4284e2fa8c7e27148'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

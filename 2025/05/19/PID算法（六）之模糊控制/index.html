@@ -1,0 +1,1570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="luomuqingyun">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PID算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID算法（六）之模糊控制">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%A8%A1%E7%B3%8A%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="PID算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/392b63ec-138f-4d88-8dfe-da23128ec931.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/83b9e7c1-beb5-4e67-abc2-f2adbfd81cb1.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/1fe60ff7-5987-4b9f-9cf9-03cfa6b39aa0.png">
+<meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
+<meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
+<meta property="article:modified_time" content="2025-05-22T15:12:10.575Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="编程经验">
+<meta property="article:tag" content="算法应用">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.mdnice.com/user/38598/392b63ec-138f-4d88-8dfe-da23128ec931.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>PID算法（六）之模糊控制 - 落木青云</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>落木青云</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PID算法（六）之模糊控制"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-19 14:42" pubdate>
+          2025年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="编程"
+        id="heading-41282bf95e43c64d579757573a03cdde" role="tab" data-toggle="collapse" href="#collapse-41282bf95e43c64d579757573a03cdde"
+        aria-expanded="true"
+      >
+        编程
+        <span class="list-group-count">(47)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-41282bf95e43c64d579757573a03cdde"
+           role="tabpanel" aria-labelledby="heading-41282bf95e43c64d579757573a03cdde">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="单片机"
+        id="heading-d1f314cc6e06520a45c2ad7d0dc7fab2" role="tab" data-toggle="collapse" href="#collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+        aria-expanded="false"
+      >
+        单片机
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+           role="tabpanel" aria-labelledby="heading-d1f314cc6e06520a45c2ad7d0dc7fab2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" title="51单片机开发看这一篇就够了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机开发看这一篇就够了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E5%8D%95%E7%89%87%E6%9C%BA%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E4%B8%8B/" title="51单片机进阶开发（三）之单片机底层逻辑下"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（三）之单片机底层逻辑下</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8BIIC%E9%80%9A%E4%BF%A1/" title="51单片机进阶开发（五）之IIC通信"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（五）之IIC通信</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（六）之浅谈SPI</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/" title="51单片机进阶开发（四）之AD、DA"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（四）之AD、DA</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89/" title="STM32位带操作（修改）"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32位带操作（修改）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" title="STM32单片机编程之数据对齐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32单片机编程之数据对齐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" title="STM32启动文件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32启动文件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">小白入门STM32之学会看文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%B0%86STC%E5%8D%95%E7%89%87%E6%9C%BA%E6%B7%BB%E5%8A%A0%E5%88%B0keil%E9%80%89%E5%9E%8B%E8%A1%A8/" title="怎么将STC单片机添加到keil选型表"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么将STC单片机添加到keil选型表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%B5%85%E6%9E%90STM32%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84/" title="浅析STM32存储器映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">浅析STM32存储器映射</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础"
+        id="heading-0796ba76b4b553687e5ffaeb78512ccb" role="tab" data-toggle="collapse" href="#collapse-0796ba76b4b553687e5ffaeb78512ccb"
+        aria-expanded="false"
+      >
+        基础
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0796ba76b4b553687e5ffaeb78512ccb"
+           role="tabpanel" aria-labelledby="heading-0796ba76b4b553687e5ffaeb78512ccb">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%B8%E5%9E%8B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" title="单片机初学者典型疑惑解答"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机初学者典型疑惑解答</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机的启动文件代码分析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/" title="数学与编程"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">数学与编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/" title="系统环境变量设置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">系统环境变量设置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A7%A3%E8%AF%B4/" title="计算机定点数解说"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机定点数解说</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具"
+        id="heading-20dce2c6fa909a5cd62526615fe2788a" role="tab" data-toggle="collapse" href="#collapse-20dce2c6fa909a5cd62526615fe2788a"
+        aria-expanded="false"
+      >
+        工具
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-20dce2c6fa909a5cd62526615fe2788a"
+           role="tabpanel" aria-labelledby="heading-20dce2c6fa909a5cd62526615fe2788a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/" title="初学51单片机开发必备工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">初学51单片机开发必备工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D/" title="单片机开发系列之一体化平台介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之一体化平台介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B251%E3%80%81STM32%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/" title="单片机开发系列之本地部署51、STM32开发平台"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之本地部署51、STM32开发平台</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%AF%91%E5%99%A8/" title="单片机开发系列之编译器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之编译器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%95%B4%E7%90%86/" title="如何高效的进行代码格式整理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何高效的进行代码格式整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BF%AB%E9%80%9F%E5%B0%86%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5ECloudSpace/" title="快速将工程导入ECloudSpace"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快速将工程导入ECloudSpace</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="算法"
+        id="heading-046a899ee7a6ec88d370211a518c9e80" role="tab" data-toggle="collapse" href="#collapse-046a899ee7a6ec88d370211a518c9e80"
+        aria-expanded="true"
+      >
+        算法
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-046a899ee7a6ec88d370211a518c9e80"
+           role="tabpanel" aria-labelledby="heading-046a899ee7a6ec88d370211a518c9e80">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="PID算法基础汇总"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法基础汇总</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8B%E7%AE%80%E4%BB%8B/" title="PID算法（一）之简介"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（一）之简介</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E8%87%AA%E9%80%82%E5%BA%94%E6%8E%A7%E5%88%B6/" title="PID算法（七）之自适应控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（七）之自适应控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E4%B8%B2%E7%BA%A7PID/" title="PID算法（三）之串级PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（三）之串级PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8B%E4%BD%8D%E7%BD%AEPID%E4%B8%8E%E5%A2%9E%E9%87%8FPID/" title="PID算法（二）之位置PID与增量PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（二）之位置PID与增量PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%87%AA%E6%8A%97%E6%89%B0/" title="PID算法（五）之自抗扰"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（五）之自抗扰</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" title="PID算法（八）之遗传算法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（八）之遗传算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%A8%A1%E7%B3%8A%E6%8E%A7%E5%88%B6/" title="PID算法（六）之模糊控制"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">PID算法（六）之模糊控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（四）之鲁棒性</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" title="单片机开发常用算法之卡尔曼滤波"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发常用算法之卡尔曼滤波</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="经验"
+        id="heading-32a8e000e928e6dc255876d9fc0178b3" role="tab" data-toggle="collapse" href="#collapse-32a8e000e928e6dc255876d9fc0178b3"
+        aria-expanded="false"
+      >
+        经验
+        <span class="list-group-count">(12)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-32a8e000e928e6dc255876d9fc0178b3"
+           role="tabpanel" aria-labelledby="heading-32a8e000e928e6dc255876d9fc0178b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">C语言初学者可以利用的帮助文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="keil使用过程中的一些常见问题"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil使用过程中的一些常见问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" title="keil开发模块化编程步骤"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil开发模块化编程步骤</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" title="python程序运行莫名警告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">python程序运行莫名警告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8EQT%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%AE%9A%E4%BD%8Ddll%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="关于QT程序无法定位dll文件问题问题解决方法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于QT程序无法定位dll文件问题问题解决方法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E4%B8%ADC%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%9F%A5%E8%AF%86/" title="单片机开发中C语言指针知识"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发中C语言指针知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8C%89%E9%94%AE%E7%A8%8B%E5%BA%8F%E5%88%86%E4%BA%AB/" title="单片机开发实用按键程序分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发实用按键程序分享</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="单片机开发模块化编程实例详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发模块化编程实例详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/" title="开发者应该学会如何提问"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发者应该学会如何提问</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E6%AC%BE%E6%96%B0%E7%9A%84MCU/" title="怎么快速上手一款新的MCU"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么快速上手一款新的MCU</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%9B%B4%E6%8E%A5%E5%AD%A6STM32%E8%BF%98%E6%98%AF%E5%85%88%E5%AD%A651%EF%BC%9F/" title="直接学STM32还是先学51？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">直接学STM32还是先学51？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%A8%8B%E5%BA%8F%E7%9C%8B%E5%BE%97%E6%87%82%E5%8D%B4%E5%86%99%E4%B8%8D%E5%87%BA%E6%80%8E%E4%B9%88%E5%8A%9E/" title="程序看得懂却写不出怎么办"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">程序看得懂却写不出怎么办</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="资料"
+        id="heading-447564e4e2b0171973515a26650e66a2" role="tab" data-toggle="collapse" href="#collapse-447564e4e2b0171973515a26650e66a2"
+        aria-expanded="false"
+      >
+        资料
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-447564e4e2b0171973515a26650e66a2"
+           role="tabpanel" aria-labelledby="heading-447564e4e2b0171973515a26650e66a2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/" title="51单片机学习推荐书单"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机学习推荐书单</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/" title="分享一个很好看C51的交通灯仿真项目"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享一个很好看C51的交通灯仿真项目</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E8%BF%BD%E8%B8%AA%E5%BA%93/" title="推荐一个嵌入式系统代码错误追踪库"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐一个嵌入式系统代码错误追踪库</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PID算法（六）之模糊控制</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="模糊控制理论">模糊控制理论</h2>
+<p>模糊控制是一种基于模糊逻辑的控制方法，所谓的“模糊”是指所涉及的逻辑不能表达为“真”或“假”，而是“部分真”。它是以模糊集合论，模糊语言变量及模糊逻辑推理为基础的计算机智能控制。该控制机制的输入是透过模糊化将原本为0或1的数字逻辑信息变成0到1之间的任意数值，相对于原本数字逻辑的非零即一的二分法更接近人类的逻辑思维。在推论的过程中资料为模糊的，但透过解模糊化的步骤，可使得输出为精确值。总体来说，模糊控制在概念上是非常简单，比较容易理解的，但它的实现过程却相对比较难。简单理解就是我们要把数字化的控制系统，通过特定经验的公式计算实现为模拟化的控制系统，输入经验值不一样，对应的公式也不一样，控制结果肯定也不太一样。当然经过科学家和前线工程师们的几十年的经验积累，模糊控制也取得了非常多的成就，目前它常被用于智能运算、建构专家控制系统、和类神经网络等应用，在整个儿智能化控制领域有着举足轻重的意义。</p>
+<p><img src="https://files.mdnice.com/user/38598/392b63ec-138f-4d88-8dfe-da23128ec931.png" srcset="/img/loading.gif" lazyload alt="模糊控制理论简图"></p>
+<h2 id="模糊控制实现过程">模糊控制实现过程</h2>
+<ul>
+<li>确定输入变量和输出变量</li>
+</ul>
+<p>根据实际控制系统和控制要求,确定模糊控制器的输入变量和输出变量。输入变量通常是系统状态,输出变量是控制指令。</p>
+<ul>
+<li>
+<p>定义输入输出变量的语言词及隶属函数<br>
+为每个输入输出变量定义适当的语言词,比如“误差”的语言词可以定为“负大”“负小”“零”“正小”“正大”。并为每个语言词确定隶属函数,如三角函数或梯形函数等。</p>
+</li>
+<li>
+<p>建立模糊控制规则</p>
+</li>
+</ul>
+<p>根据对系统的控制经验,建立输入变量和输出变量之间的如果-则形式的模糊控制规则。如“如果误差是正大,则输出是增大”。</p>
+<ul>
+<li>进行模糊推理</li>
+</ul>
+<p>对当前的输入变量值,根据控制规则进行模糊推理,得到语言形式的输出值,常用Mamdani推理方法。</p>
+<p><img src="https://files.mdnice.com/user/38598/83b9e7c1-beb5-4e67-abc2-f2adbfd81cb1.png" srcset="/img/loading.gif" lazyload alt="Mamdani模型“形象”"></p>
+<ul>
+<li>输出值的清晰化</li>
+</ul>
+<p>采用（离散）质心法等清晰化（也称作解模糊化或反模糊化）方法,将语言输出转化为确切的数值输出。</p>
+<ul>
+<li>转换控制输出</li>
+</ul>
+<p>将清晰化后的控制输出传递给执行机构,完成对过程的控制。</p>
+<ul>
+<li>闭环控制</li>
+</ul>
+<p>构建闭环控制系统,以实现对过程的持续稳定控制。</p>
+<h2 id="模糊PID控制">模糊PID控制</h2>
+<p>模糊PID控制就是将模糊控制理论方法融入到PID控制当中去，可以让控制系统实现动态调节参数，从而实现系统的智能化控制。这种做法在一定程度上可以使得原本的PID控制适应范围更广，抗噪能力更强。当然设计复杂度也相对更高。</p>
+<p><img src="https://files.mdnice.com/user/38598/1fe60ff7-5987-4b9f-9cf9-03cfa6b39aa0.png" srcset="/img/loading.gif" lazyload alt="模糊PID模型"></p>
+<p>模糊PID控制过程：</p>
+<ol>
+<li>确定系统输入和输出变量</li>
+</ol>
+<p>输入变量:误差e和误差变化率ec<br>
+输出变量:PID三个参数Kp、Ki、Kd的调整量。</p>
+<ol start="2">
+<li>定义语言变量及隶属函数</li>
+</ol>
+<p>对输入输出变量定义适当的语言词,如误差的“负大”“负小”等,并确定隶属函数形状。</p>
+<ol start="3">
+<li>建立模糊控制规则库</li>
+</ol>
+<p>根据PID参数调节经验,建立输入和输出之间的如果-则形式模糊控制规则。</p>
+<ol start="4">
+<li>选择模糊推理方法</li>
+</ol>
+<p>通常选择Mamdani推理方法,进行规则模糊推理。</p>
+<ol start="5">
+<li>输出值的清晰化</li>
+</ol>
+<p>采用质心法等方法,得到PID参数的数值输出。</p>
+<ol start="6">
+<li>PID控制器</li>
+</ol>
+<p>将调整后的Kp、Ki、Kd参数输入传统PID控制器,实时控制过程。</p>
+<ol start="7">
+<li>闭环控制系统</li>
+</ol>
+<p>构建闭环控制系统,持续获取反馈,实现过程变量的稳定控制。</p>
+<ol start="8">
+<li>优化和维护</li>
+</ol>
+<p>根据控制效果,优化和维护规则库、隶属函数等,改进控制性能。</p>
+<h2 id="模糊控制特点">模糊控制特点</h2>
+<p>相较于传统的控制方法，模糊控制具有非常多的优势。</p>
+<ul>
+<li>不需要建立精确数学模型</li>
+</ul>
+<p>模糊控制基于对专家知识的模拟,不需要建立被控对象的精确数学模型。</p>
+<ul>
+<li>可以处理非线性系统</li>
+</ul>
+<p>传统控制方法对非线性系统效果不佳,而模糊控制可以很好地应用于非线性系统。</p>
+<ul>
+<li>具有一定的鲁棒性</li>
+</ul>
+<p>规则表达带有模糊性,不会因局部参数变化而完全失效。</p>
+<ul>
+<li>设计方便、易实现</li>
+</ul>
+<p>控制策略用语言规则表达,减少复杂的数学计算,软件较易实现。</p>
+<ul>
+<li>控制效果好</li>
+</ul>
+<p>模糊控制的控制质量通常优于传统PID控制。</p>
+<ul>
+<li>可以利用专家经验</li>
+</ul>
+<p>控制规则来源于专家的控制经验,能反映人的控制思维。</p>
+<ul>
+<li>适应性强</li>
+</ul>
+<p>基于反馈调整控制规则,系统可在线进行自适应、自学习、自组织实现自身的优化。</p>
+<ul>
+<li>用途广泛</li>
+</ul>
+<p>可广泛用于工业过程控制、家电、消费电子、汽车等领域。</p>
+<p>当然每种控制理论都有优缺点，模糊控制也是一样，它有多少优点相反方向它就会有多少缺点。</p>
+<p>相较于传统控制，模糊控制更难进行理论化，系统化的表达与分析，需要更多的数据经验。所以这也容易导致其系统可能不如传统控制稳定，更依赖于设计者的经验或提供的数据丰富程度。可以类比现在流行的各种AI产品，简单来说它们可以看做是一种概率分析，所以性能完美的AI要都有一个庞大的数据模型供它自主学习。</p>
+<h2 id="模糊控制程序举例">模糊控制程序举例</h2>
+<p>参考代码源自著名开源仓库中的<code>/shuoyueqishi/fuzzy-PID-controller</code>，访问不稳定朋友的查看以下内容。</p>
+<p>参数及变量声明fuzzy_PID.h文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> FUZZY_PID_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> FUZZY_PID_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string&gt;</span></span><br>using <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;<br>using <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span>;<br>using <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cin</span>;<br>using <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FuzzyPID</span></span><br><span class="hljs-class">&#123;</span><br>public:<br>	<span class="hljs-type">const</span> <span class="hljs-type">static</span> <span class="hljs-type">int</span> N=<span class="hljs-number">7</span>;<br>private:<br>	<span class="hljs-type">float</span> target;  <span class="hljs-comment">//系统的控制目标</span><br>	<span class="hljs-type">float</span> actual;  <span class="hljs-comment">//采样获得的实际值</span><br>	<span class="hljs-type">float</span> e;       <span class="hljs-comment">//误差</span><br>	<span class="hljs-type">float</span> e_pre_1; <span class="hljs-comment">//上一次的误差</span><br>	<span class="hljs-type">float</span> e_pre_2; <span class="hljs-comment">//上上次的误差</span><br>	<span class="hljs-type">float</span> de;      <span class="hljs-comment">//误差的变化率</span><br>	<span class="hljs-type">float</span> emax;    <span class="hljs-comment">//误差基本论域上限</span><br>	<span class="hljs-type">float</span> demax;   <span class="hljs-comment">//误差辩化率基本论域的上限</span><br>	<span class="hljs-type">float</span> delta_Kp_max;   <span class="hljs-comment">//delta_kp输出的上限</span><br>	<span class="hljs-type">float</span> delta_Ki_max;   <span class="hljs-comment">//delta_ki输出上限</span><br>	<span class="hljs-type">float</span> delta_Kd_max;   <span class="hljs-comment">//delta_kd输出上限</span><br>	<span class="hljs-type">float</span> Ke;      <span class="hljs-comment">//Ke=n/emax,量化论域为[-3,-2,-1,0,1,2,3]</span><br>	<span class="hljs-type">float</span> Kde;     <span class="hljs-comment">//Kde=n/demax,量化论域为[-3,-2,-1,0,1,2,3]</span><br>	<span class="hljs-type">float</span> Ku_p;    <span class="hljs-comment">//Ku_p=Kpmax/n,量化论域为[-3,-2,-1,0,1,2,3]</span><br>	<span class="hljs-type">float</span> Ku_i;    <span class="hljs-comment">//Ku_i=Kimax/n,量化论域为[-3,-2,-1,0,1,2,3]</span><br>	<span class="hljs-type">float</span> Ku_d;    <span class="hljs-comment">//Ku_d=Kdmax/n,量化论域为[-3,-2,-1,0,1,2,3]</span><br>	<span class="hljs-type">int</span> Kp_rule_matrix[N][N];<span class="hljs-comment">//Kp模糊规则矩阵</span><br>	<span class="hljs-type">int</span> Ki_rule_matrix[N][N];<span class="hljs-comment">//Ki模糊规则矩阵</span><br>	<span class="hljs-type">int</span> Kd_rule_matrix[N][N];<span class="hljs-comment">//Kd模糊规则矩阵</span><br>	<span class="hljs-built_in">string</span> mf_t_e;       <span class="hljs-comment">//e的隶属度函数类型</span><br>	<span class="hljs-built_in">string</span> mf_t_de;      <span class="hljs-comment">//de的隶属度函数类型</span><br>	<span class="hljs-built_in">string</span> mf_t_Kp;      <span class="hljs-comment">//kp的隶属度函数类型</span><br>	<span class="hljs-built_in">string</span> mf_t_Ki;      <span class="hljs-comment">//ki的隶属度函数类型</span><br>	<span class="hljs-built_in">string</span> mf_t_Kd;      <span class="hljs-comment">//kd的隶属度函数类型</span><br>	<span class="hljs-type">float</span> *e_mf_paras; <span class="hljs-comment">//误差的隶属度函数的参数</span><br>	<span class="hljs-type">float</span> *de_mf_paras;<span class="hljs-comment">//误差的偏差隶属度函数的参数</span><br>	<span class="hljs-type">float</span> *Kp_mf_paras; <span class="hljs-comment">//kp的隶属度函数的参数</span><br>	<span class="hljs-type">float</span> *Ki_mf_paras; <span class="hljs-comment">//ki的隶属度函数的参数</span><br>	<span class="hljs-type">float</span> *Kd_mf_paras; <span class="hljs-comment">//kd的隶属度函数的参数</span><br>	<span class="hljs-type">float</span> Kp;<br>	<span class="hljs-type">float</span> Ki;<br>	<span class="hljs-type">float</span> Kd;<br>	<span class="hljs-type">float</span> A;<br>	<span class="hljs-type">float</span> B;<br>	<span class="hljs-type">float</span> C;<br>	<span class="hljs-type">void</span> <span class="hljs-title function_">showMf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; type,<span class="hljs-type">float</span> *mf_paras)</span>;      <span class="hljs-comment">//显示隶属度函数的信息</span><br>	<span class="hljs-type">void</span> <span class="hljs-title function_">setMf_sub</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; type,<span class="hljs-type">float</span> *paras,<span class="hljs-type">int</span> n)</span>;<span class="hljs-comment">//设置模糊隶属度函数的子函数</span><br>public:<br>	FuzzyPID(<span class="hljs-type">float</span> e_max,<span class="hljs-type">float</span> de_max,<span class="hljs-type">float</span> kp_max,<span class="hljs-type">float</span> ki_max,<span class="hljs-type">float</span> kd_max,<span class="hljs-type">float</span> Kp0,<span class="hljs-type">float</span> Ki0,<span class="hljs-type">float</span> Kd0);<br>	FuzzyPID(<span class="hljs-type">float</span> *fuzzyLimit,<span class="hljs-type">float</span> *pidInitVal);<br>	~FuzzyPID();<br>	<span class="hljs-type">float</span> <span class="hljs-title function_">trimf</span><span class="hljs-params">(<span class="hljs-type">float</span> x,<span class="hljs-type">float</span> a,<span class="hljs-type">float</span> b,<span class="hljs-type">float</span> c)</span>;          <span class="hljs-comment">//三角隶属度函数</span><br>	<span class="hljs-type">float</span> <span class="hljs-title function_">gaussmf</span><span class="hljs-params">(<span class="hljs-type">float</span> x,<span class="hljs-type">float</span> ave,<span class="hljs-type">float</span> sigma)</span>;          <span class="hljs-comment">//正态隶属度函数</span><br>	<span class="hljs-type">float</span> <span class="hljs-title function_">trapmf</span><span class="hljs-params">(<span class="hljs-type">float</span> x,<span class="hljs-type">float</span> a,<span class="hljs-type">float</span> b,<span class="hljs-type">float</span> c,<span class="hljs-type">float</span> d)</span>; <span class="hljs-comment">//梯形隶属度函数</span><br>	<span class="hljs-type">void</span> <span class="hljs-title function_">setMf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_e,<span class="hljs-type">float</span> *e_mf,</span><br><span class="hljs-params">			   <span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_de,<span class="hljs-type">float</span> *de_mf,</span><br><span class="hljs-params">			   <span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_Kp,<span class="hljs-type">float</span> *Kp_mf,</span><br><span class="hljs-params">		       <span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_Ki,<span class="hljs-type">float</span> *Ki_mf,</span><br><span class="hljs-params">			   <span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_Kd,<span class="hljs-type">float</span> *Kd_mf)</span>;	<span class="hljs-comment">//设置模糊隶属度函数的参数</span><br>	<span class="hljs-type">void</span> <span class="hljs-title function_">setRuleMatrix</span><span class="hljs-params">(<span class="hljs-type">int</span> kp_m[N][N],<span class="hljs-type">int</span> ki_m[N][N],<span class="hljs-type">int</span> kd_m[N][N])</span>;  <span class="hljs-comment">//设置模糊规则</span><br>	<span class="hljs-type">float</span> <span class="hljs-title function_">realize</span><span class="hljs-params">(<span class="hljs-type">float</span> t,<span class="hljs-type">float</span> a)</span>;              <span class="hljs-comment">//实现模糊控制</span><br>	<span class="hljs-type">void</span> <span class="hljs-title function_">showInfo</span><span class="hljs-params">()</span>;                                      <span class="hljs-comment">//显示该模糊控制器的信息</span><br><br><br>&#125;;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+<p>控制实现fuzzy_PID.cpp文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br></pre></td><td class="code"><pre><code class="hljs C"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;fuzzy_PID.h&quot;</span></span><br><br><br>FuzzyPID::FuzzyPID(<span class="hljs-type">float</span> e_max,<span class="hljs-type">float</span> de_max,<span class="hljs-type">float</span> kp_max,<span class="hljs-type">float</span> ki_max,<span class="hljs-type">float</span> kd_max,<span class="hljs-type">float</span> Kp0,<span class="hljs-type">float</span> Ki0,<span class="hljs-type">float</span> Kd0):<br>target(<span class="hljs-number">0</span>),actual(<span class="hljs-number">0</span>),emax(e_max),demax(de_max),delta_Kp_max(kp_max),delta_Ki_max(ki_max),delta_Kd_max(kd_max),e_mf_paras(<span class="hljs-literal">NULL</span>),de_mf_paras(<span class="hljs-literal">NULL</span>),<br>Kp_mf_paras(<span class="hljs-literal">NULL</span>),Ki_mf_paras(<span class="hljs-literal">NULL</span>),Kd_mf_paras(<span class="hljs-literal">NULL</span>)<br>&#123;<br>   e=target-actual;<br>   e_pre_1=<span class="hljs-number">0</span>;<br>   e_pre_2=<span class="hljs-number">0</span>;<br>   de=e-e_pre_1;<br>   Ke=(N/<span class="hljs-number">2</span>)/emax;<br>   Kde=(N/<span class="hljs-number">2</span>)/demax;<br>   Ku_p=delta_Kp_max/(N/<span class="hljs-number">2</span>);<br>   Ku_i=delta_Ki_max/(N/<span class="hljs-number">2</span>);<br>   Ku_d=delta_Kd_max/(N/<span class="hljs-number">2</span>);<br>   mf_t_e=<span class="hljs-string">&quot;No type&quot;</span>;<br>   mf_t_de=<span class="hljs-string">&quot;No type&quot;</span>;<br>   mf_t_Kp=<span class="hljs-string">&quot;No type&quot;</span>;<br>   mf_t_Ki=<span class="hljs-string">&quot;No type&quot;</span>;<br>   mf_t_Kd=<span class="hljs-string">&quot;No type&quot;</span>;<br>   Kp=Kp0;<br>   Ki=Ki0;<br>   Kd=Kd0;<br>   A=Kp+Ki+Kd;<br>   B=<span class="hljs-number">-2</span>*Kd-Kp;<br>   C=Kd;<br>&#125;<br><br>FuzzyPID::FuzzyPID(<span class="hljs-type">float</span> *fuzzyLimit,<span class="hljs-type">float</span> *pidInitVal)<br>&#123;<br>	target=<span class="hljs-number">0</span>;<br>	actual=<span class="hljs-number">0</span>;<br>	e=<span class="hljs-number">0</span>;<br>	e_pre_1=<span class="hljs-number">0</span>;<br>    e_pre_2=<span class="hljs-number">0</span>;<br>    de=e-e_pre_1;<br>	emax=fuzzyLimit[<span class="hljs-number">0</span>];<br>	demax=fuzzyLimit[<span class="hljs-number">1</span>];<br>	delta_Kp_max=fuzzyLimit[<span class="hljs-number">2</span>];<br>	delta_Ki_max=fuzzyLimit[<span class="hljs-number">3</span>];<br>	delta_Kd_max=fuzzyLimit[<span class="hljs-number">4</span>];<br>	Ke=(N/<span class="hljs-number">2</span>)/emax;<br>    Kde=(N/<span class="hljs-number">2</span>)/demax;<br>    Ku_p=delta_Kp_max/(N/<span class="hljs-number">2</span>);<br>    Ku_i=delta_Ki_max/(N/<span class="hljs-number">2</span>);<br>    Ku_d=delta_Kd_max/(N/<span class="hljs-number">2</span>);<br>    mf_t_e=<span class="hljs-string">&quot;No type&quot;</span>;<br>    mf_t_de=<span class="hljs-string">&quot;No type&quot;</span>;<br>    mf_t_Kp=<span class="hljs-string">&quot;No type&quot;</span>;<br>    mf_t_Ki=<span class="hljs-string">&quot;No type&quot;</span>;<br>    mf_t_Kd=<span class="hljs-string">&quot;No type&quot;</span>;<br>	e_mf_paras=<span class="hljs-literal">NULL</span>;<br>	de_mf_paras=<span class="hljs-literal">NULL</span>;<br>	Kp_mf_paras=<span class="hljs-literal">NULL</span>;<br>	Ki_mf_paras=<span class="hljs-literal">NULL</span>;<br>	Kd_mf_paras=<span class="hljs-literal">NULL</span>;<br><br>    Kp=pidInitVal[<span class="hljs-number">0</span>];<br>    Ki=pidInitVal[<span class="hljs-number">1</span>];<br>    Kd=pidInitVal[<span class="hljs-number">2</span>];<br>    A=Kp+Ki+Kd;<br>    B=<span class="hljs-number">-2</span>*Kd-Kp;<br>    C=Kd;<br>&#125;<br><br>FuzzyPID::~FuzzyPID()<br>&#123;<br>  delete [] e_mf_paras;<br>  delete [] de_mf_paras;<br>  delete [] Kp_mf_paras;<br>  delete [] Ki_mf_paras;<br>  delete [] Kd_mf_paras;<br>&#125;<br><span class="hljs-comment">//三角隶属度函数</span><br><span class="hljs-type">float</span> <span class="hljs-title function_">FuzzyPID::trimf</span><span class="hljs-params">(<span class="hljs-type">float</span> x,<span class="hljs-type">float</span> a,<span class="hljs-type">float</span> b,<span class="hljs-type">float</span> c)</span><br>&#123;<br>   <span class="hljs-type">float</span> u;<br>   <span class="hljs-keyword">if</span>(x&gt;=a&amp;&amp;x&lt;=b)<br>	   u=(x-a)/(b-a);<br>   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(x&gt;b&amp;&amp;x&lt;=c)<br>	   u=(c-x)/(c-b);<br>   <span class="hljs-keyword">else</span><br>	   u=<span class="hljs-number">0.0</span>;<br>   <span class="hljs-keyword">return</span> u;<br><br>&#125;<br><span class="hljs-comment">//正态隶属度函数</span><br><span class="hljs-type">float</span> <span class="hljs-title function_">FuzzyPID::gaussmf</span><span class="hljs-params">(<span class="hljs-type">float</span> x,<span class="hljs-type">float</span> ave,<span class="hljs-type">float</span> sigma)</span> <br>&#123;<br>	<span class="hljs-type">float</span> u;<br>	<span class="hljs-keyword">if</span>(sigma&lt;<span class="hljs-number">0</span>)<br>	&#123;<br>	   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;In gaussmf, sigma must larger than 0&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	&#125;<br>	u=<span class="hljs-built_in">exp</span>(-<span class="hljs-built_in">pow</span>(((x-ave)/sigma),<span class="hljs-number">2</span>));<br>	<span class="hljs-keyword">return</span> u;<br>&#125;<br><span class="hljs-comment">//梯形隶属度函数</span><br><span class="hljs-type">float</span> <span class="hljs-title function_">FuzzyPID::trapmf</span><span class="hljs-params">(<span class="hljs-type">float</span> x,<span class="hljs-type">float</span> a,<span class="hljs-type">float</span> b,<span class="hljs-type">float</span> c,<span class="hljs-type">float</span> d)</span><br>&#123;<br>    <span class="hljs-type">float</span> u;<br>	<span class="hljs-keyword">if</span>(x&gt;=a&amp;&amp;x&lt;b)<br>		u=(x-a)/(b-a);<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(x&gt;=b&amp;&amp;x&lt;c)<br>        u=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(x&gt;=c&amp;&amp;x&lt;=d)<br>		u=(d-x)/(d-c);<br>	<span class="hljs-keyword">else</span><br>		u=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">return</span> u;<br>&#125;<br><span class="hljs-comment">//设置模糊规则Matrix</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">FuzzyPID::setRuleMatrix</span><span class="hljs-params">(<span class="hljs-type">int</span> kp_m[N][N],<span class="hljs-type">int</span> ki_m[N][N],<span class="hljs-type">int</span> kd_m[N][N])</span><br>&#123;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N;i++)<br>	   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;N;j++)<br>	   &#123;<br>		   Kp_rule_matrix[i][j]=kp_m[i][j];<br>		   Ki_rule_matrix[i][j]=ki_m[i][j];<br>		   Kd_rule_matrix[i][j]=kd_m[i][j];<br>	   &#125;<br>&#125;<br><span class="hljs-comment">//设置模糊隶属度函数的子函数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">FuzzyPID::setMf_sub</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; type,<span class="hljs-type">float</span> *paras,<span class="hljs-type">int</span> n)</span><br>&#123;<br>	<span class="hljs-type">int</span> N_mf_e,N_mf_de,N_mf_Kp,N_mf_Ki,N_mf_Kd;<br>  <span class="hljs-keyword">switch</span>(n)<br>  &#123;<br>  <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>	  <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trimf&quot;</span>||type==<span class="hljs-string">&quot;gaussmf&quot;</span>||type==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>	    mf_t_e=type;<br>	  <span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Type of membership function must be \&quot;trimf\&quot; or \&quot;gaussmf\&quot; or \&quot;trapmf\&quot;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>      <span class="hljs-keyword">if</span>(mf_t_e==<span class="hljs-string">&quot;trimf&quot;</span>)<br>        N_mf_e=<span class="hljs-number">3</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_e==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		N_mf_e=<span class="hljs-number">2</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_e==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		N_mf_e=<span class="hljs-number">4</span>;<br>       <br>	  e_mf_paras=new <span class="hljs-type">float</span> [N*N_mf_e];<br>	  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N*N_mf_e;i++)<br>		e_mf_paras[i]=paras[i];<br>	  <span class="hljs-keyword">break</span>;<br><br>  <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>	  <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trimf&quot;</span>||type==<span class="hljs-string">&quot;gaussmf&quot;</span>||type==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>	    mf_t_de=type;<br>	  <span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Type of membership function must be \&quot;trimf\&quot; or \&quot;gaussmf\&quot; or \&quot;trapmf\&quot;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>      <span class="hljs-keyword">if</span>(mf_t_de==<span class="hljs-string">&quot;trimf&quot;</span>)<br>        N_mf_de=<span class="hljs-number">3</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_de==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		N_mf_de=<span class="hljs-number">2</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_de==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		N_mf_de=<span class="hljs-number">4</span>;<br>        de_mf_paras=new <span class="hljs-type">float</span> [N*N_mf_de];<br>	  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N*N_mf_de;i++)<br>		de_mf_paras[i]=paras[i];<br>	  <span class="hljs-keyword">break</span>;<br><br>   <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>	  <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trimf&quot;</span>||type==<span class="hljs-string">&quot;gaussmf&quot;</span>||type==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>	    mf_t_Kp=type;<br>	  <span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Type of membership function must be \&quot;trimf\&quot; or \&quot;gaussmf\&quot; or \&quot;trapmf\&quot;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>      <span class="hljs-keyword">if</span>(mf_t_Kp==<span class="hljs-string">&quot;trimf&quot;</span>)<br>        N_mf_Kp=<span class="hljs-number">3</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_Kp==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		N_mf_Kp=<span class="hljs-number">2</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_Kp==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		N_mf_Kp=<span class="hljs-number">4</span>;<br>        Kp_mf_paras=new <span class="hljs-type">float</span> [N*N_mf_Kp];<br>	  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N*N_mf_Kp;i++)<br>		Kp_mf_paras[i]=paras[i];<br>	  <span class="hljs-keyword">break</span>;<br><br>   <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>	  <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trimf&quot;</span>||type==<span class="hljs-string">&quot;gaussmf&quot;</span>||type==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>	    mf_t_Ki=type;<br>	  <span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Type of membership function must be \&quot;trimf\&quot; or \&quot;gaussmf\&quot; or \&quot;trapmf\&quot;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>      <span class="hljs-keyword">if</span>(mf_t_Ki==<span class="hljs-string">&quot;trimf&quot;</span>)<br>        N_mf_Ki=<span class="hljs-number">3</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_Ki==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		N_mf_Ki=<span class="hljs-number">2</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_Ki==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		N_mf_Ki=<span class="hljs-number">4</span>;<br>        Ki_mf_paras=new <span class="hljs-type">float</span> [N*N_mf_Ki];<br>	  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N*N_mf_Ki;i++)<br>		Ki_mf_paras[i]=paras[i];<br>	  <span class="hljs-keyword">break</span>;<br><br>   <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>	  <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trimf&quot;</span>||type==<span class="hljs-string">&quot;gaussmf&quot;</span>||type==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>	    mf_t_Kd=type;<br>	  <span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Type of membership function must be \&quot;trimf\&quot; or \&quot;gaussmf\&quot; or \&quot;trapmf\&quot;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>      <span class="hljs-keyword">if</span>(mf_t_Kd==<span class="hljs-string">&quot;trimf&quot;</span>)<br>        N_mf_Kd=<span class="hljs-number">3</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_Kd==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		N_mf_Kd=<span class="hljs-number">2</span>;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_Kd==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		N_mf_Kd=<span class="hljs-number">4</span>;<br>        Kd_mf_paras=new <span class="hljs-type">float</span> [N*N_mf_Kd];<br>	  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N*N_mf_Kd;i++)<br>		Kd_mf_paras[i]=paras[i];<br>	  <span class="hljs-keyword">break</span>;<br><br>   <span class="hljs-keyword">default</span>: <span class="hljs-keyword">break</span>;<br>  &#125;<br>&#125;<br><span class="hljs-comment">//设置模糊隶属度函数的类型和参数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">FuzzyPID::setMf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_e,<span class="hljs-type">float</span> *e_mf,</span><br><span class="hljs-params">			<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_de,<span class="hljs-type">float</span> *de_mf,</span><br><span class="hljs-params">			<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_Kp,<span class="hljs-type">float</span> *Kp_mf,</span><br><span class="hljs-params">		    <span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_Ki,<span class="hljs-type">float</span> *Ki_mf,</span><br><span class="hljs-params">			<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; mf_type_Kd,<span class="hljs-type">float</span> *Kd_mf)</span><br>&#123;<br>	setMf_sub(mf_type_e,e_mf,<span class="hljs-number">0</span>);<br>	setMf_sub(mf_type_de,de_mf,<span class="hljs-number">1</span>);<br>	setMf_sub(mf_type_Kp,Kp_mf,<span class="hljs-number">2</span>);<br>	setMf_sub(mf_type_Ki,Ki_mf,<span class="hljs-number">3</span>);<br>	setMf_sub(mf_type_Kd,Kd_mf,<span class="hljs-number">4</span>);<br>&#125;<br><span class="hljs-comment">//实现模糊控制</span><br><span class="hljs-type">float</span> <span class="hljs-title function_">FuzzyPID::realize</span><span class="hljs-params">(<span class="hljs-type">float</span> t,<span class="hljs-type">float</span> a)</span>   <br>&#123;<br>	<span class="hljs-type">float</span> u_e[N],u_de[N],u_u[N];<br>	<span class="hljs-type">int</span> u_e_index[<span class="hljs-number">3</span>],u_de_index[<span class="hljs-number">3</span>];<span class="hljs-comment">//假设一个输入最多激活3个模糊子集</span><br>	<span class="hljs-type">float</span> delta_Kp,delta_Ki,delta_Kd;<br>	<span class="hljs-type">float</span> delta_u;<br>	target=t;<br>	actual=a;<br>    e=target-actual;<br>	de=e-e_pre_1;<br>	e=Ke*e;<br>	de=Kde*de;<br>  <span class="hljs-comment">/* 将误差e模糊化*/</span><br>	<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N;i++)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(mf_t_e==<span class="hljs-string">&quot;trimf&quot;</span>)<br>		  u_e[i]=trimf(e,e_mf_paras[i*<span class="hljs-number">3</span>],e_mf_paras[i*<span class="hljs-number">3</span>+<span class="hljs-number">1</span>],e_mf_paras[i*<span class="hljs-number">3</span>+<span class="hljs-number">2</span>]);<span class="hljs-comment">//e模糊化，计算它的隶属度</span><br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_e==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		  u_e[i]=gaussmf(e,e_mf_paras[i*<span class="hljs-number">2</span>],e_mf_paras[i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>]);<span class="hljs-comment">//e模糊化，计算它的隶属度</span><br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_e==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		  u_e[i]=trapmf(e,e_mf_paras[i*<span class="hljs-number">4</span>],e_mf_paras[i*<span class="hljs-number">4</span>+<span class="hljs-number">1</span>],e_mf_paras[i*<span class="hljs-number">4</span>+<span class="hljs-number">2</span>],e_mf_paras[i*<span class="hljs-number">4</span>+<span class="hljs-number">3</span>]);<span class="hljs-comment">//e模糊化，计算它的隶属度</span><br><br>		<span class="hljs-keyword">if</span>(u_e[i]!=<span class="hljs-number">0</span>)<br>            u_e_index[j++]=i;                <span class="hljs-comment">//存储被激活的模糊子集的下标，可以减小计算量</span><br>  	&#125;<br>	<span class="hljs-keyword">for</span>(;j&lt;<span class="hljs-number">3</span>;j++)u_e_index[j]=<span class="hljs-number">0</span>;             <span class="hljs-comment">//富余的空间填0</span><br><br>	<span class="hljs-comment">/*将误差变化率de模糊化*/</span><br>	j=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N;i++)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(mf_t_de==<span class="hljs-string">&quot;trimf&quot;</span>)<br>		   u_de[i]=trimf(de,de_mf_paras[i*<span class="hljs-number">3</span>],de_mf_paras[i*<span class="hljs-number">3</span>+<span class="hljs-number">1</span>],de_mf_paras[i*<span class="hljs-number">3</span>+<span class="hljs-number">2</span>]);<span class="hljs-comment">//de模糊化，计算它的隶属度</span><br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_de==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		   u_de[i]=gaussmf(de,de_mf_paras[i*<span class="hljs-number">2</span>],de_mf_paras[i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>]);<span class="hljs-comment">//de模糊化，计算它的隶属度</span><br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mf_t_de==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		   u_de[i]=trapmf(de,de_mf_paras[i*<span class="hljs-number">4</span>],de_mf_paras[i*<span class="hljs-number">4</span>+<span class="hljs-number">1</span>],de_mf_paras[i*<span class="hljs-number">4</span>+<span class="hljs-number">2</span>],de_mf_paras[i*<span class="hljs-number">4</span>+<span class="hljs-number">3</span>]);<span class="hljs-comment">//de模糊化，计算它的隶属度</span><br><br>		<span class="hljs-keyword">if</span>(u_de[i]!=<span class="hljs-number">0</span>)<br>			u_de_index[j++]=i;            <span class="hljs-comment">//存储被激活的模糊子集的下标，可以减小计算量</span><br>	&#125;<br>	<span class="hljs-keyword">for</span>(;j&lt;<span class="hljs-number">3</span>;j++)u_de_index[j]=<span class="hljs-number">0</span>;          <span class="hljs-comment">//富余的空间填0</span><br><br>	<span class="hljs-type">float</span> den=<span class="hljs-number">0</span>,num=<span class="hljs-number">0</span>;<br>	<span class="hljs-comment">/*计算delta_Kp和Kp*/</span><br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> m=<span class="hljs-number">0</span>;m&lt;<span class="hljs-number">3</span>;m++)<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> n=<span class="hljs-number">0</span>;n&lt;<span class="hljs-number">3</span>;n++)<br>		&#123;<br>		   num+=u_e[u_e_index[m]]*u_de[u_de_index[n]]*Kp_rule_matrix[u_e_index[m]][u_de_index[n]];<br>		   den+=u_e[u_e_index[m]]*u_de[u_de_index[n]];<br>		&#125;<br>	delta_Kp=num/den;<br>	delta_Kp=Ku_p*delta_Kp;<br>	<span class="hljs-keyword">if</span>(delta_Kp&gt;=delta_Kp_max)   delta_Kp=delta_Kp_max;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(delta_Kp&lt;=-delta_Kp_max) delta_Kp=-delta_Kp_max;<br>	Kp+=delta_Kp;<br>	<span class="hljs-keyword">if</span>(Kp&lt;<span class="hljs-number">0</span>)Kp=<span class="hljs-number">0</span>;<br>	<span class="hljs-comment">/*计算delta_Ki和Ki*/</span><br>	den=<span class="hljs-number">0</span>;num=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> m=<span class="hljs-number">0</span>;m&lt;<span class="hljs-number">3</span>;m++)<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> n=<span class="hljs-number">0</span>;n&lt;<span class="hljs-number">3</span>;n++)<br>		&#123;<br>		   num+=u_e[u_e_index[m]]*u_de[u_de_index[n]]*Ki_rule_matrix[u_e_index[m]][u_de_index[n]];<br>		   den+=u_e[u_e_index[m]]*u_de[u_de_index[n]];<br>		&#125;<br><br>	delta_Ki=num/den;<br>	delta_Ki=Ku_i*delta_Ki;<br>	<span class="hljs-keyword">if</span>(delta_Ki&gt;=delta_Ki_max)   delta_Ki=delta_Ki_max;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(delta_Ki&lt;=-delta_Ki_max)  delta_Ki=-delta_Ki_max;<br>	Ki+=delta_Ki;<br>	<span class="hljs-keyword">if</span>(Ki&lt;<span class="hljs-number">0</span>)Ki=<span class="hljs-number">0</span>;<br>	<span class="hljs-comment">/*计算delta_Kd和Kd*/</span><br>	den=<span class="hljs-number">0</span>;num=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> m=<span class="hljs-number">0</span>;m&lt;<span class="hljs-number">3</span>;m++)<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> n=<span class="hljs-number">0</span>;n&lt;<span class="hljs-number">3</span>;n++)<br>		&#123;<br>		   num+=u_e[u_e_index[m]]*u_de[u_de_index[n]]*Kd_rule_matrix[u_e_index[m]][u_de_index[n]];<br>		   den+=u_e[u_e_index[m]]*u_de[u_de_index[n]];<br>		&#125;<br>	delta_Kd=num/den;<br>	delta_Kd=Ku_d*delta_Kd;<br>	<span class="hljs-keyword">if</span>(delta_Kd&gt;=delta_Kd_max)   delta_Kd=delta_Kd_max;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(delta_Kd&lt;=-delta_Kd_max) delta_Kd=-delta_Kd_max;<br>	Kd+=delta_Kd;<br>	<span class="hljs-keyword">if</span>(Kd&lt;<span class="hljs-number">0</span>)Kd=<span class="hljs-number">0</span>;<br><br>	A=Kp+Ki+Kd;<br>    B=<span class="hljs-number">-2</span>*Kd-Kp;<br>    C=Kd;<br>	delta_u=A*e+B*e_pre_1+C*e_pre_2;<br><br>	delta_u=delta_u/Ke;<br>  <br>	<span class="hljs-keyword">if</span>(delta_u&gt;=<span class="hljs-number">0.95</span>*target)delta_u=<span class="hljs-number">0.95</span>*target;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(delta_u&lt;=<span class="hljs-number">-0.95</span>*target)delta_u=<span class="hljs-number">-0.95</span>*target;<br><br>	e_pre_2=e_pre_1;<br>    e_pre_1=e;<br><br>	<span class="hljs-keyword">return</span> delta_u;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">FuzzyPID::showMf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span> &amp; type,<span class="hljs-type">float</span> *mf_paras)</span><br>&#123;<br>    <span class="hljs-type">int</span> tab;<br>	<span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trimf&quot;</span>)<br>		tab=<span class="hljs-number">2</span>;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;gaussmf&quot;</span>)<br>		tab==<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(type==<span class="hljs-string">&quot;trapmf&quot;</span>)<br>		tab=<span class="hljs-number">3</span>;<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;函数类型：&quot;</span>&lt;&lt;mf_t_e&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;函数参数列表：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-type">float</span> *p=mf_paras;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N*(tab+<span class="hljs-number">1</span>);i++)<br>	  &#123;<br>		  <span class="hljs-built_in">cout</span>.width(<span class="hljs-number">3</span>);<br>	      <span class="hljs-built_in">cout</span>&lt;&lt;p[i]&lt;&lt;<span class="hljs-string">&quot;  &quot;</span>;<br>		  <span class="hljs-keyword">if</span>(i%(tab+<span class="hljs-number">1</span>)==tab)<br>			  <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	  &#125;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">FuzzyPID::showInfo</span><span class="hljs-params">()</span><br>&#123;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Info of this fuzzy controller is as following:&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;基本论域e：[&quot;</span>&lt;&lt;-emax&lt;&lt;<span class="hljs-string">&quot;,&quot;</span>&lt;&lt;emax&lt;&lt;<span class="hljs-string">&quot;]&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;基本论域de：[&quot;</span>&lt;&lt;-demax&lt;&lt;<span class="hljs-string">&quot;,&quot;</span>&lt;&lt;demax&lt;&lt;<span class="hljs-string">&quot;]&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;基本论域delta_Kp：[&quot;</span>&lt;&lt;-delta_Kp_max&lt;&lt;<span class="hljs-string">&quot;,&quot;</span>&lt;&lt;delta_Kp_max&lt;&lt;<span class="hljs-string">&quot;]&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;基本论域delta_Ki：[&quot;</span>&lt;&lt;-delta_Ki_max&lt;&lt;<span class="hljs-string">&quot;,&quot;</span>&lt;&lt;delta_Ki_max&lt;&lt;<span class="hljs-string">&quot;]&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;基本论域delta_Kd：[&quot;</span>&lt;&lt;-delta_Kd_max&lt;&lt;<span class="hljs-string">&quot;,&quot;</span>&lt;&lt;delta_Kd_max&lt;&lt;<span class="hljs-string">&quot;]&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;误差e的模糊隶属度函数参数：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   showMf(mf_t_e,e_mf_paras);<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;误差变化率de的模糊隶属度函数参数：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   showMf(mf_t_de,de_mf_paras);<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;delta_Kp的模糊隶属度函数参数：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   showMf(mf_t_Kp,Kp_mf_paras);<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;delta_Ki的模糊隶属度函数参数：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   showMf(mf_t_Ki,Ki_mf_paras);<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;delta_Kd的模糊隶属度函数参数：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   showMf(mf_t_Kd,Kd_mf_paras);<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;模糊规则表：&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;delta_Kp的模糊规则矩阵&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N;i++)<br>   &#123;<br>	 <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;N;j++)<br>	   &#123;<br>		 <span class="hljs-built_in">cout</span>.width(<span class="hljs-number">3</span>);<br>		 <span class="hljs-built_in">cout</span>&lt;&lt;Kp_rule_matrix[i][j]&lt;&lt;<span class="hljs-string">&quot;  &quot;</span>;<br>	    &#125;<br>	   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   &#125;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;delta_Ki的模糊规则矩阵&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N;i++)<br>   &#123;<br>	 <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;N;j++)<br>	   &#123;<br>		 <span class="hljs-built_in">cout</span>.width(<span class="hljs-number">3</span>);<br>		 <span class="hljs-built_in">cout</span>&lt;&lt;Ki_rule_matrix[i][j]&lt;&lt;<span class="hljs-string">&quot;  &quot;</span>;<br>	    &#125;<br>	   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   &#125;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;delta_Kd的模糊规则矩阵&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;N;i++)<br>   &#123;<br>	 <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;N;j++)<br>	   &#123;<br>		 <span class="hljs-built_in">cout</span>.width(<span class="hljs-number">3</span>);<br>		 <span class="hljs-built_in">cout</span>&lt;&lt;Kd_rule_matrix[i][j]&lt;&lt;<span class="hljs-string">&quot;  &quot;</span>;<br>	    &#125;<br>	   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   &#125;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;误差的量化比例因子Ke=&quot;</span>&lt;&lt;Ke&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;误差变化率的量化比例因子Kde=&quot;</span>&lt;&lt;Kde&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;输出的量化比例因子Ku_p=&quot;</span>&lt;&lt;Ku_p&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;输出的量化比例因子Ku_i=&quot;</span>&lt;&lt;Ku_i&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;输出的量化比例因子Ku_d=&quot;</span>&lt;&lt;Ku_d&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;设定目标target=&quot;</span>&lt;&lt;target&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;误差e=&quot;</span>&lt;&lt;e&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Kp=&quot;</span>&lt;&lt;Kp&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Ki=&quot;</span>&lt;&lt;Ki&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;Kd=&quot;</span>&lt;&lt;Kd&lt;&lt;<span class="hljs-built_in">endl</span>;<br>   <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>举例应用main.c文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;fuzzy_PID.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> NB -3</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> NM -2</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> NS -1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ZO 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PS 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PM 2</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PB 3</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">float</span> target=<span class="hljs-number">600</span>;<br>	<span class="hljs-type">float</span> actual=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">float</span> u=<span class="hljs-number">0</span>;<br>	<span class="hljs-type">int</span> deltaKpMatrix[<span class="hljs-number">7</span>][<span class="hljs-number">7</span>]=&#123;&#123;PB,PB,PM,PM,PS,ZO,ZO&#125;,<br>	                         &#123;PB,PB,PM,PS,PS,ZO,NS&#125;,<br>						     &#123;PM,PM,PM,PS,ZO,NS,NS&#125;,<br>	                         &#123;PM,PM,PS,ZO,NS,NM,NM&#125;,<br>	                         &#123;PS,PS,ZO,NS,NS,NM,NM&#125;,<br>	                         &#123;PS,ZO,NS,NM,NM,NM,NB&#125;,<br>	                         &#123;ZO,ZO,NM,NM,NM,NB,NB&#125;&#125;;<br>	<span class="hljs-type">int</span> deltaKiMatrix[<span class="hljs-number">7</span>][<span class="hljs-number">7</span>]=&#123;&#123;NB,NB,NM,NM,NS,ZO,ZO&#125;,<br>	                         &#123;NB,NB,NM,NS,NS,ZO,ZO&#125;,<br>						     &#123;NB,NM,NS,NS,ZO,PS,PS&#125;,<br>	                         &#123;NM,NM,NS,ZO,PS,PM,PM&#125;,<br>	                         &#123;NM,NS,ZO,PS,PS,PM,PB&#125;,<br>	                         &#123;ZO,ZO,PS,PS,PM,PB,PB&#125;,<br>	                         &#123;ZO,ZO,PS,PM,PM,PB,PB&#125;&#125;;<br>	<span class="hljs-type">int</span> deltaKdMatrix[<span class="hljs-number">7</span>][<span class="hljs-number">7</span>]=&#123;&#123;PS,NS,NB,NB,NB,NM,PS&#125;,<br>	                         &#123;PS,NS,NB,NM,NM,NS,ZO&#125;,<br>						     &#123;ZO,NS,NM,NM,NS,NS,ZO&#125;,<br>	                         &#123;ZO,NS,NS,NS,NS,NS,ZO&#125;,<br>	                         &#123;ZO,ZO,ZO,ZO,ZO,ZO,ZO&#125;,<br>	                         &#123;PB,NS,PS,PS,PS,PS,PB&#125;,<br>	                         &#123;PB,PM,PM,PM,PS,PS,PB&#125;&#125;;<br>	<span class="hljs-type">float</span> e_mf_paras[]=&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>&#125;;<br>	<span class="hljs-type">float</span> de_mf_paras[]=&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>&#125;;<br>	<span class="hljs-type">float</span> Kp_mf_paras[]=&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>&#125;;<br>	<span class="hljs-type">float</span> Ki_mf_paras[]=&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>&#125;;<br>	<span class="hljs-type">float</span> Kd_mf_paras[]=&#123;<span class="hljs-number">-3</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>&#125;;<br>    FuzzyPID <span class="hljs-title function_">fuzzypid</span><span class="hljs-params">(<span class="hljs-number">1500</span>,<span class="hljs-number">650</span>,<span class="hljs-number">0.3</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.2</span>,<span class="hljs-number">0.02</span>,<span class="hljs-number">0.65</span>,<span class="hljs-number">0.005</span>)</span>;<br>	fuzzypid.setMf(<span class="hljs-string">&quot;trimf&quot;</span>,e_mf_paras,<span class="hljs-string">&quot;trimf&quot;</span>,de_mf_paras,<span class="hljs-string">&quot;trimf&quot;</span>,Kp_mf_paras,<span class="hljs-string">&quot;trimf&quot;</span>,Ki_mf_paras,<span class="hljs-string">&quot;trimf&quot;</span>,Kd_mf_paras);<br>	fuzzypid.setRuleMatrix(deltaKpMatrix,deltaKiMatrix,deltaKdMatrix);<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;num target    actual&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-comment">/*fuzzy.showInfo();*/</span><br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">200</span>;i++)<br>	&#123;<br>		u=fuzzypid.realize(target,actual);<br>		actual+=u;<br>		<span class="hljs-built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="hljs-string">&quot;   &quot;</span>&lt;&lt;target&lt;&lt;<span class="hljs-string">&quot;    &quot;</span>&lt;&lt;actual&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	&#125;<br>	fuzzypid.showInfo();<br>	system(<span class="hljs-string">&quot;pause&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>文章内容为作者个人观点，难免有疏忽或错误，若有不同见解可以交流评论，若发现错误还请指正，若认同文章观点，欢迎关注，分享。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>如学习需要或项目合作可以扫码添加微信。<br>
+建有交流群，以方便大家平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code>。<br>
+<img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>占位</p>
+<p><code>温馨提示：若需要获取分享的资料，进入公众号后台发送关键字内容即可自动获取，而不是在留言或个人微信聊天界面发送！！！</code></p>
+<h4 id="推荐阅读">推荐阅读</h4>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485581&amp;idx=1&amp;sn=b36e6536717774f7931c7aa93d5b237a&amp;chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&amp;token=466212876&amp;lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485862&amp;idx=1&amp;sn=830ede5ac467c8d396adfbea141f0526&amp;chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&amp;token=63320980&amp;lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485523&amp;idx=1&amp;sn=b7fcd1b86e2467d6f03b1a520c39bb06&amp;chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&amp;token=1711068967&amp;lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485606&amp;idx=1&amp;sn=2b433faa2e436fc762dc538c9cf3fe14&amp;chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&amp;token=1580674001&amp;lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485572&amp;idx=1&amp;sn=17cefa35d9d660083d419a7e9b6db6f7&amp;chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&amp;token=1711068967&amp;lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485987&amp;idx=1&amp;sn=106e52add61999ae4bddd8b28c7ed2b1&amp;chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&amp;token=63320980&amp;lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485420&amp;idx=2&amp;sn=728ca4abbadf7caf51c392e7d7045cbe&amp;chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&amp;token=1711068967&amp;lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=3&amp;sn=d4c0d26781f307ffd26defdc4022c928&amp;chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&amp;token=63320980&amp;lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=4&amp;sn=211c2d0871a19c5e92cdf0c34f01d96b&amp;chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&amp;token=970763775&amp;lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+</ul>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C/" class="print-no-link">#编程经验</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8/" class="print-no-link">#算法应用</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PID算法（六）之模糊控制</div>
+      <div>https://luomuqingyun.github.io/2025/05/19/PID算法（六）之模糊控制/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>luomuqingyun</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" title="PID算法（八）之遗传算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PID算法（八）之遗传算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性">
+                        <span class="hidden-mobile">PID算法（四）之鲁棒性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '0cb9e02a972214ea87da7c4109cc0e4a'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

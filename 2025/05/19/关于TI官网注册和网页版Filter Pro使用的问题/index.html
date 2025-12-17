@@ -8,36 +8,39 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="author" content="luomuqingyun">
   <meta name="keywords" content="">
   
-    <meta name="description" content="占位 关于Filter Pro软件电路参数问题前段时间小破站上有留言说TI的滤波器电路设计软件Filter Pro使用时出问题，设计参数与TI-TINA的仿真相差很大。但我在自己电脑上设计了一个简单电路，软件生成的电路参数与计算结果是没问题的。因为电脑上没安装TI-TINA了，也没看到他的实际电路和TI-TINA软件设置情况，所以也不知道那位朋友具体是哪里出了意外。我个人猜测如果是软件问题的话可能">
+    <meta name="description" content="Filter Pro软件说明">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于TI官网注册和网页版Filter Pro使用的问题">
 <meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/%E5%85%B3%E4%BA%8ETI%E5%AE%98%E7%BD%91%E6%B3%A8%E5%86%8C%E5%92%8C%E7%BD%91%E9%A1%B5%E7%89%88Filter%20Pro%E4%BD%BF%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="占位 关于Filter Pro软件电路参数问题前段时间小破站上有留言说TI的滤波器电路设计软件Filter Pro使用时出问题，设计参数与TI-TINA的仿真相差很大。但我在自己电脑上设计了一个简单电路，软件生成的电路参数与计算结果是没问题的。因为电脑上没安装TI-TINA了，也没看到他的实际电路和TI-TINA软件设置情况，所以也不知道那位朋友具体是哪里出了意外。我个人猜测如果是软件问题的话可能">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="Filter Pro软件说明">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/46c37866-acfe-4744-85bb-337da97a1ceb.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/ca6b9431-0605-46f0-b773-f289277d1641.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg">
 <meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T06:42:00.668Z">
-<meta property="article:author" content="LUOMUQINGYUN">
+<meta property="article:modified_time" content="2025-05-22T15:10:09.940Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="开发工具">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://files.mdnice.com/user/38598/46c37866-acfe-4744-85bb-337da97a1ceb.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>关于TI官网注册和网页版Filter Pro使用的问题 - Hexo</title>
+  
+  <title>关于TI官网注册和网页版Filter Pro使用的问题 - 落木青云</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -75,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -85,6 +88,17 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -101,7 +115,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>落木青云</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -197,7 +211,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -244,6 +258,15 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
   </div>
 
 
@@ -267,6 +290,112 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具"
+        id="heading-20dce2c6fa909a5cd62526615fe2788a" role="tab" data-toggle="collapse" href="#collapse-20dce2c6fa909a5cd62526615fe2788a"
+        aria-expanded="true"
+      >
+        工具
+        <span class="list-group-count">(7)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-20dce2c6fa909a5cd62526615fe2788a"
+           role="tabpanel" aria-labelledby="heading-20dce2c6fa909a5cd62526615fe2788a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E4%B8%80%E6%AC%BE%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%AB%AF%E7%94%B5%E5%AD%90%E4%B9%A6%E7%AE%A1%E7%90%86%E7%A5%9E%E5%99%A8/" title="一款强大的桌面端电子书管理神器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">一款强大的桌面端电子书管理神器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8ETI%E5%AE%98%E7%BD%91%E6%B3%A8%E5%86%8C%E5%92%8C%E7%BD%91%E9%A1%B5%E7%89%88Filter%20Pro%E4%BD%BF%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/" title="关于TI官网注册和网页版Filter Pro使用的问题"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">关于TI官网注册和网页版Filter Pro使用的问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%A4%E4%B8%AA%E7%94%B5%E5%AD%90%E5%BC%80%E5%8F%91%E8%80%85%E7%94%A8%E5%BE%97%E4%B8%8A%E7%9A%84%E5%A5%BD%E5%B7%A5%E5%85%B7/" title="分享两个电子开发者用得上的好工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享两个电子开发者用得上的好工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E5%87%A0%E4%B8%AAwindows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E6%AF%94%E8%BE%83%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7/" title="分享几个windows平台上比较实用的工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享几个windows平台上比较实用的工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E6%AC%BE%E7%AE%80%E5%8D%95%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/" title="推荐一款简单强大的浏览器插件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐一款简单强大的浏览器插件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E5%87%A0%E6%AC%BE%E5%A5%BD%E7%94%A8%E7%9A%84%E6%89%8B%E6%9C%BAAPP/" title="推荐几款好用的手机APP"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐几款好用的手机APP</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%94%B5%E5%AD%90%E5%BC%80%E5%8F%91%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/" title="电子开发小工具分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">电子开发小工具分享</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -276,25 +405,37 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">关于TI官网注册和网页版Filter Pro使用的问题</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
                 <p>占位</p>
-<h2 id="关于Filter-Pro软件电路参数问题"><a href="#关于Filter-Pro软件电路参数问题" class="headerlink" title="关于Filter Pro软件电路参数问题"></a>关于Filter Pro软件电路参数问题</h2><p>前段时间小破站上有留言说TI的滤波器电路设计软件<code>Filter Pro</code>使用时出问题，设计参数与<code>TI-TINA</code>的仿真相差很大。但我在自己电脑上设计了一个简单电路，软件生成的电路参数与计算结果是没问题的。因为电脑上没安装TI-TINA了，也没看到他的实际电路和TI-TINA软件设置情况，所以也不知道那位朋友具体是哪里出了意外。我个人猜测如果是软件问题的话可能因为当前的Filter Pro软件包是十多年前的版本了（TI公司推出网页版之后就没怎么更新安装软件了），软件设置的某些参数的是当时的芯片参数，而网友的仿真电路中的芯片参数已经更新很多版本了。综上原因如果需要进行电路设计不妨可以试试网页版工具。</p>
-<h2 id="关于TI官网注册问题"><a href="#关于TI官网注册问题" class="headerlink" title="关于TI官网注册问题"></a>关于TI官网注册问题</h2><p>TI网页版的滤波器电路设计工具在TI官网的设计资源库中，名称为<code>Filter designer</code>,里面还有许多TI官方的其他支持应用软件，各位空闲的时候可以按需尝试。但是TI官网的所有工具都是需要登录才能使用。前面那位网友反馈注册不了TI官网账号，他当时怀疑是否是因为某些原因TI官方对国内用户的支持做了相关限制，我当时也觉得可能有一定的关联，但TI在国内业务那么广应该不会这么折腾自己吧？后面我本着求真原则重新注册了一个新的账号，我当时是在谷歌浏览器上操作的，一路信息填下去也没遇到网友所说的注册不了的情况。所以TI官方应该没有限制国内用户使用的权限，不过注册时其官网时推荐使用企业邮箱进行注册的，这大概率和他们的业务推广有关，可能也是为了更直接的提供技术支持服务吧，总之，你使用有效的个人邮箱注册都是可以的。当然一般国外网站因为主服务器不在国内的原因我们访问速度会相对慢一点，网站也可能没那么稳定，一般遇到这种情况建议使用无痕窗口进行操作。</p>
+<h2 id="关于Filter-Pro软件电路参数问题">关于Filter Pro软件电路参数问题</h2>
+<p>前段时间小破站上有留言说TI的滤波器电路设计软件<code>Filter Pro</code>使用时出问题，设计参数与<code>TI-TINA</code>的仿真相差很大。但我在自己电脑上设计了一个简单电路，软件生成的电路参数与计算结果是没问题的。因为电脑上没安装TI-TINA了，也没看到他的实际电路和TI-TINA软件设置情况，所以也不知道那位朋友具体是哪里出了意外。我个人猜测如果是软件问题的话可能因为当前的Filter Pro软件包是十多年前的版本了（TI公司推出网页版之后就没怎么更新安装软件了），软件设置的某些参数的是当时的芯片参数，而网友的仿真电路中的芯片参数已经更新很多版本了。综上原因如果需要进行电路设计不妨可以试试网页版工具。</p>
+<h2 id="关于TI官网注册问题">关于TI官网注册问题</h2>
+<p>TI网页版的滤波器电路设计工具在TI官网的设计资源库中，名称为<code>Filter designer</code>,里面还有许多TI官方的其他支持应用软件，各位空闲的时候可以按需尝试。但是TI官网的所有工具都是需要登录才能使用。前面那位网友反馈注册不了TI官网账号，他当时怀疑是否是因为某些原因TI官方对国内用户的支持做了相关限制，我当时也觉得可能有一定的关联，但TI在国内业务那么广应该不会这么折腾自己吧？后面我本着求真原则重新注册了一个新的账号，我当时是在谷歌浏览器上操作的，一路信息填下去也没遇到网友所说的注册不了的情况。所以TI官方应该没有限制国内用户使用的权限，不过注册时其官网时推荐使用企业邮箱进行注册的，这大概率和他们的业务推广有关，可能也是为了更直接的提供技术支持服务吧，总之，你使用有效的个人邮箱注册都是可以的。当然一般国外网站因为主服务器不在国内的原因我们访问速度会相对慢一点，网站也可能没那么稳定，一般遇到这种情况建议使用无痕窗口进行操作。</p>
 <p><img src="https://files.mdnice.com/user/38598/46c37866-acfe-4744-85bb-337da97a1ceb.png" srcset="/img/loading.gif" lazyload alt="网友留言信息"></p>
 <p>今天又收到另一位网友在后面留言说他怎么都注册不上，希望我做一个注册视频，我当时是非常疑惑的，是真的注册不了了，难道TI真的搞事情了？或许还有很多经验不多的网友会也遇到类似问题，正好就再注册一个账号验证一下，再加上很久没更新小破站的视频内容了，都快被平台埋了，所以就想着录一个注册全过程的的视频，供大家参考。</p>
 <p>为了确定是否与浏览器相关我这次特意使用国内应用比较广的微软Edge浏览器进行操作。最终验证结果是注册没问题，同时为了验证在无痕模式下进行操作更稳定，我这一次性注册了2个账号。所以到目前为止我就有了4个账号~</p>
 <p><img src="https://files.mdnice.com/user/38598/ca6b9431-0605-46f0-b773-f289277d1641.png" srcset="/img/loading.gif" lazyload alt="一堆尴尬的账号"></p>
-<h2 id="完整注册视频"><a href="#完整注册视频" class="headerlink" title="完整注册视频"></a>完整注册视频</h2><p>下面是完整视频，需要的朋友可以查看：</p>
+<h2 id="完整注册视频">完整注册视频</h2>
+<p>下面是完整视频，需要的朋友可以查看：</p>
 <p>占位</p>
-<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247484080&idx=1&sn=72ceac0e9c7a2601201431ca847c82f9&chksm=ea790ac1dd0e83d7630ec80d2e28acc9b99d88812d9bff7aa6b957a2352b2231d2bbf27e6d65&token=1854026269&lang=zh_CN#rd">滤波器设计软件FilterPro</a></li>
+<h4 id="推荐阅读">推荐阅读</h4>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485523&amp;idx=1&amp;sn=b7fcd1b86e2467d6f03b1a520c39bb06&amp;chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&amp;token=1711068967&amp;lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485581&amp;idx=1&amp;sn=b36e6536717774f7931c7aa93d5b237a&amp;chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&amp;token=466212876&amp;lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485572&amp;idx=1&amp;sn=17cefa35d9d660083d419a7e9b6db6f7&amp;chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&amp;token=1711068967&amp;lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485420&amp;idx=2&amp;sn=728ca4abbadf7caf51c392e7d7045cbe&amp;chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&amp;token=1711068967&amp;lang=zh_CN#rd">分享几个windows平台上非常实用的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485606&amp;idx=1&amp;sn=2b433faa2e436fc762dc538c9cf3fe14&amp;chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&amp;token=1580674001&amp;lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247484080&amp;idx=1&amp;sn=72ceac0e9c7a2601201431ca847c82f9&amp;chksm=ea790ac1dd0e83d7630ec80d2e28acc9b99d88812d9bff7aa6b957a2352b2231d2bbf27e6d65&amp;token=1854026269&amp;lang=zh_CN#rd">滤波器设计软件FilterPro</a></li>
 </ul>
 <hr>
 <p><img src="https://files.mdnice.com/user/38598/37e7b97e-a5c7-44d1-9e48-bbe22ab3141d.jpg" srcset="/img/loading.gif" lazyload alt="欢迎添加作者微信"></p>
@@ -307,6 +448,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="print-no-link">#开发工具</a>
+      
+    </div>
   
 </div>
 
@@ -323,7 +492,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>LUOMUQINGYUN</div>
+          <div>luomuqingyun</div>
         </div>
       
       
@@ -361,9 +530,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/19/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA%E4%B8%8E%E8%88%B5%E6%9C%BA/" title="伺服电机与舵机">
+                      <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" title="python程序运行莫名警告">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">伺服电机与舵机</span>
+                        <span class="hidden-mobile">python程序运行莫名警告</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -371,8 +540,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%BB%B6%E8%AE%A9%E4%BA%BA%E4%BC%A4%E6%84%9F%E7%9A%84%E4%BA%8B%EF%BC%9A%E5%BC%80%E6%BA%90%E5%A4%A7%E7%89%9B%E8%BD%AC%E5%81%9A%E5%87%BA%E7%BA%B3/" title="分享一件让人伤感的事：开源大牛转做出纳">
-                        <span class="hidden-mobile">分享一件让人伤感的事：开源大牛转做出纳</span>
+                      <a href="/2025/05/19/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA%E4%B8%8E%E8%88%B5%E6%9C%BA/" title="伺服电机与舵机">
+                        <span class="hidden-mobile">伺服电机与舵机</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -383,6 +552,33 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'a9621a944a6a1031efbf157c62d0ae7b'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -475,7 +671,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   
@@ -623,6 +819,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

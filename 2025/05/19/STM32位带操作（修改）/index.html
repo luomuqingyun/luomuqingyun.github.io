@@ -8,23 +8,23 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="LUOMUQINGYUN">
+  <meta name="author" content="luomuqingyun">
   <meta name="keywords" content="">
   
-    <meta name="description" content="修改声明之前写的文章后半部分关于位带示例说明的内容没有详细考究，给出了错误的介绍，为了不造成更多的误导已将该文删除现修改后半部分。希望看完该篇文章内容的朋友重新查看这篇内容，以免形成错误认知。同时也在这里给大家道歉，还希望后续的文章中若有发现错误的内容大家能够积极提出质疑，我们一起交流，共同改进。文章中主要错误描述是：标准库和HAL中对GPIO等大多数外设的处理是对直接寄存器操作方式的封装，涉及到">
+    <meta name="description" content="STM32位带操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32位带操作（修改）">
 <meta property="og:url" content="https://luomuqingyun.github.io/2025/05/19/STM32%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="修改声明之前写的文章后半部分关于位带示例说明的内容没有详细考究，给出了错误的介绍，为了不造成更多的误导已将该文删除现修改后半部分。希望看完该篇文章内容的朋友重新查看这篇内容，以免形成错误认知。同时也在这里给大家道歉，还希望后续的文章中若有发现错误的内容大家能够积极提出质疑，我们一起交流，共同改进。文章中主要错误描述是：标准库和HAL中对GPIO等大多数外设的处理是对直接寄存器操作方式的封装，涉及到">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="STM32位带操作">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/312c3d33-7d15-41a3-bb78-6a5479653035.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/660e4dab-7dd2-4c37-b15f-07afb6fcb3ad.png">
@@ -38,14 +38,18 @@
 <meta property="og:image" content="https://files.mdnice.com/user/38598/6460138b-d6d2-4228-81dd-c6380e0a5dd4.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
 <meta property="article:published_time" content="2025-05-19T06:42:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T06:42:00.746Z">
-<meta property="article:author" content="LUOMUQINGYUN">
+<meta property="article:modified_time" content="2025-05-22T15:12:57.368Z">
+<meta property="article:author" content="落木青云">
+<meta property="article:tag" content="编程经验">
+<meta property="article:tag" content="STM32">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://files.mdnice.com/user/38598/312c3d33-7d15-41a3-bb78-6a5479653035.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>STM32位带操作（修改） - Hexo</title>
+  
+  <title>STM32位带操作（修改） - 落木青云</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -83,7 +87,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -93,6 +97,17 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -109,7 +124,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>落木青云</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -205,7 +220,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -252,6 +267,15 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
   </div>
 
 
@@ -275,6 +299,643 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="编程"
+        id="heading-41282bf95e43c64d579757573a03cdde" role="tab" data-toggle="collapse" href="#collapse-41282bf95e43c64d579757573a03cdde"
+        aria-expanded="true"
+      >
+        编程
+        <span class="list-group-count">(47)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-41282bf95e43c64d579757573a03cdde"
+           role="tabpanel" aria-labelledby="heading-41282bf95e43c64d579757573a03cdde">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="单片机"
+        id="heading-d1f314cc6e06520a45c2ad7d0dc7fab2" role="tab" data-toggle="collapse" href="#collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+        aria-expanded="true"
+      >
+        单片机
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-d1f314cc6e06520a45c2ad7d0dc7fab2"
+           role="tabpanel" aria-labelledby="heading-d1f314cc6e06520a45c2ad7d0dc7fab2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" title="51单片机开发看这一篇就够了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机开发看这一篇就够了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E5%8D%95%E7%89%87%E6%9C%BA%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91%E4%B8%8B/" title="51单片机进阶开发（三）之单片机底层逻辑下"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（三）之单片机底层逻辑下</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8BIIC%E9%80%9A%E4%BF%A1/" title="51单片机进阶开发（五）之IIC通信"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（五）之IIC通信</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%B5%85%E8%B0%88SPI/" title="51单片机进阶开发（六）之浅谈SPI"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（六）之浅谈SPI</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8BAD%E3%80%81DA/" title="51单片机进阶开发（四）之AD、DA"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机进阶开发（四）之AD、DA</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C%EF%BC%88%E4%BF%AE%E6%94%B9%EF%BC%89/" title="STM32位带操作（修改）"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">STM32位带操作（修改）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%8D%95%E7%89%87%E6%9C%BA%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/" title="STM32单片机编程之数据对齐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32单片机编程之数据对齐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" title="STM32启动文件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">STM32启动文件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8STM32%E4%B9%8B%E5%AD%A6%E4%BC%9A%E7%9C%8B%E6%96%87%E6%A1%A3/" title="小白入门STM32之学会看文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">小白入门STM32之学会看文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%B0%86STC%E5%8D%95%E7%89%87%E6%9C%BA%E6%B7%BB%E5%8A%A0%E5%88%B0keil%E9%80%89%E5%9E%8B%E8%A1%A8/" title="怎么将STC单片机添加到keil选型表"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么将STC单片机添加到keil选型表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%B5%85%E6%9E%90STM32%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84/" title="浅析STM32存储器映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">浅析STM32存储器映射</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础"
+        id="heading-0796ba76b4b553687e5ffaeb78512ccb" role="tab" data-toggle="collapse" href="#collapse-0796ba76b4b553687e5ffaeb78512ccb"
+        aria-expanded="false"
+      >
+        基础
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0796ba76b4b553687e5ffaeb78512ccb"
+           role="tabpanel" aria-labelledby="heading-0796ba76b4b553687e5ffaeb78512ccb">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%88%9D%E5%AD%A6%E8%80%85%E5%85%B8%E5%9E%8B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" title="单片机初学者典型疑惑解答"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机初学者典型疑惑解答</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" title="单片机的启动文件代码分析"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机的启动文件代码分析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/" title="数学与编程"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">数学与编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/" title="系统环境变量设置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">系统环境变量设置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A7%A3%E8%AF%B4/" title="计算机定点数解说"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机定点数解说</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具"
+        id="heading-20dce2c6fa909a5cd62526615fe2788a" role="tab" data-toggle="collapse" href="#collapse-20dce2c6fa909a5cd62526615fe2788a"
+        aria-expanded="false"
+      >
+        工具
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-20dce2c6fa909a5cd62526615fe2788a"
+           role="tabpanel" aria-labelledby="heading-20dce2c6fa909a5cd62526615fe2788a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%9D%E5%AD%A651%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/" title="初学51单片机开发必备工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">初学51单片机开发必备工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D/" title="单片机开发系列之一体化平台介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之一体化平台介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B251%E3%80%81STM32%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0/" title="单片机开发系列之本地部署51、STM32开发平台"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之本地部署51、STM32开发平台</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%AF%91%E5%99%A8/" title="单片机开发系列之编译器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发系列之编译器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%95%B4%E7%90%86/" title="如何高效的进行代码格式整理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何高效的进行代码格式整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BF%AB%E9%80%9F%E5%B0%86%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5ECloudSpace/" title="快速将工程导入ECloudSpace"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快速将工程导入ECloudSpace</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="算法"
+        id="heading-046a899ee7a6ec88d370211a518c9e80" role="tab" data-toggle="collapse" href="#collapse-046a899ee7a6ec88d370211a518c9e80"
+        aria-expanded="false"
+      >
+        算法
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-046a899ee7a6ec88d370211a518c9e80"
+           role="tabpanel" aria-labelledby="heading-046a899ee7a6ec88d370211a518c9e80">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E6%B1%87%E6%80%BB/" title="PID算法基础汇总"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法基础汇总</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8B%E7%AE%80%E4%BB%8B/" title="PID算法（一）之简介"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（一）之简介</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E8%87%AA%E9%80%82%E5%BA%94%E6%8E%A7%E5%88%B6/" title="PID算法（七）之自适应控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（七）之自适应控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E4%B8%B2%E7%BA%A7PID/" title="PID算法（三）之串级PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（三）之串级PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8B%E4%BD%8D%E7%BD%AEPID%E4%B8%8E%E5%A2%9E%E9%87%8FPID/" title="PID算法（二）之位置PID与增量PID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（二）之位置PID与增量PID</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%87%AA%E6%8A%97%E6%89%B0/" title="PID算法（五）之自抗扰"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（五）之自抗扰</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" title="PID算法（八）之遗传算法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（八）之遗传算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E6%A8%A1%E7%B3%8A%E6%8E%A7%E5%88%B6/" title="PID算法（六）之模糊控制"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（六）之模糊控制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PID算法（四）之鲁棒性</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" title="单片机开发常用算法之卡尔曼滤波"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发常用算法之卡尔曼滤波</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="经验"
+        id="heading-32a8e000e928e6dc255876d9fc0178b3" role="tab" data-toggle="collapse" href="#collapse-32a8e000e928e6dc255876d9fc0178b3"
+        aria-expanded="false"
+      >
+        经验
+        <span class="list-group-count">(12)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-32a8e000e928e6dc255876d9fc0178b3"
+           role="tabpanel" aria-labelledby="heading-32a8e000e928e6dc255876d9fc0178b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/C%E8%AF%AD%E8%A8%80%E5%88%9D%E5%AD%A6%E8%80%85%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="C语言初学者可以利用的帮助文档"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">C语言初学者可以利用的帮助文档</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="keil使用过程中的一些常见问题"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil使用过程中的一些常见问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/keil%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E6%AD%A5%E9%AA%A4/" title="keil开发模块化编程步骤"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">keil开发模块化编程步骤</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/python%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E8%8E%AB%E5%90%8D%E8%AD%A6%E5%91%8A/" title="python程序运行莫名警告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">python程序运行莫名警告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%85%B3%E4%BA%8EQT%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%AE%9A%E4%BD%8Ddll%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="关于QT程序无法定位dll文件问题问题解决方法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于QT程序无法定位dll文件问题问题解决方法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E4%B8%ADC%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E7%9F%A5%E8%AF%86/" title="单片机开发中C语言指针知识"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发中C语言指针知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8C%89%E9%94%AE%E7%A8%8B%E5%BA%8F%E5%88%86%E4%BA%AB/" title="单片机开发实用按键程序分享"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发实用按键程序分享</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="单片机开发模块化编程实例详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">单片机开发模块化编程实例详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%BC%80%E5%8F%91%E8%80%85%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/" title="开发者应该学会如何提问"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发者应该学会如何提问</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E6%AC%BE%E6%96%B0%E7%9A%84MCU/" title="怎么快速上手一款新的MCU"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">怎么快速上手一款新的MCU</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%9B%B4%E6%8E%A5%E5%AD%A6STM32%E8%BF%98%E6%98%AF%E5%85%88%E5%AD%A651%EF%BC%9F/" title="直接学STM32还是先学51？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">直接学STM32还是先学51？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E7%A8%8B%E5%BA%8F%E7%9C%8B%E5%BE%97%E6%87%82%E5%8D%B4%E5%86%99%E4%B8%8D%E5%87%BA%E6%80%8E%E4%B9%88%E5%8A%9E/" title="程序看得懂却写不出怎么办"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">程序看得懂却写不出怎么办</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="资料"
+        id="heading-447564e4e2b0171973515a26650e66a2" role="tab" data-toggle="collapse" href="#collapse-447564e4e2b0171973515a26650e66a2"
+        aria-expanded="false"
+      >
+        资料
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-447564e4e2b0171973515a26650e66a2"
+           role="tabpanel" aria-labelledby="heading-447564e4e2b0171973515a26650e66a2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/19/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/" title="51单片机学习推荐书单"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">51单片机学习推荐书单</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9C%8BC51%E7%9A%84%E4%BA%A4%E9%80%9A%E7%81%AF%E4%BB%BF%E7%9C%9F%E9%A1%B9%E7%9B%AE/" title="分享一个很好看C51的交通灯仿真项目"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">分享一个很好看C51的交通灯仿真项目</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/19/%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E8%BF%BD%E8%B8%AA%E5%BA%93/" title="推荐一个嵌入式系统代码错误追踪库"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">推荐一个嵌入式系统代码错误追踪库</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -284,34 +945,51 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">STM32位带操作（修改）</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年5月22日 晚上
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
-                <h2 id="修改声明"><a href="#修改声明" class="headerlink" title="修改声明"></a>修改声明</h2><p>之前写的文章后半部分关于位带示例说明的内容没有详细考究，给出了错误的介绍，为了不造成更多的误导已将该文删除现修改后半部分。希望看完该篇文章内容的朋友重新查看这篇内容，以免形成错误认知。同时也在这里给大家道歉，还希望后续的文章中若有发现错误的内容大家能够积极提出质疑，我们一起交流，共同改进。<code>文章中主要错误描述是：标准库和HAL中对GPIO等大多数外设的处理是对直接寄存器操作方式的封装，涉及到的更多的是位操作，而不是使用位带操作，此文会将正确的做法列出。当然两种官方库中对位带操作都有应用，只是官方应用的范围比较少，如果想在一般外设中使用还是需要自己添加一些代码去实现。</code></p>
-<h2 id="让STM32像51一样编程"><a href="#让STM32像51一样编程" class="headerlink" title="让STM32像51一样编程"></a>让STM32像51一样编程</h2><p>在以前的文章中我都提到过很多次，单片机控制程序实质上大部分都是在操作寄存器。<br>举例一段51代码：</p>
+                <h2 id="修改声明">修改声明</h2>
+<p>之前写的文章后半部分关于位带示例说明的内容没有详细考究，给出了错误的介绍，为了不造成更多的误导已将该文删除现修改后半部分。希望看完该篇文章内容的朋友重新查看这篇内容，以免形成错误认知。同时也在这里给大家道歉，还希望后续的文章中若有发现错误的内容大家能够积极提出质疑，我们一起交流，共同改进。<code>文章中主要错误描述是：标准库和HAL中对GPIO等大多数外设的处理是对直接寄存器操作方式的封装，涉及到的更多的是位操作，而不是使用位带操作，此文会将正确的做法列出。当然两种官方库中对位带操作都有应用，只是官方应用的范围比较少，如果想在一般外设中使用还是需要自己添加一些代码去实现。</code></p>
+<h2 id="让STM32像51一样编程">让STM32像51一样编程</h2>
+<p>在以前的文章中我都提到过很多次，单片机控制程序实质上大部分都是在操作寄存器。<br>
+举例一段51代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-keyword">for</span>(;;)<br>	&#123;<br>		P1^<span class="hljs-number">0</span> = <span class="hljs-number">0</span>;<br>		delay(<span class="hljs-number">300</span>);<br>		P1^<span class="hljs-number">0</span> = <span class="hljs-number">1</span>;<br>		delay(<span class="hljs-number">300</span>);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>在51单片机程序中我们都是直接通过寄存器的设置来实现代码功能，并且使用位操作运算符非常容易的就可以实现各种寄存器设置操作，想设置功能也是非常直接，再比如<code>EA = 1;</code>设置总中断使能。因为51单片机的内存地址和寄存器都差不多数得过来，并且寄存器都是8位的，所以编程时对于这点数量的位运算可以说是“指哪打哪”。</p>
 <p>现在再一起来回顾一下主要的位运算符：</p>
 <ul>
-<li><p>‘|’ :位或运算符,可以设置寄存器的某几位</p>
+<li>
+<p>‘|’ :位或运算符,可以设置寄存器的某几位</p>
 </li>
-<li><p>‘&amp;’ :位与运算符,可以清除寄存器的某几位</p>
+<li>
+<p>‘&amp;’ :位与运算符,可以清除寄存器的某几位</p>
 </li>
-<li><p>‘^’ :位异或运算符,可以翻转寄存器的某几位</p>
+<li>
+<p>‘^’ :位异或运算符,可以翻转寄存器的某几位</p>
 </li>
-<li><p>‘&lt;&lt;’:左移运算符,可以访问某个位位置</p>
+<li>
+<p>‘&lt;&lt;’:左移运算符,可以访问某个位位置</p>
 </li>
-<li><p>‘&gt;&gt;’:右移运算符,可以访问某个位位置</p>
+<li>
+<p>‘&gt;&gt;’:右移运算符,可以访问某个位位置</p>
 </li>
 </ul>
 <p><img src="https://files.mdnice.com/user/38598/312c3d33-7d15-41a3-bb78-6a5479653035.png" srcset="/img/loading.gif" lazyload alt="51单片机寄存器地址定义"></p>
 <p><img src="https://files.mdnice.com/user/38598/660e4dab-7dd2-4c37-b15f-07afb6fcb3ad.png" srcset="/img/loading.gif" lazyload alt="51单片机寄存器位定义"></p>
-<p>虽然单片机的位操作很方便了，但当单片机外设，寄存器数量及位数很大的时候，使用位运算进行编程时还是需要仔细推倒一下逻辑关系，不然还是很容易出错的。对于STM32，它内部的寄存器和内存空间都很多，并且寄存器是32位的，编程时程序该怎么对应寄存器，内存地址才会比较方便呢？并且使用Cortex-M3内核制造芯片的厂家那么多，要怎么统一规划？arm公司就对这些情况进行了一些设置，这个问题就是通过我上一篇文章写的STM32单片机存储器映射解决的，没看的朋友可以点击链接跳转查看：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247486100&idx=1&sn=a177c25048f591ea29a489070361bb16&chksm=ea7902e5dd0e8bf3ecfa9bd88eee25b2f328d168f473a08467e9a806438c3de46cb23896fd17&token=1626842862&lang=zh_CN#rd">浅析STM32存储器映射</a>。</p>
+<p>虽然单片机的位操作很方便了，但当单片机外设，寄存器数量及位数很大的时候，使用位运算进行编程时还是需要仔细推倒一下逻辑关系，不然还是很容易出错的。对于STM32，它内部的寄存器和内存空间都很多，并且寄存器是32位的，编程时程序该怎么对应寄存器，内存地址才会比较方便呢？并且使用Cortex-M3内核制造芯片的厂家那么多，要怎么统一规划？arm公司就对这些情况进行了一些设置，这个问题就是通过我上一篇文章写的STM32单片机存储器映射解决的，没看的朋友可以点击链接跳转查看：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247486100&amp;idx=1&amp;sn=a177c25048f591ea29a489070361bb16&amp;chksm=ea7902e5dd0e8bf3ecfa9bd88eee25b2f328d168f473a08467e9a806438c3de46cb23896fd17&amp;token=1626842862&amp;lang=zh_CN#rd">浅析STM32存储器映射</a>。</p>
 <p>再贴一下Cortex-M3内核单片机存储器映射结构：</p>
 <p><img src="https://files.mdnice.com/user/38598/48a6bcd7-269f-48f2-baa4-5deb87a8c435.png" srcset="/img/loading.gif" lazyload alt="Cortex-M3存储器映射"></p>
 <p>在STM32中使用的方法就是:<code>Bit-band</code>,也就是通常说的<code>位带</code>操作。</p>
 <p>STM32系列MCU具有强大的位带操作能力,通过对某地址字的读写操作实现对某bit的读写操作。这样做可以高效地像51单片机那样对单个或多个位进行读写或控制，从而简化了直接寄存器操作时的“读-改-写”这一个过程。</p>
-<h2 id="位带操作的底层原理"><a href="#位带操作的底层原理" class="headerlink" title="位带操作的底层原理"></a>位带操作的底层原理</h2><p>单片机支持位带操作后，就可以使用普通的加载&#x2F;存储指令来对单一的比特进行读写。在 Cortex-M3内核中，有两个区中实现了位带。其中一个是 SRAM 区的最低1MB范围，第二个则是片内外设区的最低1MB范围。这两个区中的地址除了可以像普通的RAM一样使用外，它们还都有自己的“位带别名区”，位带别名区把每个比特膨胀成一个32位的字，简单的说就是，这些bit-band区域将存储器别名区的一个字映射为bit-band区的一个位。就如你的本名叫张三，别人叫你三崽同一个道理，你听到后就知道都是在叫你。当你通过位带别名区访问这些字时，就可以达到访问原始bit位的目的。</p>
+<h2 id="位带操作的底层原理">位带操作的底层原理</h2>
+<p>单片机支持位带操作后，就可以使用普通的加载/存储指令来对单一的比特进行读写。在 Cortex-M3内核中，有两个区中实现了位带。其中一个是 SRAM 区的最低1MB范围，第二个则是片内外设区的最低1MB范围。这两个区中的地址除了可以像普通的RAM一样使用外，它们还都有自己的“位带别名区”，位带别名区把每个比特膨胀成一个32位的字，简单的说就是，这些bit-band区域将存储器别名区的一个字映射为bit-band区的一个位。就如你的本名叫张三，别人叫你三崽同一个道理，你听到后就知道都是在叫你。当你通过位带别名区访问这些字时，就可以达到访问原始bit位的目的。</p>
 <p>其中内容具体对应关系如下：</p>
 <ul>
 <li>对 32MB SRAM 别名区的访问映射为对1MB SRAMbit-band 区的访问。</li>
@@ -330,16 +1008,18 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">AliasAddr=<span class="hljs-number">0x22000000</span>+((A<span class="hljs-number">-0x20000000</span>)*<span class="hljs-number">8</span>+n)*<span class="hljs-number">4</span> =<span class="hljs-number">0x22000000</span>+(A<span class="hljs-number">-0x20000000</span>)*<span class="hljs-number">32</span>+n*<span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
 <p>外设区某字节地址为A的第n bit其位带别名区地址计算公式如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">AliasAddr=<span class="hljs-number">0x42000000</span>+((A<span class="hljs-number">-0x40000000</span>)*<span class="hljs-number">8</span>+n)*<span class="hljs-number">4</span> =<span class="hljs-number">0x42000000</span>+(A<span class="hljs-number">-0x40000000</span>)*<span class="hljs-number">32</span>+n*<span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
-
 <p><img src="https://files.mdnice.com/user/38598/4b57b42b-51d4-4770-806a-32745dc7832a.png" srcset="/img/loading.gif" lazyload alt="位带储存区地址对应图示"></p>
-<p><strong>位带别名区的字只有最低位（LSB）有效，即对该字进行写1或写零就是对其对应的位带区所在的bit位进行置位或清零，这样就实现了类似51中EA &#x3D; 0这种操作了，而不用先读取该寄存器所有值，再进行对其中某一位处理，最后再进行寄存器整体赋值。如果用过STM8或16位机，或者cortex-M0系列等功能相对复杂却没位带操作的芯片的朋友应该能过感受这种复杂的操作</strong></p>
-<h2 id="代码中实现位带操作"><a href="#代码中实现位带操作" class="headerlink" title="代码中实现位带操作"></a>代码中实现位带操作</h2><p>我们编程时要实现位带操作可以将一些常用外设位带区与位带别名区，当然通常情况下都是对GPIO的使用，所以代码量也不会太大。并且一般情况下这些代码也不用我们自己去实现一遍，如果你有购买某些开发板学习那在开发板配套的资料里都会有涉及，如果你没使用过开发板那可以在原子，野火等官网下载相关资料获取，在项目中使用时可以直接调用该文件。当然你也可以根据自己的需求定义一些适合你自己使用的内容。</p>
+<p><strong>位带别名区的字只有最低位（LSB）有效，即对该字进行写1或写零就是对其对应的位带区所在的bit位进行置位或清零，这样就实现了类似51中EA = 0这种操作了，而不用先读取该寄存器所有值，再进行对其中某一位处理，最后再进行寄存器整体赋值。如果用过STM8或16位机，或者cortex-M0系列等功能相对复杂却没位带操作的芯片的朋友应该能过感受这种复杂的操作</strong></p>
+<h2 id="代码中实现位带操作">代码中实现位带操作</h2>
+<p>我们编程时要实现位带操作可以将一些常用外设位带区与位带别名区，当然通常情况下都是对GPIO的使用，所以代码量也不会太大。并且一般情况下这些代码也不用我们自己去实现一遍，如果你有购买某些开发板学习那在开发板配套的资料里都会有涉及，如果你没使用过开发板那可以在原子，野火等官网下载相关资料获取，在项目中使用时可以直接调用该文件。当然你也可以根据自己的需求定义一些适合你自己使用的内容。</p>
 <p>比如定义一个这样的头文件：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> __SYS_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __SYS_H</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;main.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> BITBAND(addr, bitnum) ((addr &amp; 0xF0000000)+0x2000000+((addr &amp;0xFFFFF)&lt;&lt;5)+(bitnum&lt;&lt;2)) </span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MEM_ADDR(addr)  *((volatile unsigned long  *)(addr)) </span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> BIT_ADDR(addr, bitnum)   MEM_ADDR(BITBAND(addr, bitnum)) </span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bit_read_write(data, bit) BIT_ADDR((unsigned long)(&amp;data), bit)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> USE_STM32F1xx	</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PA_L8_MODE(n)   BIT_ADDR(&amp;(GPIOA-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PB_L8_MODE(n)   BIT_ADDR(&amp;(GPIOB-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PC_L8_MODE(n)   BIT_ADDR(&amp;(GPIOC-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PD_L8_MODE(n)   BIT_ADDR(&amp;(GPIOD-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PE_L8_MODE(n)   BIT_ADDR(&amp;(GPIOE-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PF_L8_MODE(n)   BIT_ADDR(&amp;(GPIOF-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PH_L8_MODE(n)   BIT_ADDR(&amp;(GPIOH-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PI_L8_MODE(n)   BIT_ADDR(&amp;(GPIOI-&gt;CRL),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PA_H8_MODE(n)   BIT_ADDR(&amp;(GPIOA-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PB_H8_MODE(n)   BIT_ADDR(&amp;(GPIOB-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PC_H8_MODE(n)   BIT_ADDR(&amp;(GPIOC-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PD_H8_MODE(n)   BIT_ADDR(&amp;(GPIOD-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PE_H8_MODE(n)   BIT_ADDR(&amp;(GPIOE-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PF_H8_MODE(n)   BIT_ADDR(&amp;(GPIOF-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PH_H8_MODE(n)   BIT_ADDR(&amp;(GPIOH-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PI_H8_MODE(n)   BIT_ADDR(&amp;(GPIOI-&gt;CRH),n*4)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> USE_STM32F4xx</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PAMODE(n)   BIT_ADDR(&amp;(GPIOA-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PBMODE(n)   BIT_ADDR(&amp;(GPIOB-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PCMODE(n)   BIT_ADDR(&amp;(GPIOC-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PDMODE(n)   BIT_ADDR(&amp;(GPIOD-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PEMODE(n)   BIT_ADDR(&amp;(GPIOE-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PFMODE(n)   BIT_ADDR(&amp;(GPIOF-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PHMODE(n)   BIT_ADDR(&amp;(GPIOH-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PIMODE(n)   BIT_ADDR(&amp;(GPIOI-&gt;MODER),n*2)  <span class="hljs-comment">//1:OUTPUT MODE;0:INTPUT MODE </span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * [PAout description]</span><br><span class="hljs-comment"> * @param  n [0-15]</span><br><span class="hljs-comment"> * @return   [none]</span><br><span class="hljs-comment"> * EG:  PAout(1) = 1;//set PA1 to HIGH</span><br><span class="hljs-comment"> * 		PAout(1) = 0;//set PA1 to LOW</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PAout(n)   BIT_ADDR(&amp;(GPIOA-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PBout(n)   BIT_ADDR(&amp;(GPIOB-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PCout(n)   BIT_ADDR(&amp;(GPIOC-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PDout(n)   BIT_ADDR(&amp;(GPIOD-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PEout(n)   BIT_ADDR(&amp;(GPIOE-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PFout(n)   BIT_ADDR(&amp;(GPIOF-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PGout(n)   BIT_ADDR(&amp;(GPIOG-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PHout(n)   BIT_ADDR(&amp;(GPIOH-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PIout(n)   BIT_ADDR(&amp;(GPIOI-&gt;ODR),n)  <span class="hljs-comment">//OUTPUT</span></span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * [PAin description]</span><br><span class="hljs-comment"> * @param  n [0-15]</span><br><span class="hljs-comment"> * @return   [none]</span><br><span class="hljs-comment"> * EG:  a = PAin(1);//get PA1 bit to value a</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PAin(n)    BIT_ADDR(&amp;(GPIOA-&gt;IDR),n)  <span class="hljs-comment">//输入 </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PBin(n)    BIT_ADDR(&amp;(GPIOB-&gt;IDR),n)  <span class="hljs-comment">//输入 </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PCin(n)    BIT_ADDR(&amp;(GPIOC-&gt;IDR),n)  <span class="hljs-comment">//输入 </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PDin(n)    BIT_ADDR(&amp;(GPIOD-&gt;IDR),n)  <span class="hljs-comment">//输入 </span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PEin(n)    BIT_ADDR(&amp;(GPIOE-&gt;IDR),n)  <span class="hljs-comment">//输入</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PFin(n)    BIT_ADDR(&amp;(GPIOF-&gt;IDR),n)  <span class="hljs-comment">//输入</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PGin(n)    BIT_ADDR(&amp;(GPIOG-&gt;IDR),n)  <span class="hljs-comment">//输入</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PHin(n)    BIT_ADDR(&amp;(GPIOH-&gt;IDR),n)  <span class="hljs-comment">//输入</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PIin(n)    BIT_ADDR(&amp;(GPIOI-&gt;IDR),n)  <span class="hljs-comment">//输入</span></span><br><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> HIGH 0x1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LOW  0x0</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PI 3.1415926535897932384626433832795</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> HALF_PI 1.5707963267948966192313216916398</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TWO_PI 6.283185307179586476925286766559</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEG_TO_RAD 0.017453292519943295769236907684886</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> RAD_TO_DEG 57.295779513082320876798154814105</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> EULER 2.718281828459045235360287471352</span><br><br><span class="hljs-comment">//#define SERIAL  0x0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DISPLAY 0x1</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LSBFIRST 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MSBFIRST 1</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> CHANGE 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> FALLING 2</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> RISING 3</span><br><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> min(a,b) ((a)&lt;(b)?(a):(b))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> max(a,b) ((a)&gt;(b)?(a):(b))</span><br><span class="hljs-comment">// #define abs(x) ((x)&gt;0?(x):-(x))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> constrain(amt,low,high) ((amt)<span class="hljs-string">&lt;=(low)?(low):((amt)&gt;</span>(high)?(high):(amt)))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> round(x)     ((x)&gt;=0?(long)((x)+0.5):(long)((x)-0.5))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> radians(deg) ((deg)*DEG_TO_RAD)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> degrees(rad) ((rad)*RAD_TO_DEG)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> sq(x) ((x)*(x))</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> low8Byte(w) ((uint8_t) ((w) &amp; 0xff))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> high8Byte(w) ((uint8_t) ((w) &gt;&gt; 8))</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bitRead(value, bit) (((value) &gt;&gt; (bit)) &amp; 0x01)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bitSet(value, bit) ((value) |= (1UL &lt;&lt; (bit)))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bitClear(value, bit) ((value) &amp;= ~(1UL &lt;&lt; (bit)))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : bitClear(value, bit))</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bitToggle(value, bit) bitWrite(value, bit, !bitRead(value, bit))</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> swap(a, b) &#123; uint32_t t = a; a = b; b = t; &#125;</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> bit(b) (1UL &lt;&lt; (b))</span><br><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> map(x, in_min, in_max, out_min, out_max) \</span><br><span class="hljs-meta">  ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> cycle_increase(a, b) a=(a+1)%(b)</span><br><br><span class="hljs-comment">/* 向上取整 */</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> CEIL_DIV(a, b) (((a)+(b)-1)/(b))</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br></code></pre></td></tr></table></figure>
-
-<p>将以上头文件添加到工程中后我们代码中就可以使用如<br><code>PAout(0)  PAin(1)  </code><br>这样简洁的代码实现对单片机端口的控制。</p>
+<p>将以上头文件添加到工程中后我们代码中就可以使用如<br>
+<code>PAout(0)  PAin(1)  </code><br>
+这样简洁的代码实现对单片机端口的控制。</p>
 <p>如果平时喜欢使用寄存器操作的编程方式就可以将更多外设对应的操作定义列举出来。如果使用官方标准库或HAL库，也可以在工程中混合使用。如果你在编程时不想要现成的，或者想和库函数实现代码保持一致，那标准库和HAL库中也给出了一些使用的例子可以作为参考。</p>
-<p>可以参考的标准库位带功能使用案例：<br><img src="https://files.mdnice.com/user/38598/a0c3e65e-791c-4a6f-8f46-2178803da8e1.png" srcset="/img/loading.gif" lazyload alt="标准库中对位带别名区基地址的定义"></p>
+<p>可以参考的标准库位带功能使用案例：<br>
+<img src="https://files.mdnice.com/user/38598/a0c3e65e-791c-4a6f-8f46-2178803da8e1.png" srcset="/img/loading.gif" lazyload alt="标准库中对位带别名区基地址的定义"></p>
 <p><img src="https://files.mdnice.com/user/38598/81a8c9d8-7dca-430e-9e85-09dbf529bfcc.png" srcset="/img/loading.gif" lazyload alt="标准库中对特定外设的别名区地址定义"></p>
 <p><img src="https://files.mdnice.com/user/38598/48d91759-0c80-4d18-92ae-85866421a162.png" srcset="/img/loading.gif" lazyload alt="标准库中特定位带功能实现函数"></p>
 <p>相关使用方式在HAL也差不多类似的：</p>
@@ -347,7 +1027,8 @@
 <p><img src="https://files.mdnice.com/user/38598/9a56b85f-c942-40a4-b766-25110784d5a0.png" srcset="/img/loading.gif" lazyload alt="HAL库中对一些特定外设的别名区地址定义"></p>
 <p><img src="https://files.mdnice.com/user/38598/6460138b-d6d2-4228-81dd-c6380e0a5dd4.png" srcset="/img/loading.gif" lazyload alt="HAL库中一些特定位带功能实现函数"></p>
 <p>从这些代码中我们可以很容易看出来，使用位带功能编程一旦你将基础的功能定义好了，在实现操作时都可以用等式定义就能达到目的，在一些特定场景下使用位带操作还是很方便。不管你平时使用哪种库或者直接寄存器的方法都可以与之相互结合使用，互不冲突。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>位带操作是STM32编程中非常重要的一种技术,可以对MCU的IO口、外设状态位进行高效的访问。平时编程的过程中根据应用的复杂程度和资源情况,适当使用位带操作可以充分发挥STM32的性能优势,编写出高效可靠的应用程序。</p>
+<h2 id="总结">总结</h2>
+<p>位带操作是STM32编程中非常重要的一种技术,可以对MCU的IO口、外设状态位进行高效的访问。平时编程的过程中根据应用的复杂程度和资源情况,适当使用位带操作可以充分发挥STM32的性能优势,编写出高效可靠的应用程序。</p>
 <hr>
 <blockquote>
 <blockquote>
@@ -359,22 +1040,25 @@
 <blockquote>
 <blockquote>
 <blockquote>
-<p>如学习需要或技术合作可以扫码添加微信。<br>建有交流群，以方便大家平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code>。<br><img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>如学习需要或技术合作可以扫码添加微信。<br>
+建有交流群，以方便大家平时交流、学习，如果要进群，加好友时记得备注信息<code>进群</code>。<br>
+<img src="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 </blockquote>
 </blockquote>
 </blockquote>
 <p>占位</p>
 <p><code>温馨提示：若需要获取分享的资料，进入公众号后台发送关键字内容即可自动获取，而不是在留言或个人微信聊天界面发送！！！</code></p>
-<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485581&idx=1&sn=b36e6536717774f7931c7aa93d5b237a&chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&token=466212876&lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485862&idx=1&sn=830ede5ac467c8d396adfbea141f0526&chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&token=63320980&lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485523&idx=1&sn=b7fcd1b86e2467d6f03b1a520c39bb06&chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&token=1711068967&lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485606&idx=1&sn=2b433faa2e436fc762dc538c9cf3fe14&chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&token=1580674001&lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485572&idx=1&sn=17cefa35d9d660083d419a7e9b6db6f7&chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&token=1711068967&lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485987&idx=1&sn=106e52add61999ae4bddd8b28c7ed2b1&chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&token=63320980&lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485420&idx=2&sn=728ca4abbadf7caf51c392e7d7045cbe&chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&token=1711068967&lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=3&sn=d4c0d26781f307ffd26defdc4022c928&chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&token=63320980&lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&mid=2247485689&idx=4&sn=211c2d0871a19c5e92cdf0c34f01d96b&chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&token=970763775&lang=zh_CN#rd">零基础电子技术知识集合</a></li>
+<h4 id="推荐阅读">推荐阅读</h4>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485581&amp;idx=1&amp;sn=b36e6536717774f7931c7aa93d5b237a&amp;chksm=ea7900fcdd0e89ea0db13737720edc996fcb3fdbab3e43b4a92316240ac66d4b5a8bf9a07e78&amp;token=466212876&amp;lang=zh_CN#rd">怎么快速上手一款新的MCU</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485862&amp;idx=1&amp;sn=830ede5ac467c8d396adfbea141f0526&amp;chksm=ea7901d7dd0e88c1e8e5396305ab83c6fbd884cf356ad64c54463230364e865a1659f193dd1f&amp;token=63320980&amp;lang=zh_CN#rd">初学者看得懂代码却写不出怎么办</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485523&amp;idx=1&amp;sn=b7fcd1b86e2467d6f03b1a520c39bb06&amp;chksm=ea790022dd0e893452c4994fa16d63111b16d9878c303712f695b58b7af360b7b18c1ed4b201&amp;token=1711068967&amp;lang=zh_CN#rd">51单片机入门看这一篇就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485606&amp;idx=1&amp;sn=2b433faa2e436fc762dc538c9cf3fe14&amp;chksm=ea7900d7dd0e89c169f8948ff3d423016c8f51f1c914eb7b0d20cba8145b9ffa54815915d67b&amp;token=1580674001&amp;lang=zh_CN#rd">实用单片机、电子开发小工具集</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485572&amp;idx=1&amp;sn=17cefa35d9d660083d419a7e9b6db6f7&amp;chksm=ea7900f5dd0e89e35b65ba26354cc69ad24f686d8e18abd34e0932567a9345e8c9ed653eee6b&amp;token=1711068967&amp;lang=zh_CN#rd">Keil软件如何高效格式化代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485987&amp;idx=1&amp;sn=106e52add61999ae4bddd8b28c7ed2b1&amp;chksm=ea790252dd0e8b44e36e26f20153b1bd73a0fff98ef3c50330358435a9dfac2d97e04a30d59e&amp;token=63320980&amp;lang=zh_CN#rd">两个电子开发初学者用得上的工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485420&amp;idx=2&amp;sn=728ca4abbadf7caf51c392e7d7045cbe&amp;chksm=ea790f9ddd0e868b9fa162c80db1876199845f387bbe851c8d38a4e8412329ae635916c13cfb&amp;token=1711068967&amp;lang=zh_CN#rd">windows平台上非常实用的小工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=3&amp;sn=d4c0d26781f307ffd26defdc4022c928&amp;chksm=ea790088dd0e899e2872692b9568309e779acfc515e82c28a853d4228de2e2b8f7ee7149913f&amp;token=63320980&amp;lang=zh_CN#rd">51单片机入门学习推荐书单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1OTQ4MTg4Ng==&amp;mid=2247485689&amp;idx=4&amp;sn=211c2d0871a19c5e92cdf0c34f01d96b&amp;chksm=ea790088dd0e899e3042a649a346bc98e94189d1fd18da2b954a7ddb781582dc2d0a82e07f4d&amp;token=970763775&amp;lang=zh_CN#rd">零基础电子技术知识集合</a></li>
 </ul>
 <hr>
 
@@ -385,6 +1069,43 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C/" class="print-no-link">#编程经验</a>
+      
+        <a href="/tags/STM32/" class="print-no-link">#STM32</a>
+      
+    </div>
   
 </div>
 
@@ -401,7 +1122,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>LUOMUQINGYUN</div>
+          <div>luomuqingyun</div>
         </div>
       
       
@@ -439,9 +1160,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%E8%87%AA%E6%8A%97%E6%89%B0/" title="PID算法（五）自抗扰">
+                      <a href="/2025/05/19/PID%E7%AE%97%E6%B3%95%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E9%B2%81%E6%A3%92%E6%80%A7/" title="PID算法（四）之鲁棒性">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PID算法（五）自抗扰</span>
+                        <span class="hidden-mobile">PID算法（四）之鲁棒性</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -449,8 +1170,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/19/Qiling%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6/" title="Qiling代码框架">
-                        <span class="hidden-mobile">Qiling代码框架</span>
+                      <a href="/2025/05/19/STM32%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/" title="STM32启动文件">
+                        <span class="hidden-mobile">STM32启动文件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -461,6 +1182,33 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '3482a01adaf1958b350e37ebffe4891c'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
@@ -553,7 +1301,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   
@@ -701,6 +1449,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

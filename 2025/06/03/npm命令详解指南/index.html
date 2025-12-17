@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  <link rel="icon" href="/img/%E8%90%BD%E6%9C%A8%E9%9D%92%E4%BA%91-(4)%E7%BC%96%E8%BE%91.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="落木青云">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="npm命令详解指南 1. 安装命令 (install) 基本语法 1npm install [&lt;@scope&gt;&#x2F;]&lt;package&gt;[@&lt;version&gt;] [options] 详细用法 安装所有依赖 12npm installnpm i  # 简写  读取package.json中的dependencies和devDependencies 生成或更新packa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="落木青云">
+<meta property="og:url" content="https://luomuqingyun.github.io/2025/06/03/npm%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="落木青云">
+<meta property="og:description" content="npm命令详解指南 1. 安装命令 (install) 基本语法 1npm install [&lt;@scope&gt;&#x2F;]&lt;package&gt;[@&lt;version&gt;] [options] 详细用法 安装所有依赖 12npm installnpm i  # 简写  读取package.json中的dependencies和devDependencies 生成或更新packa">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-06-03T15:26:49.388Z">
+<meta property="article:modified_time" content="2025-06-03T15:26:44.591Z">
+<meta property="article:author" content="落木青云">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>落木青云</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luomuqingyun.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"auto"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>落木青云</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wallhaven-2yp6gg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-03 23:26" pubdate>
+          2025年6月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header"></h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年6月3日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>npm命令详解指南</h1>
+<h2 id="1-安装命令-install">1. 安装命令 (install)</h2>
+<h3 id="基本语法">基本语法</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install [&lt;@scope&gt;/]&lt;package&gt;[@&lt;version&gt;] [options]<br></code></pre></td></tr></table></figure>
+<h3 id="详细用法">详细用法</h3>
+<h4 id="安装所有依赖">安装所有依赖</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install<br>npm i  <span class="hljs-comment"># 简写</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>读取package.json中的dependencies和devDependencies</li>
+<li>生成或更新package-lock.json</li>
+<li>创建node_modules文件夹</li>
+</ul>
+<h4 id="安装指定包">安装指定包</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装最新版本</span><br>npm install lodash<br><br><span class="hljs-comment"># 安装指定版本</span><br>npm install lodash@4.17.21<br><br><span class="hljs-comment"># 安装版本范围</span><br>npm install lodash@^4.0.0  <span class="hljs-comment"># 兼容版本</span><br>npm install lodash@~4.17.0 <span class="hljs-comment"># 近似版本</span><br>npm install lodash@latest  <span class="hljs-comment"># 最新版本</span><br></code></pre></td></tr></table></figure>
+<h4 id="安装选项详解">安装选项详解</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 保存到dependencies（默认行为）</span><br>npm install express --save<br>npm install express -S<br><br><span class="hljs-comment"># 保存到devDependencies</span><br>npm install webpack --save-dev<br>npm install webpack -D<br><br><span class="hljs-comment"># 全局安装</span><br>npm install -g nodemon<br><br><span class="hljs-comment"># 只安装生产依赖</span><br>npm install --production<br>npm install --only=production<br><br><span class="hljs-comment"># 不保存到package.json</span><br>npm install express --no-save<br><br><span class="hljs-comment"># 强制重新安装</span><br>npm install --force<br><br><span class="hljs-comment"># 忽略scripts</span><br>npm install --ignore-scripts<br></code></pre></td></tr></table></figure>
+<h3 id="实际应用场景">实际应用场景</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 新项目初始化后安装依赖</span><br>npm install<br><br><span class="hljs-comment"># 添加生产依赖</span><br>npm install express mongoose cors<br><br><span class="hljs-comment"># 添加开发依赖</span><br>npm install -D webpack babel-loader eslint<br><br><span class="hljs-comment"># 安装特定版本解决兼容性问题</span><br>npm install react@17.0.2 react-dom@17.0.2<br></code></pre></td></tr></table></figure>
+<h2 id="2-初始化命令-init">2. 初始化命令 (init)</h2>
+<h3 id="基本语法-2">基本语法</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm init [options]<br>npm init &lt;package-spec&gt; [options]<br></code></pre></td></tr></table></figure>
+<h3 id="详细用法-2">详细用法</h3>
+<h4 id="交互式初始化">交互式初始化</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm init<br></code></pre></td></tr></table></figure>
+<p>会提示输入：</p>
+<ul>
+<li>package name: 包名</li>
+<li>version: 版本号</li>
+<li>description: 描述</li>
+<li>entry point: 入口文件</li>
+<li>test command: 测试命令</li>
+<li>git repository: Git仓库</li>
+<li>keywords: 关键词</li>
+<li>author: 作者</li>
+<li>license: 许可证</li>
+</ul>
+<h4 id="快速初始化">快速初始化</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm init -y<br>npm init --<span class="hljs-built_in">yes</span><br></code></pre></td></tr></table></figure>
+<p>使用默认值快速创建package.json</p>
+<h4 id="使用模板初始化">使用模板初始化</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建React应用</span><br>npm init react-app my-app<br><br><span class="hljs-comment"># 创建Vue应用</span><br>npm init vue@latest my-vue-app<br><br><span class="hljs-comment"># 创建Express应用</span><br>npm init express-generator my-express-app<br></code></pre></td></tr></table></figure>
+<h3 id="自定义默认值">自定义默认值</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置默认作者</span><br>npm config <span class="hljs-built_in">set</span> init-author-name <span class="hljs-string">&quot;Your Name&quot;</span><br>npm config <span class="hljs-built_in">set</span> init-author-email <span class="hljs-string">&quot;your.email@example.com&quot;</span><br>npm config <span class="hljs-built_in">set</span> init-license <span class="hljs-string">&quot;MIT&quot;</span><br><br><span class="hljs-comment"># 查看当前配置</span><br>npm config list<br></code></pre></td></tr></table></figure>
+<h2 id="3-脚本运行命令-run">3. 脚本运行命令 (run)</h2>
+<h3 id="基本语法-3">基本语法</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm run &lt;script&gt; [-- &lt;args&gt;]<br>npm run-script &lt;script&gt; [-- &lt;args&gt;]<br></code></pre></td></tr></table></figure>
+<h3 id="详细用法-3">详细用法</h3>
+<h4 id="package-json脚本配置">package.json脚本配置</h4>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node server.js&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nodemon server.js&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack --mode=production&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jest&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;lint&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eslint src/&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;lint:fix&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eslint src/ --fix&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;clean&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rm -rf dist/&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;prebuild&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npm run clean&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;postbuild&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo &#x27;Build completed&#x27;&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<h4 id="运行脚本">运行脚本</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 运行自定义脚本</span><br>npm run dev<br>npm run build<br>npm run lint<br><br><span class="hljs-comment"># 内置脚本可省略run</span><br>npm start  <span class="hljs-comment"># 等同于 npm run start</span><br>npm <span class="hljs-built_in">test</span>   <span class="hljs-comment"># 等同于 npm run test</span><br><br><span class="hljs-comment"># 传递参数</span><br>npm run build -- --watch<br>npm run lint -- --fix<br><br><span class="hljs-comment"># 查看所有可用脚本</span><br>npm run<br></code></pre></td></tr></table></figure>
+<h4 id="生命周期脚本">生命周期脚本</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># pre和post钩子</span><br>npm run prebuild  <span class="hljs-comment"># 自动在build前运行</span><br>npm run build     <span class="hljs-comment"># 主要构建命令</span><br>npm run postbuild <span class="hljs-comment"># 自动在build后运行</span><br></code></pre></td></tr></table></figure>
+<h2 id="4-信息查询命令">4. 信息查询命令</h2>
+<h3 id="list-列出已安装包">list - 列出已安装包</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出当前项目依赖</span><br>npm list<br>npm <span class="hljs-built_in">ls</span><br><br><span class="hljs-comment"># 只显示顶级依赖</span><br>npm <span class="hljs-built_in">ls</span> --depth=0<br><br><span class="hljs-comment"># 列出全局包</span><br>npm <span class="hljs-built_in">ls</span> -g --depth=0<br><br><span class="hljs-comment"># 列出特定包</span><br>npm <span class="hljs-built_in">ls</span> lodash<br><br><span class="hljs-comment"># 以JSON格式输出</span><br>npm <span class="hljs-built_in">ls</span> --json<br></code></pre></td></tr></table></figure>
+<h3 id="view-查看包信息">view - 查看包信息</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看包的详细信息</span><br>npm view react<br><br><span class="hljs-comment"># 查看特定字段</span><br>npm view react version<br>npm view react versions --json<br>npm view react dependencies<br>npm view react repository.url<br><br><span class="hljs-comment"># 查看包的所有版本</span><br>npm view react versions<br></code></pre></td></tr></table></figure>
+<h3 id="search-搜索包">search - 搜索包</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 搜索包</span><br>npm search react<br>npm search <span class="hljs-string">&quot;react component&quot;</span><br><br><span class="hljs-comment"># 限制搜索结果</span><br>npm search react --searchlimit=10<br></code></pre></td></tr></table></figure>
+<h2 id="5-更新和维护命令">5. 更新和维护命令</h2>
+<h3 id="update-更新包">update - 更新包</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 更新所有包</span><br>npm update<br><br><span class="hljs-comment"># 更新特定包</span><br>npm update lodash<br><br><span class="hljs-comment"># 全局更新</span><br>npm update -g<br><br><span class="hljs-comment"># 检查过时的包</span><br>npm outdated<br><br><span class="hljs-comment"># 检查全局过时包</span><br>npm outdated -g<br></code></pre></td></tr></table></figure>
+<h3 id="audit-安全审计">audit - 安全审计</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 检查安全漏洞</span><br>npm audit<br><br><span class="hljs-comment"># 自动修复</span><br>npm audit fix<br><br><span class="hljs-comment"># 强制修复（可能破坏性更改）</span><br>npm audit fix --force<br><br><span class="hljs-comment"># 生产环境审计</span><br>npm audit --production<br><br><span class="hljs-comment"># 输出JSON格式</span><br>npm audit --json<br></code></pre></td></tr></table></figure>
+<h2 id="6-配置管理命令-config">6. 配置管理命令 (config)</h2>
+<h3 id="基本语法-4">基本语法</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> &lt;key&gt; &lt;value&gt;<br>npm config get &lt;key&gt;<br>npm config delete &lt;key&gt;<br>npm config list<br></code></pre></td></tr></table></figure>
+<h3 id="常用配置">常用配置</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置registry镜像源</span><br>npm config <span class="hljs-built_in">set</span> registry https://registry.npmmirror.com/<br><br><span class="hljs-comment"># 设置代理</span><br>npm config <span class="hljs-built_in">set</span> proxy http://proxy.company.com:8080<br>npm config <span class="hljs-built_in">set</span> https-proxy http://proxy.company.com:8080<br><br><span class="hljs-comment"># 设置用户信息</span><br>npm config <span class="hljs-built_in">set</span> init-author-name <span class="hljs-string">&quot;Your Name&quot;</span><br>npm config <span class="hljs-built_in">set</span> init-author-email <span class="hljs-string">&quot;your@email.com&quot;</span><br><br><span class="hljs-comment"># 查看所有配置</span><br>npm config list<br><br><span class="hljs-comment"># 查看特定配置</span><br>npm config get registry<br><br><span class="hljs-comment"># 删除配置</span><br>npm config delete proxy<br></code></pre></td></tr></table></figure>
+<h3 id="配置文件位置">配置文件位置</h3>
+<ul>
+<li>用户配置：<code>~/.npmrc</code></li>
+<li>项目配置：<code>项目根目录/.npmrc</code></li>
+<li>系统配置：<code>/etc/npmrc</code></li>
+</ul>
+<h2 id="7-缓存管理命令-cache">7. 缓存管理命令 (cache)</h2>
+<h3 id="基本操作">基本操作</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 清理缓存</span><br>npm cache clean --force<br><br><span class="hljs-comment"># 验证缓存</span><br>npm cache verify<br><br><span class="hljs-comment"># 查看缓存路径</span><br>npm config get cache<br><br><span class="hljs-comment"># 设置缓存路径</span><br>npm config <span class="hljs-built_in">set</span> cache /path/to/cache<br></code></pre></td></tr></table></figure>
+<h2 id="8-发布管理命令">8. 发布管理命令</h2>
+<h3 id="账户管理">账户管理</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 登录npm</span><br>npm login<br><br><span class="hljs-comment"># 查看当前用户</span><br>npm <span class="hljs-built_in">whoami</span><br><br><span class="hljs-comment"># 登出</span><br>npm <span class="hljs-built_in">logout</span><br></code></pre></td></tr></table></figure>
+<h3 id="发布包">发布包</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 发布包</span><br>npm publish<br><br><span class="hljs-comment"># 发布beta版本</span><br>npm publish --tag beta<br><br><span class="hljs-comment"># 发布私有包</span><br>npm publish --access=public<br><br><span class="hljs-comment"># 撤销发布（24小时内）</span><br>npm unpublish package-name@version<br><br><span class="hljs-comment"># 标记废弃</span><br>npm deprecate package-name@version <span class="hljs-string">&quot;reason&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="9-执行命令-npx">9. 执行命令 (npx)</h2>
+<h3 id="基本用法">基本用法</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 执行本地包命令</span><br>npx webpack<br><br><span class="hljs-comment"># 执行远程包（不安装）</span><br>npx create-react-app my-app<br><br><span class="hljs-comment"># 指定版本执行</span><br>npx webpack@4<br><br><span class="hljs-comment"># 强制使用远程版本</span><br>npx --ignore-existing webpack<br><br><span class="hljs-comment"># 静默模式</span><br>npx --quiet create-react-app my-app<br></code></pre></td></tr></table></figure>
+<h2 id="10-常用组合命令">10. 常用组合命令</h2>
+<h3 id="项目初始化流程">项目初始化流程</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 创建项目目录</span><br><span class="hljs-built_in">mkdir</span> my-project &amp;&amp; <span class="hljs-built_in">cd</span> my-project<br><br><span class="hljs-comment"># 2. 初始化package.json</span><br>npm init -y<br><br><span class="hljs-comment"># 3. 安装依赖</span><br>npm install express<br>npm install -D nodemon<br><br><span class="hljs-comment"># 4. 创建启动脚本</span><br><span class="hljs-comment"># 在package.json中添加scripts</span><br><br><span class="hljs-comment"># 5. 运行项目</span><br>npm run dev<br></code></pre></td></tr></table></figure>
+<h3 id="依赖管理最佳实践">依赖管理最佳实践</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装前检查过时包</span><br>npm outdated<br><br><span class="hljs-comment"># 安装依赖</span><br>npm install<br><br><span class="hljs-comment"># 安全检查</span><br>npm audit<br><br><span class="hljs-comment"># 修复安全问题</span><br>npm audit fix<br><br><span class="hljs-comment"># 清理无用依赖</span><br>npm prune<br></code></pre></td></tr></table></figure>
+<h3 id="性能优化命令">性能优化命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使用淘宝镜像</span><br>npm config <span class="hljs-built_in">set</span> registry https://registry.npmmirror.com/<br><br><span class="hljs-comment"># 并行安装（npm v7+默认）</span><br>npm install --maxsockets 10<br><br><span class="hljs-comment"># 跳过可选依赖</span><br>npm install --no-optional<br><br><span class="hljs-comment"># 离线安装</span><br>npm install --offline<br></code></pre></td></tr></table></figure>
+<h2 id="11-故障排除命令">11. 故障排除命令</h2>
+<h3 id="清理和重置">清理和重置</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除node_modules和package-lock.json</span><br><span class="hljs-built_in">rm</span> -rf node_modules package-lock.json<br><br><span class="hljs-comment"># 清理npm缓存</span><br>npm cache clean --force<br><br><span class="hljs-comment"># 重新安装</span><br>npm install<br><br><span class="hljs-comment"># 修复权限问题（macOS/Linux）</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R $(<span class="hljs-built_in">whoami</span>) ~/.npm<br></code></pre></td></tr></table></figure>
+<h3 id="调试命令">调试命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 详细输出</span><br>npm install --verbose<br><br><span class="hljs-comment"># 调试模式</span><br>npm install --loglevel=verbose<br><br><span class="hljs-comment"># 检查npm配置</span><br>npm doctor<br><br><span class="hljs-comment"># 查看npm版本信息</span><br>npm version<br></code></pre></td></tr></table></figure>
+<p>这个详细指南涵盖了npm的主要命令和实际使用场景，可以作为日常开发的参考手册。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://luomuqingyun.github.io/2025/06/03/npm命令详解指南/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>落木青云</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年6月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/06/06/github%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/03/STM32duino%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23li73J7HiiND4lJNh","clientSecret":"f9a09176e3ec9a1357ab5a80af24ee32927df485","repo":"luomuqingyun.github.io","owner":"luomuqingyun","admin":["luomuqingyun"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'd0bdc59be77f3764029756aa7fbccd7b'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/luomuqingyun" target="_blank" rel="nofollow noopener"><span>落木青云</span></a> <i class="iconfont icon-love"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://files.mdnice.com/user/38598/1fe60ff7-5987-4b9f-9cf9-03cfa6b39aa0.png">
 <meta property="og:image" content="https://files.mdnice.com/user/38598/6fbcd253-edc6-4175-ba0c-44e24ad33b21.jpg">
 <meta property="article:published_time" content="2025-05-19T14:42:00.000Z">
-<meta property="article:modified_time" content="2025-12-18T06:33:37.039Z">
+<meta property="article:modified_time" content="2025-12-18T06:41:20.653Z">
 <meta property="article:author" content="落木青云">
 <meta property="article:tag" content="编程经验">
 <meta property="article:tag" content="算法应用">
@@ -1223,6 +1223,41 @@
   
     <article id="comments" lazyload>
       
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"luomuqingyun/luomuqingyun.github.io","repo-id":"R_kgDOOsZm6w","category":"Announcements","category-id":"DIC_kwDOOsZm684Cz8x7","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
 
     </article>
   
